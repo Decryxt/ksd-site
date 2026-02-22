@@ -1,5 +1,5 @@
 import CategoryHero from "../../components/archive/CategoryHero";
-import ProductGrid from "../../components/archive/ProductGrid";
+import ClickableProductGrid from "../../components/archive/ClickableProductGrid";
 
 import heroBracelet from "../../assets/BraceletHero.png";
 
@@ -17,14 +17,29 @@ function titleFromFilename(filePath: string) {
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+function slugFromFilename(filePath: string) {
+  const file = filePath.split("/").pop() || "";
+  const base = file.replace(/\.(png|jpg|jpeg|webp)$/i, "");
+  return base
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 export default function Bracelets() {
   const items = Object.entries(braceletImages)
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([path, url], idx) => ({
-      id: `br-${idx + 1}`,
-      name: titleFromFilename(path),
-      imageUrl: url,
-    }));
+    .map(([path, url], idx) => {
+      const slug = slugFromFilename(path);
+      const href = `/product/bracelets/${slug}?img=${encodeURIComponent(url)}`;
+
+      return {
+        id: `br-${idx + 1}`,
+        name: titleFromFilename(path),
+        imageUrl: url,
+        href,
+      };
+    });
 
   return (
     <div className="bg-white text-black">
@@ -33,7 +48,7 @@ export default function Bracelets() {
         subtitle="Stacked essentials • Gold warmth • Clean finish"
         imageUrl={heroBracelet}
       />
-      <ProductGrid items={items} />
+      <ClickableProductGrid items={items} />
     </div>
   );
 }

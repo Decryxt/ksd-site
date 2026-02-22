@@ -1,5 +1,5 @@
 import CategoryHero from "../../components/archive/CategoryHero";
-import ProductGrid from "../../components/archive/ProductGrid";
+import ClickableProductGrid from "../../components/archive/ClickableProductGrid";
 
 import heroPearl from "../../assets/HighEndPearlDesignHero.png";
 
@@ -17,14 +17,29 @@ function titleFromFilename(filePath: string) {
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+function slugFromFilename(filePath: string) {
+  const file = filePath.split("/").pop() || "";
+  const base = file.replace(/\.(png|jpg|jpeg|webp)$/i, "");
+  return base
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 export default function HighEndPearlDesigns() {
   const items = Object.entries(pearlImages)
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([path, url], idx) => ({
-      id: `pearl-${idx + 1}`,
-      name: titleFromFilename(path),
-      imageUrl: url,
-    }));
+    .map(([path, url], idx) => {
+      const slug = slugFromFilename(path);
+      const href = `/product/high-end-pearls/${slug}?img=${encodeURIComponent(url)}`;
+
+      return {
+        id: `pearl-${idx + 1}`,
+        name: titleFromFilename(path),
+        imageUrl: url,
+        href,
+      };
+    });
 
   return (
     <div className="bg-white text-black">
@@ -33,7 +48,7 @@ export default function HighEndPearlDesigns() {
         subtitle="Freshwater pearls • Gold-filled detailing • Editorial finish"
         imageUrl={heroPearl}
       />
-      <ProductGrid items={items} />
+      <ClickableProductGrid items={items} />
     </div>
   );
 }

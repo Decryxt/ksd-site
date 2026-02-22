@@ -1,5 +1,5 @@
 import CategoryHero from "../../components/archive/CategoryHero";
-import ProductGrid from "../../components/archive/ProductGrid";
+import ClickableProductGrid from "../../components/archive/ClickableProductGrid";
 
 import heroEarrings from "../../assets/EarringsHero.png";
 
@@ -17,14 +17,29 @@ function titleFromFilename(filePath: string) {
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+function slugFromFilename(filePath: string) {
+  const file = filePath.split("/").pop() || "";
+  const base = file.replace(/\.(png|jpg|jpeg|webp)$/i, "");
+  return base
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 export default function Earrings() {
   const items = Object.entries(earringImages)
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([path, url], idx) => ({
-      id: `ear-${idx + 1}`,
-      name: titleFromFilename(path),
-      imageUrl: url,
-    }));
+    .map(([path, url], idx) => {
+      const slug = slugFromFilename(path);
+      const href = `/product/earrings/${slug}?img=${encodeURIComponent(url)}`;
+
+      return {
+        id: `ear-${idx + 1}`,
+        name: titleFromFilename(path),
+        imageUrl: url,
+        href,
+      };
+    });
 
   return (
     <div className="bg-white text-black">
@@ -33,7 +48,7 @@ export default function Earrings() {
         subtitle="Gold glow • Pearl accents • Everyday elegance"
         imageUrl={heroEarrings}
       />
-      <ProductGrid items={items} />
+      <ClickableProductGrid items={items} />
     </div>
   );
 }
