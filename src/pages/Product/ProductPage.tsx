@@ -82,8 +82,10 @@ export default function ProductPage() {
   const clickedImg = searchParams.get("img") || "";
 
   const { scrollY } = useScroll();
-  const titleOpacity = useTransform(scrollY, [0, 90], [1, 0]);
-  const titleY = useTransform(scrollY, [0, 140], [0, -18]);
+
+  // Keeps the elegant "fade quickly once scroll starts" behavior
+  const titleOpacity = useTransform(scrollY, [0, 80], [1, 0]);
+  const titleY = useTransform(scrollY, [0, 120], [0, -18]);
 
   if (!category || !slug) {
     return (
@@ -111,9 +113,10 @@ export default function ProductPage() {
 
   return (
     <div className="bg-white text-black">
-      {/* HERO — 3:2 FULL WIDTH */}
+      {/* HERO (smaller, "old style": black title + fade-to-white at bottom) */}
       <section className="relative w-full overflow-hidden">
-        <div className="relative w-full aspect-[3/2]">
+        {/* Reduced height so it doesn't eat the screen */}
+        <div className="relative w-full h-[52vh] md:h-[58vh]">
           {heroImg ? (
             <img
               src={heroImg}
@@ -124,44 +127,47 @@ export default function ProductPage() {
             <div className="absolute inset-0 bg-black/5" />
           )}
 
-          {/* Overlay: a little cleaner + less heavy */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/08 to-black/28" />
+          {/* OLD STYLE OVERLAY:
+              - subtle dark at top for nav readability
+              - fades to white at bottom for the page transition
+          */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white" />
 
           {/* Top Bar */}
           <div className="absolute top-0 left-0 right-0 z-10 mx-auto max-w-6xl px-6 pt-6">
             <div className="flex items-center justify-between">
               <Link
                 to={categoryBackHref(category)}
-                className="text-white/80 hover:text-white transition text-sm tracking-wide"
+                className="text-black/60 hover:text-black transition text-sm tracking-wide"
               >
                 ← Back to {categoryLabel(category)}
               </Link>
 
-              <div className="text-white/70 text-xs tracking-[0.28em] uppercase">
+              <div className="text-black/45 text-xs tracking-[0.28em] uppercase">
                 Katherine Sterling Designs
               </div>
             </div>
           </div>
 
-          {/* Title Overlay */}
+          {/* Title Overlay (BLACK, fades out when scroll begins) */}
           <motion.div
             style={{ opacity: titleOpacity, y: titleY }}
             className="absolute bottom-0 left-0 right-0 z-10 mx-auto max-w-6xl px-6 pb-10 md:pb-12"
           >
-            <div className="max-w-3xl text-white">
-              <div className="text-white/70 text-xs tracking-[0.28em] uppercase">
+            <div className="max-w-3xl">
+              <div className="text-black/45 text-xs tracking-[0.28em] uppercase">
                 {categoryLabel(category)}
               </div>
 
-              {/* FORCE Perandory on the product title */}
+              {/* FORCE Perandory */}
               <h1
-                className="mt-3 text-4xl md:text-6xl leading-[1.02] tracking-[-0.01em] text-white"
+                className="mt-3 text-4xl md:text-6xl leading-[1.02] tracking-[-0.01em] text-black"
                 style={{ fontFamily: '"Perandory", serif', fontWeight: 400 }}
               >
                 {title}
               </h1>
 
-              <p className="mt-5 text-white/80 text-base md:text-lg leading-relaxed">
+              <p className="mt-5 text-black/60 text-base md:text-lg leading-relaxed">
                 {shortDescription}
               </p>
             </div>
@@ -171,7 +177,7 @@ export default function ProductPage() {
 
       {/* CONTENT */}
       <section className="mx-auto max-w-6xl px-6 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pt-10">
           {/* LEFT COLUMN */}
           <div className="lg:col-span-7">
             <motion.div
