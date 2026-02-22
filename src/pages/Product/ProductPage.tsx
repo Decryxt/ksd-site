@@ -1,3 +1,4 @@
+// src/pages/Product/ProductPage.tsx
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { getFallbackCopy, productCopy, type CategoryKey } from "../../data/productCopy";
@@ -39,10 +40,50 @@ function categoryBackHref(category: CategoryKey) {
   }
 }
 
+/**
+ * Dedicated Necklace Hero loader:
+ * src/assets/products/necklaces/Hero/*.png|jpg|jpeg|webp
+ * We auto-map filenames to slugs by removing "Hero" text and converting to kebab-case.
+ *
+ * Example:
+ * "Large Pearl Cross Necklace Hero.png" -> "large-pearl-cross-necklace"
+ */
+const necklaceHeroModules = import.meta.glob(
+  "../../assets/products/necklaces/Hero/*.{png,jpg,jpeg,webp}",
+  { eager: true, import: "default" }
+) as Record<string, string>;
+
+function toSlugFromHeroFilename(path: string) {
+  const file = path.split("/").pop() || "";
+  const base = file.replace(/\.(png|jpg|jpeg|webp)$/i, "");
+
+  // Remove trailing "Hero" and any extra whitespace
+  const cleaned = base
+    .replace(/\bhero\b/i, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return cleaned
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+const necklaceHeroBySlug: Record<string, string> = Object.entries(necklaceHeroModules).reduce(
+  (acc, [path, url]) => {
+    const slug = toSlugFromHeroFilename(path);
+    acc[slug] = url;
+    return acc;
+  },
+  {} as Record<string, string>
+);
+
 export default function ProductPage() {
   const { category, slug } = useParams<Params>();
   const [searchParams] = useSearchParams();
-  const heroImg = searchParams.get("img") || "";
+
+  // fallback: clicked card image (query param)
+  const clickedImg = searchParams.get("img") || "";
 
   const { scrollY } = useScroll();
   const titleOpacity = useTransform(scrollY, [0, 90], [1, 0]);
@@ -60,6 +101,12 @@ export default function ProductPage() {
       </div>
     );
   }
+
+  // Dedicated necklace hero overrides clicked image (only for necklaces)
+  const heroImg =
+    category === "necklaces"
+      ? necklaceHeroBySlug[slug] || clickedImg
+      : clickedImg;
 
   const custom = productCopy?.[category]?.[slug];
   const fallback = getFallbackCopy(category);
@@ -113,7 +160,11 @@ export default function ProductPage() {
                 {categoryLabel(category)}
               </div>
 
-              <h1 className="mt-3 text-4xl md:text-6xl leading-[1.02] tracking-[-0.01em]">
+              {/* FORCE Perandory on the product title */}
+              <h1
+                className="mt-3 text-4xl md:text-6xl leading-[1.02] tracking-[-0.01em] text-white"
+                style={{ fontFamily: '"Perandory", serif', fontWeight: 400 }}
+              >
                 {title}
               </h1>
 
@@ -140,9 +191,7 @@ export default function ProductPage() {
                 Product Description
               </div>
 
-              <p className="mt-6 text-black/70 leading-relaxed">
-                {description}
-              </p>
+              <p className="mt-6 text-black/70 leading-relaxed">{description}</p>
 
               {details?.length ? (
                 <ul className="mt-8 space-y-3 text-black/65 text-sm">
