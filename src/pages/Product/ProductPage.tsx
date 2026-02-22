@@ -43,9 +43,6 @@ function categoryBackHref(category: CategoryKey) {
 /**
  * Dedicated Necklace Hero loader:
  * src/assets/products/necklaces/Hero/*.png|jpg|jpeg|webp
- * We auto-map filenames to slugs by removing "Hero" text and converting to kebab-case.
- *
- * Example:
  * "Large Pearl Cross Necklace Hero.png" -> "large-pearl-cross-necklace"
  */
 const necklaceHeroModules = import.meta.glob(
@@ -57,7 +54,6 @@ function toSlugFromHeroFilename(path: string) {
   const file = path.split("/").pop() || "";
   const base = file.replace(/\.(png|jpg|jpeg|webp)$/i, "");
 
-  // Remove trailing "Hero" and any extra whitespace
   const cleaned = base
     .replace(/\bhero\b/i, "")
     .replace(/\s+/g, " ")
@@ -71,8 +67,8 @@ function toSlugFromHeroFilename(path: string) {
 
 const necklaceHeroBySlug: Record<string, string> = Object.entries(necklaceHeroModules).reduce(
   (acc, [path, url]) => {
-    const slug = toSlugFromHeroFilename(path);
-    acc[slug] = url;
+    const s = toSlugFromHeroFilename(path);
+    acc[s] = url;
     return acc;
   },
   {} as Record<string, string>
@@ -103,10 +99,7 @@ export default function ProductPage() {
   }
 
   // Dedicated necklace hero overrides clicked image (only for necklaces)
-  const heroImg =
-    category === "necklaces"
-      ? necklaceHeroBySlug[slug] || clickedImg
-      : clickedImg;
+  const heroImg = category === "necklaces" ? necklaceHeroBySlug[slug] || clickedImg : clickedImg;
 
   const custom = productCopy?.[category]?.[slug];
   const fallback = getFallbackCopy(category);
@@ -118,9 +111,9 @@ export default function ProductPage() {
 
   return (
     <div className="bg-white text-black">
-      {/* HERO — 16:9 FULL WIDTH */}
+      {/* HERO — 3:2 FULL WIDTH */}
       <section className="relative w-full overflow-hidden">
-        <div className="relative w-full aspect-[16/9]">
+        <div className="relative w-full aspect-[3/2]">
           {heroImg ? (
             <img
               src={heroImg}
@@ -131,8 +124,8 @@ export default function ProductPage() {
             <div className="absolute inset-0 bg-black/5" />
           )}
 
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/30" />
+          {/* Overlay: a little cleaner + less heavy */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/08 to-black/28" />
 
           {/* Top Bar */}
           <div className="absolute top-0 left-0 right-0 z-10 mx-auto max-w-6xl px-6 pt-6">
@@ -153,7 +146,7 @@ export default function ProductPage() {
           {/* Title Overlay */}
           <motion.div
             style={{ opacity: titleOpacity, y: titleY }}
-            className="absolute bottom-0 left-0 right-0 z-10 mx-auto max-w-6xl px-6 pb-12"
+            className="absolute bottom-0 left-0 right-0 z-10 mx-auto max-w-6xl px-6 pb-10 md:pb-12"
           >
             <div className="max-w-3xl text-white">
               <div className="text-white/70 text-xs tracking-[0.28em] uppercase">
@@ -178,7 +171,7 @@ export default function ProductPage() {
 
       {/* CONTENT */}
       <section className="mx-auto max-w-6xl px-6 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pt-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pt-12">
           {/* LEFT COLUMN */}
           <div className="lg:col-span-7">
             <motion.div
