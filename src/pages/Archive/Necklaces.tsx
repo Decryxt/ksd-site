@@ -1,5 +1,5 @@
 import CategoryHero from "../../components/archive/CategoryHero";
-import ProductGrid from "../../components/archive/ProductGrid";
+import ClickableProductGrid from "../../components/archive/ClickableProductGrid";
 
 import heroNecklace from "../../assets/NecklaceHero.png";
 
@@ -17,14 +17,28 @@ function titleFromFilename(filePath: string) {
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+function slugFromFilename(filePath: string) {
+  const file = filePath.split("/").pop() || "";
+  const base = file.replace(/\.(png|jpg|jpeg|webp)$/i, "");
+  return base
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 export default function Necklaces() {
   const items = Object.entries(necklaceImages)
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([path, url], idx) => ({
-      id: `neck-${idx + 1}`,
-      name: titleFromFilename(path),
-      imageUrl: url,
-    }));
+    .map(([path, url], idx) => {
+      const slug = slugFromFilename(path);
+
+      return {
+        id: `neck-${idx + 1}`,
+        name: titleFromFilename(path),
+        imageUrl: url,
+        href: `/product/necklaces/${slug}`,
+      };
+    });
 
   return (
     <div className="bg-white text-black">
@@ -33,7 +47,7 @@ export default function Necklaces() {
         subtitle="Layers • Light-catching details • Coastal femininity"
         imageUrl={heroNecklace}
       />
-      <ProductGrid items={items} />
+      <ClickableProductGrid items={items} />
     </div>
   );
 }

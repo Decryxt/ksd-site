@@ -11,6 +11,8 @@ import Earrings from "./pages/Archive/Earrings";
 import HighEndPearlDesigns from "./pages/Archive/HighEndPearlDesigns";
 import NotFound from "./pages/NotFound";
 
+import ProductPage from "./pages/Product/ProductPage";
+
 import SiteLayout from "./components/layout/SiteLayout";
 
 const luxuryEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -163,6 +165,25 @@ function AnimatedRoutes() {
         />
 
         <Route path="/archive" element={<Navigate to="/archive/necklaces" replace />} />
+
+        {/* NEW: Product detail route */}
+        <Route
+          path="/product/:category/:slug"
+          element={
+            <SiteLayout>
+              <motion.main
+                className="min-h-screen"
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <ProductPage />
+              </motion.main>
+            </SiteLayout>
+          }
+        />
 
         <Route
           path="*"
