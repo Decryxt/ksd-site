@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { getFallbackCopy, productCopy, type CategoryKey } from "../../data/productCopy";
 
@@ -41,6 +41,8 @@ function categoryBackHref(category: CategoryKey) {
 
 export default function ProductPage() {
   const { category, slug } = useParams<Params>();
+  const [searchParams] = useSearchParams();
+  const heroImg = searchParams.get("img") || "";
 
   const { scrollY } = useScroll();
   const titleOpacity = useTransform(scrollY, [0, 90], [1, 0]);
@@ -59,10 +61,6 @@ export default function ProductPage() {
     );
   }
 
-  // IMPORTANT:
-  // Step 1 uses the *clicked image itself* as the hero via a query param later,
-  // but for now we just render a clean hero layout and the copy system.
-  // In Step 2, we’ll wire the real image + gallery reliably.
   const custom = productCopy?.[category]?.[slug];
   const fallback = getFallbackCopy(category);
 
@@ -74,13 +72,27 @@ export default function ProductPage() {
   return (
     <div className="bg-white text-black">
       {/* HERO */}
-      <section className="relative h-[75vh] w-full overflow-hidden">
-        {/* Placeholder hero background (Step 2 will wire actual product image hero) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/5 to-white" />
+      <section className="relative h-[85vh] w-full overflow-hidden">
+        {/* REAL hero image */}
+        {heroImg ? (
+          <img
+            src={heroImg}
+            alt={title}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-black/5" />
+        )}
+
+        {/* overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/10 to-white" />
 
         <div className="relative z-10 mx-auto max-w-6xl px-6 pt-6">
           <div className="flex items-center justify-between">
-            <Link to={categoryBackHref(category)} className="text-black/60 hover:text-black transition text-sm tracking-wide">
+            <Link
+              to={categoryBackHref(category)}
+              className="text-black/60 hover:text-black transition text-sm tracking-wide"
+            >
               ← Back to {categoryLabel(category)}
             </Link>
 
@@ -120,7 +132,9 @@ export default function ProductPage() {
               transition={{ duration: 0.6 }}
               className="rounded-2xl border border-black/10 bg-white p-7 shadow-[0_10px_30px_rgba(0,0,0,0.06)]"
             >
-              <div className="text-black/55 text-xs tracking-[0.28em] uppercase">Product Description</div>
+              <div className="text-black/55 text-xs tracking-[0.28em] uppercase">
+                Product Description
+              </div>
 
               <p className="mt-4 text-black/70 leading-relaxed">
                 {description}
@@ -141,7 +155,9 @@ export default function ProductPage() {
 
           <div className="lg:col-span-5">
             <div className="rounded-2xl border border-black/10 bg-white p-7 sticky top-6 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
-              <div className="text-black/55 text-xs tracking-[0.28em] uppercase">Purchase</div>
+              <div className="text-black/55 text-xs tracking-[0.28em] uppercase">
+                Purchase
+              </div>
 
               <div className="mt-4">
                 <div className="text-black/90 text-lg">{title}</div>
@@ -156,7 +172,7 @@ export default function ProductPage() {
               </button>
 
               <p className="mt-4 text-black/50 text-xs leading-relaxed">
-                Step 1: routing + product page structure. Step 2: wire the correct hero image + gallery.
+                Next: gallery + real metadata per product.
               </p>
             </div>
           </div>

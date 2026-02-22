@@ -32,11 +32,14 @@ export default function Necklaces() {
     .map(([path, url], idx) => {
       const slug = slugFromFilename(path);
 
+      // pass the clicked image into the product page:
+      const href = `/product/necklaces/${slug}?img=${encodeURIComponent(url)}`;
+
       return {
         id: `neck-${idx + 1}`,
         name: titleFromFilename(path),
         imageUrl: url,
-        href: `/product/necklaces/${slug}`,
+        href,
       };
     });
 
