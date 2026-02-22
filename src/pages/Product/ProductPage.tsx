@@ -116,7 +116,7 @@ export default function ProductPage() {
       {/* HERO (smaller, "old style": black title + fade-to-white at bottom) */}
       <section className="relative w-full overflow-hidden">
         {/* Reduced height so it doesn't eat the screen */}
-        <div className="relative w-full h-[52vh] md:h-[58vh]">
+        <div className="relative w-full h-[60vh] md:h-[68vh]">
           {heroImg ? (
             <img
               src={heroImg}
