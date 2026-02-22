@@ -71,77 +71,81 @@ export default function ProductPage() {
 
   return (
     <div className="bg-white text-black">
-      {/* HERO */}
-      <section className="relative h-[85vh] w-full overflow-hidden">
-        {/* REAL hero image */}
-        {heroImg ? (
-          <img
-            src={heroImg}
-            alt={title}
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-black/5" />
-        )}
+      {/* HERO — 16:9 FULL WIDTH */}
+      <section className="relative w-full overflow-hidden">
+        <div className="relative w-full aspect-[16/9]">
+          {heroImg ? (
+            <img
+              src={heroImg}
+              alt={title}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-black/5" />
+          )}
 
-        {/* overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/10 to-white" />
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/30" />
 
-        <div className="relative z-10 mx-auto max-w-6xl px-6 pt-6">
-          <div className="flex items-center justify-between">
-            <Link
-              to={categoryBackHref(category)}
-              className="text-black/60 hover:text-black transition text-sm tracking-wide"
-            >
-              ← Back to {categoryLabel(category)}
-            </Link>
+          {/* Top Bar */}
+          <div className="absolute top-0 left-0 right-0 z-10 mx-auto max-w-6xl px-6 pt-6">
+            <div className="flex items-center justify-between">
+              <Link
+                to={categoryBackHref(category)}
+                className="text-white/80 hover:text-white transition text-sm tracking-wide"
+              >
+                ← Back to {categoryLabel(category)}
+              </Link>
 
-            <div className="text-black/45 text-xs tracking-[0.28em] uppercase">
-              Katherine Sterling Designs
+              <div className="text-white/70 text-xs tracking-[0.28em] uppercase">
+                Katherine Sterling Designs
+              </div>
             </div>
           </div>
+
+          {/* Title Overlay */}
+          <motion.div
+            style={{ opacity: titleOpacity, y: titleY }}
+            className="absolute bottom-0 left-0 right-0 z-10 mx-auto max-w-6xl px-6 pb-12"
+          >
+            <div className="max-w-3xl text-white">
+              <div className="text-white/70 text-xs tracking-[0.28em] uppercase">
+                {categoryLabel(category)}
+              </div>
+
+              <h1 className="mt-3 text-4xl md:text-6xl leading-[1.02] tracking-[-0.01em]">
+                {title}
+              </h1>
+
+              <p className="mt-5 text-white/80 text-base md:text-lg leading-relaxed">
+                {shortDescription}
+              </p>
+            </div>
+          </motion.div>
         </div>
-
-        <motion.div
-          style={{ opacity: titleOpacity, y: titleY }}
-          className="relative z-10 mx-auto max-w-6xl px-6 h-full flex items-end pb-14"
-        >
-          <div className="max-w-3xl">
-            <div className="text-black/45 text-xs tracking-[0.28em] uppercase">
-              {categoryLabel(category)}
-            </div>
-
-            <h1 className="mt-3 text-4xl md:text-6xl leading-[1.02] tracking-[-0.01em]">
-              {title}
-            </h1>
-
-            <p className="mt-5 text-black/60 text-base md:text-lg leading-relaxed">
-              {shortDescription}
-            </p>
-          </div>
-        </motion.div>
       </section>
 
       {/* CONTENT */}
       <section className="mx-auto max-w-6xl px-6 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pt-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pt-14">
+          {/* LEFT COLUMN */}
           <div className="lg:col-span-7">
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="rounded-2xl border border-black/10 bg-white p-7 shadow-[0_10px_30px_rgba(0,0,0,0.06)]"
+              className="rounded-2xl border border-black/10 bg-white p-8 shadow-[0_10px_30px_rgba(0,0,0,0.06)]"
             >
               <div className="text-black/55 text-xs tracking-[0.28em] uppercase">
                 Product Description
               </div>
 
-              <p className="mt-4 text-black/70 leading-relaxed">
+              <p className="mt-6 text-black/70 leading-relaxed">
                 {description}
               </p>
 
               {details?.length ? (
-                <ul className="mt-6 space-y-2 text-black/65 text-sm">
+                <ul className="mt-8 space-y-3 text-black/65 text-sm">
                   {details.map((d, idx) => (
                     <li key={idx} className="flex gap-3">
                       <span className="mt-[7px] h-[5px] w-[5px] rounded-full bg-black/35 shrink-0" />
@@ -153,26 +157,29 @@ export default function ProductPage() {
             </motion.div>
           </div>
 
+          {/* RIGHT COLUMN */}
           <div className="lg:col-span-5">
-            <div className="rounded-2xl border border-black/10 bg-white p-7 sticky top-6 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
+            <div className="rounded-2xl border border-black/10 bg-white p-8 sticky top-6 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
               <div className="text-black/55 text-xs tracking-[0.28em] uppercase">
                 Purchase
               </div>
 
-              <div className="mt-4">
+              <div className="mt-5">
                 <div className="text-black/90 text-lg">{title}</div>
-                <div className="text-black/55 mt-1 text-sm">Pricing + checkout comes next</div>
+                <div className="text-black/55 mt-2 text-sm">
+                  Pricing + checkout integration next step
+                </div>
               </div>
 
               <button
-                className="mt-6 w-full rounded-xl border border-black/15 bg-black/5 hover:bg-black/10 transition py-3 text-sm tracking-wide"
+                className="mt-8 w-full rounded-xl border border-black/15 bg-black/5 hover:bg-black/10 transition py-3 text-sm tracking-wide"
                 type="button"
               >
                 Add to Bag (coming soon)
               </button>
 
-              <p className="mt-4 text-black/50 text-xs leading-relaxed">
-                Next: gallery + real metadata per product.
+              <p className="mt-5 text-black/50 text-xs leading-relaxed">
+                Next: structured metadata, pricing logic, and gallery system.
               </p>
             </div>
           </div>
