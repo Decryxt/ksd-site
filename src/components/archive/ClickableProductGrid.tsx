@@ -10,7 +10,7 @@ export type ClickableGridItem = {
 export default function ClickableProductGrid({ items }: { items: ClickableGridItem[] }) {
   return (
     <section className="mx-auto max-w-6xl px-6 pb-16">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
         {items.map((item) => (
           <Link key={item.id} to={item.href} className="group block">
             <div className="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
