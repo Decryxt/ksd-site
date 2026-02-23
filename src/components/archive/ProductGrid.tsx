@@ -13,7 +13,7 @@ export default function ProductGrid({ items }: Props) {
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-6xl px-6 py-14 md:py-20">
-        <div className="grid grid-cols-2 gap-x-5 gap-y-10 md:grid-cols-3 md:gap-x-8 md:gap-y-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
           {items.map((p) => (
             <article key={p.id} className="group">
               {/* 4:5 ratio box */}
