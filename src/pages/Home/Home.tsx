@@ -42,7 +42,7 @@ export default function Home() {
             <img
               src={heroLogo}
               alt="Katherine Sterling Designs"
-              className="w-[280px] max-w-[70vw] select-none"
+              className="w-[320px] max-w-[70vw] select-none"
               draggable={false}
             />
 
