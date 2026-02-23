@@ -33,7 +33,10 @@ export default function CategoryHero({
   });
 
   return (
-    <section ref={sectionRef} className={`relative w-full overflow-hidden ${heightClassName}`}>
+    <section
+      ref={sectionRef}
+      className={`relative w-full overflow-hidden ${heightClassName} mb-10 md:mb-14`}
+    >
       {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
