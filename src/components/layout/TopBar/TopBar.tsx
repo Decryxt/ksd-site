@@ -8,7 +8,7 @@ import {
   type Transition,
 } from "framer-motion";
 
-import { FaInstagram } from "react-icons/fa";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { SiTiktok } from "react-icons/si";
 
 import logo from "../../../assets/KSD_logo_cropped.png";
@@ -160,6 +160,16 @@ export default function TopBar() {
                 </a>
 
                 <a
+                  href="https://www.facebook.com/profile.php?id=61588342836636"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="hover:text-black transition-colors"
+                >
+                  <FaFacebook size={16} />
+                </a>
+
+                <a
                   href="https://www.tiktok.com/@katherinesterlingdesigns"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -202,7 +212,7 @@ export default function TopBar() {
                       isArchiveRoute ? "text-black" : "text-black/70 hover:text-black",
                     ].join(" ")}
                   >
-                    Archive
+                    Shop
                   </button>
 
                   <div
@@ -261,7 +271,7 @@ export default function TopBar() {
               <div className="grid grid-cols-12 gap-10 py-10">
                 <div className="col-span-5">
                   <p className="text-[11px] uppercase tracking-[0.30em] text-black/55">
-                    Archive
+                    Shop
                   </p>
                   <h3 className="mt-4 text-2xl tracking-tight text-black">
                     Coastal luxury, curated.
@@ -323,7 +333,7 @@ export default function TopBar() {
                   onClick={() => setMobileArchiveOpen((v) => !v)}
                   className="w-full border border-black/10 px-4 py-3 text-left text-[11px] uppercase tracking-[0.32em] text-black/75"
                 >
-                  Archive
+                  Shop
                 </button>
 
                 <AnimatePresence initial={false}>
@@ -361,6 +371,16 @@ export default function TopBar() {
                     className="hover:text-black transition-colors"
                   >
                     <FaInstagram size={18} />
+                  </a>
+
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61588342836636"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                    className="hover:text-black transition-colors"
+                  >
+                    <FaFacebook size={18} />
                   </a>
 
                   <a
