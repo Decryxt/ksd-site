@@ -2,7 +2,7 @@ import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-mot
 import { useState } from "react";
 
 // Update to your actual hero image filename
-import hero from "../../assets/StarBracelet.png";
+import hero from "../../assets/MainHero.png";
 // Use your white transparent logo for the hero overlay if you have a separate one
 import heroLogo from "../../assets/KSDTransparentWhite.png";
 
