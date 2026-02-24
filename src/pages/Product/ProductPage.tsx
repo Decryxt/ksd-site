@@ -41,15 +41,8 @@ function categoryBackHref(category: CategoryKey) {
 }
 
 /**
- * Dedicated Necklace Hero loader:
- * src/assets/products/necklaces/Hero/*.png|jpg|jpeg|webp
  * "Large Pearl Cross Necklace Hero.png" -> "large-pearl-cross-necklace"
  */
-const necklaceHeroModules = import.meta.glob(
-  "../../assets/products/necklaces/Hero/*.{png,jpg,jpeg,webp}",
-  { eager: true, import: "default" }
-) as Record<string, string>;
-
 function toSlugFromHeroFilename(path: string) {
   const file = path.split("/").pop() || "";
   const base = file.replace(/\.(png|jpg|jpeg|webp)$/i, "");
@@ -65,14 +58,70 @@ function toSlugFromHeroFilename(path: string) {
     .replace(/^-+|-+$/g, "");
 }
 
-const necklaceHeroBySlug: Record<string, string> = Object.entries(necklaceHeroModules).reduce(
-  (acc, [path, url]) => {
+function buildHeroMap(modules: Record<string, string>) {
+  return Object.entries(modules).reduce((acc, [path, url]) => {
     const s = toSlugFromHeroFilename(path);
     acc[s] = url;
     return acc;
-  },
-  {} as Record<string, string>
-);
+  }, {} as Record<string, string>);
+}
+
+/**
+ * Dedicated Hero loaders:
+ * Put hero images in these folders:
+ *  - src/assets/products/necklaces/Hero/
+ *  - src/assets/products/bracelets/Hero/
+ *  - src/assets/products/earrings/Hero/
+ *  - src/assets/products/high-end-pearls/Hero/
+ *
+ * Filenames should end with "Hero" so slug-matching is consistent:
+ *  "Heart Of Gold Bracelet Hero.png" -> "heart-of-gold-bracelet"
+ */
+
+// Necklaces
+const necklaceHeroModules = import.meta.glob(
+  "../../assets/products/necklaces/Hero/*.{png,jpg,jpeg,webp}",
+  { eager: true, import: "default" }
+) as Record<string, string>;
+const necklaceHeroBySlug = buildHeroMap(necklaceHeroModules);
+
+// Bracelets
+const braceletHeroModules = import.meta.glob(
+  "../../assets/products/bracelets/Hero/*.{png,jpg,jpeg,webp}",
+  { eager: true, import: "default" }
+) as Record<string, string>;
+const braceletHeroBySlug = buildHeroMap(braceletHeroModules);
+
+// Earrings
+const earringHeroModules = import.meta.glob(
+  "../../assets/products/earrings/Hero/*.{png,jpg,jpeg,webp}",
+  { eager: true, import: "default" }
+) as Record<string, string>;
+const earringHeroBySlug = buildHeroMap(earringHeroModules);
+
+// High End Pearls (support both common folder naming patterns, just in case)
+const highEndPearlsHeroModulesA = import.meta.glob(
+  "../../assets/products/high-end-pearls/Hero/*.{png,jpg,jpeg,webp}",
+  { eager: true, import: "default" }
+) as Record<string, string>;
+
+const highEndPearlsHeroModulesB = import.meta.glob(
+  "../../assets/products/high-end-pearl-designs/Hero/*.{png,jpg,jpeg,webp}",
+  { eager: true, import: "default" }
+) as Record<string, string>;
+
+const highEndPearlsHeroBySlug = buildHeroMap({
+  ...highEndPearlsHeroModulesA,
+  ...highEndPearlsHeroModulesB,
+});
+
+// One lookup for all categories
+const heroByCategory: Record<CategoryKey, Record<string, string>> = {
+  necklaces: necklaceHeroBySlug,
+  bracelets: braceletHeroBySlug,
+  earrings: earringHeroBySlug,
+  "high-end-pearls": highEndPearlsHeroBySlug,
+};
 
 export default function ProductPage() {
   const { category, slug } = useParams<Params>();
@@ -100,8 +149,9 @@ export default function ProductPage() {
     );
   }
 
-  // Dedicated necklace hero overrides clicked image (only for necklaces)
-  const heroImg = category === "necklaces" ? necklaceHeroBySlug[slug] || clickedImg : clickedImg;
+  // Dedicated hero override (all categories), otherwise fallback to clicked image
+  const categoryHeroMap = heroByCategory[category] || {};
+  const heroImg = categoryHeroMap[slug] || clickedImg;
 
   const custom = productCopy?.[category]?.[slug];
   const fallback = getFallbackCopy(category);
