@@ -40,6 +40,14 @@ function categoryBackHref(category: CategoryKey) {
   }
 }
 
+function formatUSD(value?: number) {
+  if (typeof value !== "number") return null;
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(value);
+}
+
 /**
  * "Large Pearl Cross Necklace Hero.png" -> "large-pearl-cross-necklace"
  */
@@ -161,6 +169,9 @@ export default function ProductPage() {
   const description = custom?.description ?? fallback.description;
   const details = custom?.details ?? fallback.details;
 
+  // NEW: PRICE
+  const priceText = formatUSD(custom?.price);
+
   return (
     <div className="bg-white text-black">
       {/* HERO (smaller, "old style": black title + fade-to-white at bottom) */}
@@ -220,6 +231,11 @@ export default function ProductPage() {
               <p className="mt-5 text-black/60 text-base md:text-lg leading-relaxed">
                 {shortDescription}
               </p>
+
+              {/* Optional subtle price in hero area */}
+              {priceText ? (
+                <div className="mt-3 text-black/55 text-sm tracking-wide">{priceText}</div>
+              ) : null}
             </div>
           </motion.div>
         </div>
@@ -264,9 +280,14 @@ export default function ProductPage() {
 
               <div className="mt-5">
                 <div className="text-black/90 text-lg">{title}</div>
-                <div className="text-black/55 mt-2 text-sm">
-                  Pricing + checkout integration next step
-                </div>
+
+                {priceText ? (
+                  <div className="text-black/70 mt-2 text-sm tracking-wide">{priceText}</div>
+                ) : (
+                  <div className="text-black/55 mt-2 text-sm">
+                    Add a price in <span className="font-mono">productCopy.ts</span>
+                  </div>
+                )}
               </div>
 
               <button
