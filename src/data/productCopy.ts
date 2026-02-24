@@ -83,7 +83,133 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
   },
 
-  bracelets: {},
+  bracelets: {
+    "gold-design-bracelet": {
+      price: 78,
+
+      shortDescription:
+        "A polished gold-bead bracelet with graduated sizing—bold, minimal, and effortlessly elevated.",
+
+      description:
+        "The Gold Design Bracelet is a modern essential with statement presence. Crafted from polished gold-filled beads in a graduated silhouette, it reflects light with a rich, warm glow. Bold yet refined, it balances everyday wearability with elevated design. Whether worn alone for a clean, sculptural look or stacked for added dimension, it brings effortless polish to any outfit.",
+
+      details: [
+        "Graduated gold-filled bead design",
+        "High-polish reflective finish",
+        "Stretch fit for comfortable wear",
+        "Bold yet minimal silhouette",
+        "Hand-assembled in small batches",
+      ],
+    },
+
+    "initial-and-birth-stone-bracelet": {
+      price: 86,
+
+      shortDescription:
+        "A polished gold-bead bracelet personalized with a gold initial charm and a delicate birthstone accent—meaningful, modern, and uniquely yours.",
+
+      description:
+        "The Initial & Birthstone Bracelet is a refined expression of personal style. Crafted from luminous gold-filled beads and finished with a bold initial charm and a subtle birthstone accent, it blends sentiment with modern polish. Designed to feel both meaningful and elevated, it’s perfect worn alone as a signature piece or layered into your everyday stack. Personal, timeless, and effortlessly radiant—this is jewelry that tells your story.",
+
+      details: [
+        "Gold-filled bead stretch bracelet",
+        "Personalized initial charm",
+        "Delicate birthstone accent",
+        "Comfortable stretch fit",
+        "Hand-assembled in small batches",
+      ],
+    },
+
+    "lucky-star-bracelet": {
+      price: 76,
+
+      shortDescription:
+        "A polished gold-bead bracelet finished with a luminous mother-of-pearl star—coastal, celestial, and effortlessly refined.",
+
+      description:
+        "The Lucky Star Bracelet blends bold polish with soft celestial detail. Crafted from radiant gold-filled beads and finished with a luminous mother-of-pearl star centerpiece, it captures light with every movement. Designed to feel elevated yet wearable, it’s perfect styled alone for a clean statement or layered into your everyday stack. Feminine, coastal, and quietly radiant, it brings a subtle glow to any look.",
+
+      details: [
+        "Gold-filled bead stretch bracelet",
+        "Mother-of-pearl star centerpiece",
+        "Comfortable stretch fit",
+        "Bold yet feminine silhouette",
+        "Hand-assembled in small batches",
+      ],
+    },
+
+    "new-beginning-bracelet": {
+      price: 84,
+
+      shortDescription:
+        "A polished gold-bead bracelet centered with a sculptural floral charm—symbolic, refined, and effortlessly radiant.",
+
+      description:
+        "The New Beginning Bracelet is designed to symbolize renewal, growth, and fresh starts. Crafted from luminous gold-filled beads and centered with a softly sculpted floral charm, it balances bold shine with meaningful detail. The polished finish reflects light beautifully, while the organic shape of the charm adds softness and dimension. Worn alone or layered into your stack, it’s a radiant reminder of new chapters and quiet strength.",
+
+      details: [
+        "Gold-filled bead stretch bracelet",
+        "Sculptural floral centerpiece charm",
+        "Comfortable stretch fit",
+        "Symbolic renewal-inspired design",
+        "Hand-assembled in small batches",
+      ],
+    },
+
+    "new-hope-bracelet": {
+      price: 96,
+
+      shortDescription:
+        "Organic freshwater pearls centered with a polished gold floral charm—soft, luminous, and quietly symbolic.",
+
+      description:
+        "The New Hope Bracelet blends softness with strength. A strand of organically shaped freshwater pearls wraps the wrist with natural luster and gentle texture, centered by a polished gold floral charm that symbolizes renewal and light. The contrast of luminous pearl and radiant gold creates a piece that feels both heirloom-inspired and modern. Feminine, meaningful, and effortlessly elevated, it layers beautifully or stands alone as a refined statement.",
+
+      details: [
+        "Freshwater pearl stretch bracelet",
+        "Polished gold floral centerpiece charm",
+        "Each pearl is organically shaped and unique",
+        "Comfortable stretch fit",
+        "Hand-assembled in small batches",
+      ],
+    },
+
+    "poppy-bracelet": {
+      price: 78,
+
+      shortDescription:
+        "A dimensional gold-bead bracelet with spaced polished accents—minimal, luminous, and effortlessly stackable.",
+
+      description:
+        "The Poppy Bracelet is a refined take on everyday gold. Crafted with delicate gold-filled beads and accented by evenly spaced polished spheres, it creates soft dimension and movement around the wrist. The alternating bead scale adds subtle structure while maintaining a lightweight, elegant feel. Designed to layer beautifully or wear alone as a minimal statement, Poppy is an effortless essential in any coastal-luxury stack.",
+
+      details: [
+        "Gold-filled bead stretch bracelet",
+        "Spaced polished accent beads",
+        "Lightweight and ideal for stacking",
+        "Comfortable stretch fit",
+        "Hand-assembled in small batches",
+      ],
+    },
+
+    "heart-of-gold-bracelet": {
+      price: 82,
+
+      shortDescription:
+        "A polished gold-bead bracelet finished with a delicate heart charm—romantic, refined, and effortlessly wearable.",
+
+      description:
+        "The Heart of Gold Bracelet is a modern romantic essential. Crafted from luminous gold-filled beads and finished with a softly polished heart charm, it reflects light with a warm, radiant glow. Bold in shine yet delicate in sentiment, it’s designed to be worn daily—stacked with your favorite pieces or styled alone as a subtle statement. Feminine, timeless, and quietly meaningful, it brings warmth to every look.",
+
+      details: [
+        "Gold-filled bead stretch bracelet",
+        "Polished heart charm detail",
+        "Comfortable stretch fit",
+        "Bold yet feminine silhouette",
+        "Hand-assembled in small batches",
+      ],
+    },
+  },
 
   earrings: {
     "ophelia-earrings": {
