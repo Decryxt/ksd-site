@@ -2,6 +2,7 @@
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { getFallbackCopy, productCopy, type CategoryKey } from "../../data/productCopy";
+import AddToBagButton from "../../components/AddToBagButton";
 
 type Params = {
   category?: CategoryKey;
@@ -171,6 +172,8 @@ export default function ProductPage() {
 
   // NEW: PRICE
   const priceText = formatUSD(custom?.price);
+  const stripePriceId = custom?.stripePriceId;
+  const priceNumber = custom?.price ?? 0;
 
   return (
     <div className="bg-white text-black">
@@ -290,12 +293,13 @@ export default function ProductPage() {
                 )}
               </div>
 
-              <button
-                className="mt-8 w-full rounded-xl border border-black/15 bg-black/5 hover:bg-black/10 transition py-3 text-sm tracking-wide"
-                type="button"
-              >
-                Add to Bag (coming soon)
-              </button>
+              <AddToBagButton
+                category={category}
+                slug={slug}
+                title={title}
+                price={priceNumber}
+                stripePriceId={stripePriceId}
+              />
 
               <p className="mt-5 text-black/50 text-xs leading-relaxed">
                 Next: structured metadata, pricing logic, and gallery system.

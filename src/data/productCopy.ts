@@ -6,12 +6,15 @@ export type ProductCopy = {
   description?: string;
   details?: string[];
   price?: number;
+  stripePriceId?: string;
 };
 
 export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy>>> = {
   necklaces: {
     "large-pearl-cross-necklace": {
       price: 128,
+
+      stripePriceId: "price_1T4UoFQXLBKalpyYNCUrNMIB",
 
       shortDescription:
         "An organically shaped freshwater pearl cross suspended on a delicate 14k gold-filled chain—bold, luminous, and reverently refined.",
