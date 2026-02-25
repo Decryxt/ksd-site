@@ -10,6 +10,7 @@ import Bracelets from "./pages/Archive/Bracelets";
 import Earrings from "./pages/Archive/Earrings";
 import HighEndPearlDesigns from "./pages/Archive/HighEndPearlDesigns";
 import NotFound from "./pages/NotFound";
+import Bag from "./pages/Bag";
 
 import ProductPage from "./pages/Product/ProductPage";
 
@@ -180,6 +181,24 @@ function AnimatedRoutes() {
                 transition={pageTransition}
               >
                 <ProductPage />
+              </motion.main>
+            </SiteLayout>
+          }
+        />
+
+        <Route
+          path="/bag"
+          element={
+            <SiteLayout>
+              <motion.main
+                className="min-h-screen"
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <Bag />
               </motion.main>
             </SiteLayout>
           }
