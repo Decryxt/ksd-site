@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
 import { useCart } from "../context/CartContext";
 
 function formatUSD(value: number) {
@@ -10,6 +11,67 @@ function formatUSD(value: number) {
 
 export default function Bag() {
   const { items, removeFromCart, setQty, subtotal, totalItems, clearCart } = useCart();
+  const [searchParams] = useSearchParams();
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const success = searchParams.get("success") === "1";
+  const canceled = searchParams.get("canceled") === "1";
+
+  // If they return from successful checkout, clear bag (lean mode)
+  useEffect(() => {
+    if (success) clearCart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [success]);
+
+  const canCheckout = useMemo(() => {
+    if (items.length === 0) return false;
+    // every item needs a stripePriceId
+    return items.every((i) => Boolean(i.stripePriceId));
+  }, [items]);
+
+  const onCheckout = async () => {
+    setError(null);
+
+    if (!items.length) {
+      setError("Your bag is empty.");
+      return;
+    }
+
+    if (!canCheckout) {
+      setError("One or more items are missing Stripe Price IDs.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: items.map((i) => ({
+            stripePriceId: i.stripePriceId,
+            quantity: i.quantity,
+          })),
+        }),
+      });
+
+      if (!res.ok) {
+        const msg = await res.text().catch(() => "");
+        throw new Error(msg || "Failed to start checkout.");
+      }
+
+      const data = (await res.json()) as { url?: string };
+      if (!data.url) throw new Error("No checkout URL returned.");
+
+      window.location.href = data.url;
+    } catch (e: any) {
+      setError(e?.message || "Checkout failed.");
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white text-black px-6 py-10">
@@ -30,6 +92,25 @@ export default function Bag() {
         <div className="mt-2 text-sm text-black/60">
           {totalItems} item{totalItems === 1 ? "" : "s"}
         </div>
+
+        {/* RETURN BANNERS */}
+        {success && (
+          <div className="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-emerald-900">
+            <div className="text-sm font-medium">Payment successful.</div>
+            <div className="text-xs mt-1 text-emerald-900/70">
+              Your order is confirmed. A receipt will be sent by Stripe.
+            </div>
+          </div>
+        )}
+
+        {canceled && (
+          <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-amber-900">
+            <div className="text-sm font-medium">Checkout canceled.</div>
+            <div className="text-xs mt-1 text-amber-900/70">
+              No worries — your bag is still here.
+            </div>
+          </div>
+        )}
 
         {items.length === 0 ? (
           <div className="mt-10 rounded-2xl border border-black/10 p-8">
@@ -64,6 +145,12 @@ export default function Bag() {
                       <div className="mt-2 text-xs text-black/45 uppercase tracking-[0.28em]">
                         {i.category}
                       </div>
+
+                      {!i.stripePriceId && (
+                        <div className="mt-2 text-xs text-red-600">
+                          Missing Stripe Price ID (cannot checkout yet)
+                        </div>
+                      )}
                     </div>
 
                     <button
@@ -123,15 +210,29 @@ export default function Bag() {
                 </div>
 
                 <div className="mt-2 text-xs text-black/50 leading-relaxed">
-                  Taxes & shipping will be calculated at checkout (next step).
+                  Taxes & shipping will be calculated in Stripe Checkout (launch mode).
                 </div>
 
+                {error && (
+                  <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+                    {error}
+                  </div>
+                )}
+
                 <button
-                  className="mt-6 w-full rounded-xl border border-black/15 bg-black text-white py-3 text-sm tracking-wide hover:bg-black/90 transition"
+                  onClick={onCheckout}
+                  disabled={loading}
+                  className="mt-6 w-full rounded-xl border border-black/15 bg-black text-white py-3 text-sm tracking-wide hover:bg-black/90 transition disabled:opacity-60"
                   type="button"
                 >
-                  Checkout (next step)
+                  {loading ? "Redirecting to checkout..." : "Checkout"}
                 </button>
+
+                {!canCheckout && (
+                  <div className="mt-3 text-xs text-black/55">
+                    Add Stripe Price IDs to all items you want to sell before checkout will work.
+                  </div>
+                )}
               </div>
             </div>
           </div>
