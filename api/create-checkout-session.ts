@@ -50,10 +50,15 @@ export default async function handler(req: any, res: any) {
     const cancelUrl = `${origin}/bag?canceled=1`;
 
     const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      line_items,
-      success_url: successUrl,
-      cancel_url: cancelUrl,
+        mode: "payment",
+        line_items,
+        success_url: successUrl,
+        cancel_url: cancelUrl,
+
+        // NEW: collect shipping address
+        shipping_address_collection: {
+            allowed_countries: ["US"],
+        },
     });
 
     res.status(200).json({ url: session.url });
