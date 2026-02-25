@@ -1,3 +1,4 @@
+// src/components/layout/TopBar/TopBar.tsx
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -10,6 +11,9 @@ import {
 
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { SiTiktok } from "react-icons/si";
+import { FiShoppingBag } from "react-icons/fi";
+
+import { useCart } from "../../../context/CartContext";
 
 import logo from "../../../assets/KSD_logo_cropped.png";
 
@@ -58,6 +62,8 @@ function HamburgerIcon({ open }: { open: boolean }) {
 export default function TopBar() {
   const location = useLocation();
   const isHome = location.pathname === "/";
+
+  const { totalItems } = useCart();
 
   const { scrollY } = useScroll();
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -197,7 +203,21 @@ export default function TopBar() {
             </div>
 
             {/* RIGHT */}
-            <div className="flex items-center justify-end">
+            <div className="flex items-center justify-end gap-3">
+              {/* Bag Icon (desktop + mobile) */}
+              <Link
+                to="/bag"
+                aria-label="Bag"
+                className="relative inline-flex h-10 w-12 items-center justify-center rounded-md border border-black/10 bg-white text-black hover:border-black/20 transition-colors"
+              >
+                <FiShoppingBag size={18} />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 h-5 min-w-[20px] px-1 rounded-full bg-black text-white text-[11px] leading-5 text-center">
+                    {totalItems}
+                  </span>
+                )}
+              </Link>
+
               {/* Desktop nav */}
               <nav className="hidden md:flex items-center gap-10">
                 <div
