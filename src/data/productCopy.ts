@@ -12,7 +12,7 @@ export type ProductCopy = {
 export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy>>> = {
   necklaces: {
     "large-pearl-cross-necklace": {
-      price: 128,
+      price: 70,
 
       stripePriceId: "price_1T4UoFQXLBKalpyYNCUrNMIB",
 
@@ -32,7 +32,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "luxury-strand-necklace": {
-      price: 98,
+      price: 60,
 
       shortDescription:
         "A refined vertical strand pendant on a delicate 14k gold-filled chain—minimal, luminous, and quietly elevated.",
@@ -50,7 +50,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "pearl-cross-necklace": {
-      price: 88,
+      price: 60,
 
       shortDescription:
         "A delicate mother-of-pearl cross framed in gold on a fine 14k gold-filled chain—soft, meaningful, and timeless.",
@@ -68,7 +68,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "lucky-star-necklace": {
-      price: 72,
+      price: 70,
 
       shortDescription:
         "A delicate mother-of-pearl star pendant on a fine 14k gold-filled chain—softly luminous and effortlessly celestial.",
@@ -88,7 +88,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
   bracelets: {
     "gold-design-bracelet": {
-      price: 78,
+      price: 70,
 
       shortDescription:
         "A polished gold-bead bracelet with graduated sizing—bold, minimal, and effortlessly elevated.",
@@ -106,7 +106,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "initial-and-birth-stone-bracelet": {
-      price: 86,
+      price: 100,
 
       shortDescription:
         "A polished gold-bead bracelet personalized with a gold initial charm and a delicate birthstone accent—meaningful, modern, and uniquely yours.",
@@ -124,7 +124,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "lucky-star-bracelet": {
-      price: 76,
+      price: 70,
 
       shortDescription:
         "A polished gold-bead bracelet finished with a luminous mother-of-pearl star—coastal, celestial, and effortlessly refined.",
@@ -142,7 +142,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "new-beginning-bracelet": {
-      price: 84,
+      price: 80,
 
       shortDescription:
         "A polished gold-bead bracelet centered with a sculptural floral charm—symbolic, refined, and effortlessly radiant.",
@@ -160,7 +160,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "new-hope-bracelet": {
-      price: 96,
+      price: 70,
 
       shortDescription:
         "Organic freshwater pearls centered with a polished gold floral charm—soft, luminous, and quietly symbolic.",
@@ -178,7 +178,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "poppy-bracelet": {
-      price: 78,
+      price: 75,
 
       shortDescription:
         "A dimensional gold-bead bracelet with spaced polished accents—minimal, luminous, and effortlessly stackable.",
@@ -196,7 +196,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "heart-of-gold-bracelet": {
-      price: 82,
+      price: 75,
 
       shortDescription:
         "A polished gold-bead bracelet finished with a delicate heart charm—romantic, refined, and effortlessly wearable.",
@@ -216,7 +216,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
   earrings: {
     "ophelia-earrings": {
-      price: 84,
+      price: 110,
 
       shortDescription:
         "Delicate freshwater pearl coin earrings suspended from polished 14k gold-filled hoops—luminous, feminine, and effortlessly refined.",
@@ -234,7 +234,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "lucky-star-earrings": {
-      price: 72,
+      price: 70,
 
       shortDescription:
         "Delicate mother-of-pearl stars suspended from polished 14k gold-filled hoops—soft, luminous, and celestial.",
@@ -252,7 +252,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "sand-dollar-earrings": {
-      price: 64,
+      price: 55,
 
       shortDescription:
         "Tiny gold sand dollar drops on polished 14k gold-filled hoops—sunlit, coastal, and effortlessly wearable.",
@@ -270,7 +270,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "pearl-bead-earrings": {
-      price: 68,
+      price: 60,
 
       shortDescription:
         "A minimalist pearl drop with a soft, warm glow.",
@@ -289,7 +289,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
     "high-end-pearls": {
       "pearl-bead-necklace": {
-        price: 148,
+        price: 200,
 
         shortDescription:
           "A refined strand of luminous freshwater pearls accented with gold and subtle blue detailing—elevated, timeless, and quietly statement-making.",
