@@ -3,11 +3,10 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from "
 type CartItem = {
   category: string;
   slug: string;
-
   title: string;
   price: number; // for display only
   stripePriceId: string;
-
+  status?: "active" | "coming-soon" | "sold-out";
   quantity: number;
 };
 
@@ -17,7 +16,6 @@ type CartContextValue = {
   removeFromCart: (slug: string) => void;
   setQty: (slug: string, qty: number) => void;
   clearCart: () => void;
-
   totalItems: number;
   subtotal: number;
 };
@@ -51,15 +49,21 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [items]);
 
   const addToCart: CartContextValue["addToCart"] = (item, qty = 1) => {
+    if (item.status === "coming-soon" || item.status === "sold-out") {
+      return;
+    }
+
     const safeQty = Math.max(1, Math.min(99, qty));
 
     setItems((prev) => {
       const existing = prev.find((p) => p.slug === item.slug);
+
       if (existing) {
         return prev.map((p) =>
           p.slug === item.slug ? { ...p, quantity: p.quantity + safeQty } : p
         );
       }
+
       return [...prev, { ...item, quantity: safeQty }];
     });
   };
@@ -70,7 +74,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const setQty: CartContextValue["setQty"] = (slug, qty) => {
     const safeQty = Math.max(1, Math.min(99, qty));
-    setItems((prev) => prev.map((p) => (p.slug === slug ? { ...p, quantity: safeQty } : p)));
+    setItems((prev) =>
+      prev.map((p) => (p.slug === slug ? { ...p, quantity: safeQty } : p))
+    );
   };
 
   const clearCart = () => setItems([]);

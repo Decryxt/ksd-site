@@ -34,6 +34,11 @@ export default function AddToBagButton({
     setMsg(null);
 
     if (isUnavailable) {
+      setMsg(
+        status === "coming-soon"
+          ? "This piece is coming soon."
+          : "This piece is sold out."
+      );
       return;
     }
 
@@ -49,6 +54,7 @@ export default function AddToBagButton({
         title,
         price,
         stripePriceId,
+        status,
       },
       1
     );
