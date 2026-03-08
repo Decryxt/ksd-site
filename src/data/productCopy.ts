@@ -7,6 +7,7 @@ export type ProductCopy = {
   details?: string[];
   price?: number;
   stripePriceId?: string;
+  status?: "active" | "coming-soon" | "sold-out";
 };
 
 export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy>>> = {
@@ -15,6 +16,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 70,
 
       stripePriceId: "price_1T8VytQfJ3BDSPk8uVP6km2H",
+
+      status: "active",
 
       shortDescription:
         "An organically shaped freshwater pearl cross suspended on a delicate 14k gold-filled chain—bold, luminous, and reverently refined.",
@@ -36,6 +39,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8W26QfJ3BDSPk8efg9LBpl",
 
+      status: "active",
+
       shortDescription:
         "A refined vertical strand pendant on a delicate 14k gold-filled chain—minimal, luminous, and quietly elevated.",
 
@@ -56,6 +61,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8W2vQfJ3BDSPk8c3j0SknU",
 
+      status: "active",
+
       shortDescription:
         "A delicate mother-of-pearl cross framed in gold on a fine 14k gold-filled chain—soft, meaningful, and timeless.",
 
@@ -75,6 +82,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 70,
 
       stripePriceId: "price_1T8W0mQfJ3BDSPk8e0SCt6jB",
+
+      status: "active",
 
       shortDescription:
         "A delicate mother-of-pearl star pendant on a fine 14k gold-filled chain—softly luminous and effortlessly celestial.",
@@ -98,6 +107,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8W48QfJ3BDSPk8RipDEUj5",
 
+      status: "active",
+
       shortDescription:
         "A polished gold-bead bracelet with graduated sizing—bold, minimal, and effortlessly elevated.",
 
@@ -117,6 +128,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 100,
 
       stripePriceId: "price_1T8W76QfJ3BDSPk8WFr1B9Dd",
+
+      status: "coming-soon",
 
       shortDescription:
         "A polished gold-bead bracelet personalized with a gold initial charm and a delicate birthstone accent—meaningful, modern, and uniquely yours.",
@@ -138,6 +151,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8W8BQfJ3BDSPk8h7wCh5Tz",
 
+      status: "active",
+
       shortDescription:
         "A polished gold-bead bracelet finished with a luminous mother-of-pearl star—coastal, celestial, and effortlessly refined.",
 
@@ -157,6 +172,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 80,
 
       stripePriceId: "price_1T8W95QfJ3BDSPk8RL5ngYdf",
+
+      status: "active",
 
       shortDescription:
         "A polished gold-bead bracelet centered with a sculptural floral charm—symbolic, refined, and effortlessly radiant.",
@@ -178,6 +195,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8WA1QfJ3BDSPk8DPTMiBGv",
 
+      status: "active",
+
       shortDescription:
         "Organic freshwater pearls centered with a polished gold floral charm—soft, luminous, and quietly symbolic.",
 
@@ -198,6 +217,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8WAkQfJ3BDSPk86JzmanM7",
 
+      status: "active",
+
       shortDescription:
         "A dimensional gold-bead bracelet with spaced polished accents—minimal, luminous, and effortlessly stackable.",
 
@@ -217,6 +238,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 75,
 
       stripePriceId: "price_1T8W5GQfJ3BDSPk8A78pTHLM",
+
+      status: "active",
 
       shortDescription:
         "A polished gold-bead bracelet finished with a delicate heart charm—romantic, refined, and effortlessly wearable.",
@@ -240,6 +263,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8WCgQfJ3BDSPk8YcyO1FjV",
 
+      status: "active",
+
       shortDescription:
         "Delicate freshwater pearl coin earrings suspended from polished 14k gold-filled hoops—luminous, feminine, and effortlessly refined.",
 
@@ -259,6 +284,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 70,
 
       stripePriceId: "price_1T8WBuQfJ3BDSPk80tKTaKUv",
+
+      status: "active",
 
       shortDescription:
         "Delicate mother-of-pearl stars suspended from polished 14k gold-filled hoops—soft, luminous, and celestial.",
@@ -280,6 +307,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8WE9QfJ3BDSPk8kqaHcmQ2",
 
+      status: "active",
+
       shortDescription:
         "Tiny gold sand dollar drops on polished 14k gold-filled hoops—sunlit, coastal, and effortlessly wearable.",
 
@@ -299,6 +328,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 60,
 
       stripePriceId: "price_1T8WDOQfJ3BDSPk89pxVsEea",
+
+      status: "active",
 
       shortDescription:
         "A minimalist pearl drop with a soft, warm glow.",
@@ -320,6 +351,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
         price: 200,
 
         stripePriceId: "price_1T8WEzQfJ3BDSPk8PLkf76rl",
+
+        status: "active",
 
         shortDescription:
           "A refined strand of luminous freshwater pearls accented with gold and subtle blue detailing—elevated, timeless, and quietly statement-making.",
