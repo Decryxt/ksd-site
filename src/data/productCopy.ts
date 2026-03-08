@@ -280,6 +280,72 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "wild-child-earrings": {
+      price: 75,
+
+      stripePriceId: "price_1T8Ze4QfJ3BDSPk8gJjoWMXP",
+
+      status: "active",
+
+      shortDescription:
+        "Pavé horseshoe charms set with vibrant stones, suspended from polished 14k gold-filled hoops—playful, radiant, and striking.",
+
+      description:
+        "The Wild Child Earrings bring vibrant color and sparkle to a sculptural silhouette. Each horseshoe charm is pavé-set with shimmering stones in luminous tones, forming a bold arc of light that catches the sun from every angle. Suspended from polished 14k gold-filled hoops, they feel playful yet refined—designed for statement moments and nights that shimmer a little brighter.",
+
+      details: [
+        "Pavé horseshoe charm",
+        "Multicolor crystal stones",
+        "14k gold-filled hoops",
+        "Lightweight drop design",
+        "Hand-assembled in small batches",
+      ],
+    },
+
+    "stella-earrings": {
+      price: 70,
+
+      stripePriceId: "price_1T8ZbYQfJ3BDSPk8HC4PP8gS",
+
+      status: "active",
+
+      shortDescription:
+        "Textured gold coin charms suspended from polished 14k gold-filled hoops—bold, sunlit, and effortlessly coastal.",
+
+      description:
+        "Radiant with movement and texture, the Stella Earrings capture the glow of golden summer light. Each softly hammered coin charm reflects light in organic patterns, creating subtle dimension as they move. Suspended from polished 14k gold-filled hoops, they balance statement and simplicity—perfect for days by the water and evenings that stretch long into warm coastal nights.",
+
+      details: [
+        "Textured gold coin charms",
+        "14k gold-filled hoops",
+        "Lightweight drop design",
+        "Organic hammered finish",
+        "Hand-assembled in small batches",
+      ],
+    },
+
+    "paloma-earrings": {
+      price: 70,
+
+      stripePriceId: "price_1T8ZfKQfJ3BDSPk89sIfNvIF",
+
+      status: "active",
+
+      shortDescription:
+        "Luminous freshwater pearl drops suspended from polished 14k gold-filled hoops—classic, feminine, and quietly elegant.",
+
+      description:
+        "Graceful and timeless, the Paloma Earrings celebrate the natural beauty of freshwater pearls. Each softly glowing pearl drop reflects light with a gentle warmth, suspended from polished 14k gold-filled hoops for a refined, effortless finish. Elegant enough for evenings yet simple enough for everyday wear, they bring a touch of quiet luxury to any look.",
+
+      details: [
+        "Freshwater pearl drops",
+        "14k gold-filled hoops",
+        "Lightweight drop design",
+        "Natural pearl luster",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "lucky-star-earrings": {
       price: 70,
 
