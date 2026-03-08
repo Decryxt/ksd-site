@@ -14,7 +14,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     "large-pearl-cross-necklace": {
       price: 70,
 
-      stripePriceId: "price_1T4UoFQXLBKalpyYNCUrNMIB",
+      stripePriceId: "price_1T8VytQfJ3BDSPk8uVP6km2H",
 
       shortDescription:
         "An organically shaped freshwater pearl cross suspended on a delicate 14k gold-filled chain—bold, luminous, and reverently refined.",
@@ -34,7 +34,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     "luxury-strand-necklace": {
       price: 60,
 
-      stripePriceId: "price_1T4UvRQXLBKalpyYNIt4tRLR",
+      stripePriceId: "price_1T8W26QfJ3BDSPk8efg9LBpl",
 
       shortDescription:
         "A refined vertical strand pendant on a delicate 14k gold-filled chain—minimal, luminous, and quietly elevated.",
@@ -54,7 +54,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     "pearl-cross-necklace": {
       price: 60,
 
-      stripePriceId: "price_1T4UyZQXLBKalpyYaHR1vB6w",
+      stripePriceId: "price_1T8W2vQfJ3BDSPk8c3j0SknU",
 
       shortDescription:
         "A delicate mother-of-pearl cross framed in gold on a fine 14k gold-filled chain—soft, meaningful, and timeless.",
@@ -74,7 +74,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     "lucky-star-necklace": {
       price: 70,
 
-      stripePriceId: "price_1T4Ut1QXLBKalpyYlZllZP9h",
+      stripePriceId: "price_1T8W0mQfJ3BDSPk8e0SCt6jB",
 
       shortDescription:
         "A delicate mother-of-pearl star pendant on a fine 14k gold-filled chain—softly luminous and effortlessly celestial.",
@@ -96,7 +96,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     "gold-design-bracelet": {
       price: 70,
 
-      stripePriceId: "price_1T4V9xQXLBKalpyYpKVPuPG4",
+      stripePriceId: "price_1T8W48QfJ3BDSPk8RipDEUj5",
 
       shortDescription:
         "A polished gold-bead bracelet with graduated sizing—bold, minimal, and effortlessly elevated.",
@@ -116,7 +116,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     "initial-and-birth-stone-bracelet": {
       price: 100,
 
-      stripePriceId: "price_1T4VDdQXLBKalpyYthjIw19N",
+      stripePriceId: "price_1T8W76QfJ3BDSPk8WFr1B9Dd",
 
       shortDescription:
         "A polished gold-bead bracelet personalized with a gold initial charm and a delicate birthstone accent—meaningful, modern, and uniquely yours.",
@@ -136,7 +136,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     "lucky-star-bracelet": {
       price: 70,
 
-      stripePriceId: "price_1T4VEnQXLBKalpyY5J46fKdh",
+      stripePriceId: "price_1T8W8BQfJ3BDSPk8h7wCh5Tz",
 
       shortDescription:
         "A polished gold-bead bracelet finished with a luminous mother-of-pearl star—coastal, celestial, and effortlessly refined.",
@@ -156,7 +156,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     "new-beginning-bracelet": {
       price: 80,
 
-      stripePriceId: "price_1T4VHBQXLBKalpyYmbxThZK3",
+      stripePriceId: "price_1T8W95QfJ3BDSPk8RL5ngYdf",
 
       shortDescription:
         "A polished gold-bead bracelet centered with a sculptural floral charm—symbolic, refined, and effortlessly radiant.",
@@ -176,7 +176,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     "new-hope-bracelet": {
       price: 70,
 
-      stripePriceId: "price_1T4VILQXLBKalpyYY7lM7Bw1",
+      stripePriceId: "price_1T8WA1QfJ3BDSPk8DPTMiBGv",
 
       shortDescription:
         "Organic freshwater pearls centered with a polished gold floral charm—soft, luminous, and quietly symbolic.",
@@ -196,7 +196,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     "poppy-bracelet": {
       price: 75,
 
-      stripePriceId: "price_1T4VJQQXLBKalpyYn0gqPU7H",
+      stripePriceId: "price_1T8WAkQfJ3BDSPk86JzmanM7",
 
       shortDescription:
         "A dimensional gold-bead bracelet with spaced polished accents—minimal, luminous, and effortlessly stackable.",
@@ -216,7 +216,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     "heart-of-gold-bracelet": {
       price: 75,
 
-      stripePriceId: "price_1T4VCEQXLBKalpyYE3cNLBMs",
+      stripePriceId: "price_1T8W5GQfJ3BDSPk8A78pTHLM",
 
       shortDescription:
         "A polished gold-bead bracelet finished with a delicate heart charm—romantic, refined, and effortlessly wearable.",
@@ -238,7 +238,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     "ophelia-earrings": {
       price: 110,
 
-      stripePriceId: "price_1T4VNiQXLBKalpyY9mhuIMaQ",
+      stripePriceId: "price_1T8WCgQfJ3BDSPk8YcyO1FjV",
 
       shortDescription:
         "Delicate freshwater pearl coin earrings suspended from polished 14k gold-filled hoops—luminous, feminine, and effortlessly refined.",
@@ -258,7 +258,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     "lucky-star-earrings": {
       price: 70,
 
-      stripePriceId: "price_1T4VMLQXLBKalpyYfSXNHw6w",
+      stripePriceId: "price_1T8WBuQfJ3BDSPk80tKTaKUv",
 
       shortDescription:
         "Delicate mother-of-pearl stars suspended from polished 14k gold-filled hoops—soft, luminous, and celestial.",
@@ -278,7 +278,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     "sand-dollar-earrings": {
       price: 55,
 
-      stripePriceId: "price_1T4VRLQXLBKalpyYqsior90m",
+      stripePriceId: "price_1T8WE9QfJ3BDSPk8kqaHcmQ2",
 
       shortDescription:
         "Tiny gold sand dollar drops on polished 14k gold-filled hoops—sunlit, coastal, and effortlessly wearable.",
@@ -298,7 +298,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     "pearl-bead-earrings": {
       price: 60,
 
-      stripePriceId: "price_1T4VPhQXLBKalpyYogVrcVAY",
+      stripePriceId: "price_1T8WDOQfJ3BDSPk89pxVsEea",
 
       shortDescription:
         "A minimalist pearl drop with a soft, warm glow.",
@@ -319,7 +319,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       "pearl-bead-necklace": {
         price: 200,
 
-        stripePriceId: "price_1T4VTfQXLBKalpyYVnF2XLfo",
+        stripePriceId: "price_1T8WEzQfJ3BDSPk8PLkf76rl",
 
         shortDescription:
           "A refined strand of luminous freshwater pearls accented with gold and subtle blue detailing—elevated, timeless, and quietly statement-making.",
