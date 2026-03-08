@@ -299,6 +299,7 @@ export default function ProductPage() {
                 title={title}
                 price={priceNumber}
                 stripePriceId={stripePriceId}
+                status={custom?.status}
               />
 
               <p className="mt-5 text-black/50 text-xs leading-relaxed">
