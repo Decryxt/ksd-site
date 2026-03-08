@@ -68,16 +68,16 @@ export default function AddToBagButton({
       <button
         onClick={onAdd}
         disabled={isUnavailable}
-        className={`w-full rounded-2xl py-3 font-medium transition ${
+        className={`w-full rounded-xl border py-3 font-medium tracking-wide transition ${
           isUnavailable
-            ? "cursor-not-allowed border border-white/10 bg-white/5 text-white/40"
-            : "border border-white/15 bg-white text-black hover:bg-white/90"
+            ? "cursor-not-allowed border-black/15 bg-black/[0.03] text-black/40"
+            : "border-black bg-white text-black hover:bg-black hover:text-white"
         }`}
       >
         {buttonLabel}
       </button>
 
-      {msg && <div className="mt-2 text-xs text-white/60">{msg}</div>}
+      {msg && <div className="mt-2 text-xs text-black/50">{msg}</div>}
     </div>
   );
 }
