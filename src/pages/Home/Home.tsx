@@ -1,22 +1,19 @@
 import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { useState } from "react";
 
-// Update to your actual hero image filename
 import hero from "../../assets/MainHero.png";
-// Use your white transparent logo for the hero overlay if you have a separate one
 import heroLogo from "../../assets/KSDTransparentWhite.png";
 
 export default function Home() {
   const { scrollY } = useScroll();
 
-  // fast Gucci-like “any scroll collapses hero branding”
   const [hasScrolled, setHasScrolled] = useState(false);
+
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (!hasScrolled && latest > 2) setHasScrolled(true);
     if (hasScrolled && latest <= 0) setHasScrolled(false);
   });
 
-  // Hero overlay fades quickly
   const overlayOpacity = useTransform(scrollY, [0, 35], [1, 0]);
   const overlayY = useTransform(scrollY, [0, 35], [0, -10]);
 
@@ -24,16 +21,13 @@ export default function Home() {
     <div className="-mt-16">
       {/* Fullscreen hero */}
       <section className="relative h-screen w-full overflow-hidden">
-        {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${hero})` }}
         />
 
-        {/* Optional subtle gradient for readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/35" />
 
-        {/* Center logo + slogan overlay */}
         <motion.div
           className="absolute inset-0 flex items-center justify-center"
           style={{ opacity: overlayOpacity, y: overlayY }}
@@ -52,7 +46,6 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Optional: a tiny scroll hint that disappears after scroll */}
         <motion.div
           className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-[0.32em] text-white/80"
           animate={{ opacity: hasScrolled ? 0 : 1 }}
@@ -62,13 +55,41 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Content after hero (placeholder) */}
-      <section className="bg-white">
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <h2 className="text-2xl tracking-tight">Archive</h2>
-          <p className="mt-3 max-w-xl text-black/70">
-            Next step: editorial grid, category cards, and product filtering from pieces.ts.
-          </p>
+      {/* Headlines section */}
+      <section className="bg-white border-t border-black/10">
+        <div className="mx-auto max-w-6xl px-6 py-28 text-center">
+          <h2
+            className="text-5xl font-bold text-black md:text-6xl"
+            style={{ fontFamily: '"Perandory", serif' }}
+          >
+            Headlines
+          </h2>
+
+          <div className="mt-16">
+            <div className="text-xs uppercase tracking-[0.35em] text-black/40">
+              Upcoming Event
+            </div>
+
+            <div
+              className="mt-4 text-7xl uppercase tracking-[0.08em] text-black md:text-8xl"
+              style={{ fontFamily: '"BebasNeue", sans-serif' }}
+            >
+              Miami Swim Week
+            </div>
+
+            <div
+              className="text-3xl tracking-[0.45em] text-black/70"
+              style={{ fontFamily: '"BebasNeue", sans-serif' }}
+            >
+              2026
+            </div>
+
+            <p className="mx-auto mt-6 max-w-xl text-black/60">
+              Katherine Sterling Designs will appear at Miami Swim Week,
+              showcasing coastal luxury pearl and gold jewelry during the 2026
+              runway events.
+            </p>
+          </div>
         </div>
       </section>
     </div>
