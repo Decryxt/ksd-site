@@ -36,7 +36,6 @@ export default async function handler(req: any, res: any) {
       return;
     }
 
-    // Build line items from Stripe Price IDs
     const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map(
       (i) => ({
         price: i.stripePriceId,
@@ -44,7 +43,6 @@ export default async function handler(req: any, res: any) {
       })
     );
 
-    // Get unique price IDs to minimize API calls
     const uniquePriceIds = Array.from(new Set(items.map((i) => i.stripePriceId)));
 
     const prices = await Promise.all(
@@ -56,7 +54,6 @@ export default async function handler(req: any, res: any) {
       priceMap.set(p.id, p);
     }
 
-    // Compute subtotal in cents
     let subtotalCents = 0;
 
     for (const item of items) {
@@ -77,7 +74,6 @@ export default async function handler(req: any, res: any) {
       subtotalCents += unitAmount * qty;
     }
 
-    // Determine site origin
     const origin =
       req.headers?.origin ||
       (req.headers?.host ? `https://${req.headers.host}` : process.env.PUBLIC_SITE_URL);
@@ -98,9 +94,11 @@ export default async function handler(req: any, res: any) {
       shipping_address_collection: {
         allowed_countries: ["US"],
       },
+      phone_number_collection: {
+        enabled: true,
+      },
     };
 
-    // Add $10 shipping only if subtotal is under $125
     if (subtotalCents < FREE_SHIPPING_THRESHOLD_CENTS) {
       sessionParams.shipping_options = [
         {
