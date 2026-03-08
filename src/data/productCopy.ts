@@ -17,7 +17,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8VytQfJ3BDSPk8uVP6km2H",
 
-      status: "active",
+      status: "coming-soon",
 
       shortDescription:
         "An organically shaped freshwater pearl cross suspended on a delicate 14k gold-filled chain—bold, luminous, and reverently refined.",
@@ -39,7 +39,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8W26QfJ3BDSPk8efg9LBpl",
 
-      status: "active",
+      status: "coming-soon",
 
       shortDescription:
         "A refined vertical strand pendant on a delicate 14k gold-filled chain—minimal, luminous, and quietly elevated.",
@@ -61,7 +61,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8W2vQfJ3BDSPk8c3j0SknU",
 
-      status: "active",
+      status: "coming-soon",
 
       shortDescription:
         "A delicate mother-of-pearl cross framed in gold on a fine 14k gold-filled chain—soft, meaningful, and timeless.",
@@ -83,7 +83,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8W0mQfJ3BDSPk8e0SCt6jB",
 
-      status: "active",
+      status: "coming-soon",
 
       shortDescription:
         "A delicate mother-of-pearl star pendant on a fine 14k gold-filled chain—softly luminous and effortlessly celestial.",
