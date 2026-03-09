@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
-/* Perandory — served from /public/fonts */
+/* ---------------------------
+   Perandory Fonts
+--------------------------- */
+
 @font-face {
   font-family: "Perandory";
   src: url("/fonts/Perandory-Regular.otf") format("opentype");
@@ -25,7 +28,10 @@
   font-display: swap;
 }
 
-/* Bebas Neue */
+/* ---------------------------
+   Bebas Neue
+--------------------------- */
+
 @font-face {
   font-family: "BebasNeue";
   src: url("/fonts/BebasNeue-Regular.woff2") format("woff2"),
@@ -36,7 +42,10 @@
   font-display: swap;
 }
 
-/* Luxeline */
+/* ---------------------------
+   Luxeline (Collection Font)
+--------------------------- */
+
 @font-face {
   font-family: "Luxeline";
   src: url("/fonts/LuxelineDEMO-Regular-BF69ac43af5aa64.ttf") format("truetype");
@@ -44,6 +53,10 @@
   font-style: normal;
   font-display: swap;
 }
+
+/* ---------------------------
+   Base Layout
+--------------------------- */
 
 html,
 body,
@@ -55,7 +68,24 @@ body {
   margin: 0;
 }
 
-/* PROOF: if you see Perandory here, the font-face is working */
+/* ---------------------------
+   Font Proof (debug helper)
+--------------------------- */
+
 .perandory-proof {
   font-family: "Perandory", serif !important;
+}
+
+/* ---------------------------
+   Golden Hour Collection Animation
+--------------------------- */
+
+@keyframes goldShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 200% 50%;
+  }
 }
