@@ -15,7 +15,7 @@ const collectionStyles: Record<
     cardClassName: string;
   }
 > = {
-  "miami-line": {
+  "golden-hour-muse": {
     label: "GOLDEN HOUR MUSE",
     cardClassName:
       "border-[2px] border-[#d4b26a] shadow-[0_10px_30px_rgba(212,178,106,0.18)]",
