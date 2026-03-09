@@ -69,7 +69,7 @@ export default function ClickableProductGrid({ items }: { items: ClickableGridIt
                       </div>
 
                       {collection ? (
-                        <div className="flex w-[160px] shrink-0 items-center justify-center self-center pl-2">
+                        <div className="flex w-[260px] shrink-0 items-center justify-center self-center pl-2">
                           <div
                             className="flex items-center justify-center gap-3 text-center text-[0.9rem] uppercase tracking-[0.18em] leading-tight text-[#b98a3e]"
                             style={{ fontFamily: '"Luxeline", serif' }}
