@@ -1,10 +1,10 @@
+import { useMemo, useState } from "react";
 import CategoryHero from "../../components/archive/CategoryHero";
 import ClickableProductGrid from "../../components/archive/ClickableProductGrid";
 import { productCopy } from "../../data/productCopy";
 
 import heroNecklace from "../../assets/NecklaceHero.png";
 
-// Auto-load all images in: src/assets/products/necklaces/
 const necklaceImages = import.meta.glob(
   "../../assets/products/necklaces/*.{png,jpg,jpeg,webp}",
   { eager: true, import: "default" }
@@ -27,22 +27,57 @@ function slugFromFilename(filePath: string) {
     .replace(/^-+|-+$/g, "");
 }
 
-export default function Necklaces() {
-  const items = Object.entries(necklaceImages)
-    .sort(([a], [b]) => a.localeCompare(b))
-    .map(([path, url], idx) => {
-      const slug = slugFromFilename(path);
-      const href = `/product/necklaces/${slug}?img=${encodeURIComponent(url)}`;
-      const productMeta = productCopy.necklaces?.[slug];
+function collectionLabelFromKey(key: string) {
+  switch (key) {
+    case "golden-hour-muse":
+      return "Golden Hour Muse";
+    default:
+      return key
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+  }
+}
 
-      return {
-        id: `neck-${idx + 1}`,
-        name: titleFromFilename(path),
-        imageUrl: url,
-        href,
-        collection: productMeta?.collection,
-      };
-    });
+export default function Necklaces() {
+  const [activeCollection, setActiveCollection] = useState("all");
+
+  const allItems = useMemo(() => {
+    return Object.entries(necklaceImages)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([path, url], idx) => {
+        const slug = slugFromFilename(path);
+        const href = `/product/necklaces/${slug}?img=${encodeURIComponent(url)}`;
+        const productMeta = productCopy.necklaces?.[slug];
+
+        return {
+          id: `neck-${idx + 1}`,
+          name: titleFromFilename(path),
+          imageUrl: url,
+          href,
+          collection: productMeta?.collection,
+        };
+      });
+  }, []);
+
+  const collectionKeys = useMemo(() => {
+    return Array.from(
+      new Set(allItems.map((item) => item.collection).filter(Boolean))
+    ) as string[];
+  }, [allItems]);
+
+  const collections = useMemo(() => {
+    return collectionKeys.map(collectionLabelFromKey);
+  }, [collectionKeys]);
+
+  const filteredItems = useMemo(() => {
+    if (activeCollection === "all") return allItems;
+
+    const selectedKey =
+      collectionKeys.find((key) => collectionLabelFromKey(key) === activeCollection) ??
+      activeCollection;
+
+    return allItems.filter((item) => item.collection === selectedKey);
+  }, [activeCollection, allItems, collectionKeys]);
 
   return (
     <div className="bg-white text-black">
@@ -50,8 +85,11 @@ export default function Necklaces() {
         title="Necklaces"
         subtitle="Layers • Light-catching details • Coastal femininity"
         imageUrl={heroNecklace}
+        collections={collections}
+        activeCollection={activeCollection}
+        onCollectionChange={setActiveCollection}
       />
-      <ClickableProductGrid items={items} />
+      <ClickableProductGrid items={filteredItems} />
     </div>
   );
 }
