@@ -27,9 +27,7 @@ export default function ClickableProductGrid({ items }: { items: ClickableGridIt
     <section className="mx-auto max-w-6xl px-6 pb-16">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
         {items.map((item) => {
-          const collection = item.collection
-            ? collectionStyles[item.collection]
-            : null;
+          const collection = item.collection ? collectionStyles[item.collection] : null;
 
           return (
             <Link key={item.id} to={item.href} className="group block">
@@ -59,24 +57,31 @@ export default function ClickableProductGrid({ items }: { items: ClickableGridIt
                   </div>
 
                   <div className="p-4">
-                    <div className="flex items-center justify-between gap-4">
-                      <div className="text-[0.95rem] tracking-wide text-black/90 leading-snug">
-                        {item.name}
+                    <div className="flex items-start gap-4">
+                      <div className="min-w-0 flex-1">
+                        <div className="text-[0.95rem] tracking-wide text-black/90 leading-snug">
+                          {item.name}
+                        </div>
+
+                        <div className="mt-3 text-xs tracking-[0.22em] uppercase text-black/45">
+                          View details
+                        </div>
                       </div>
 
                       {collection ? (
-                        <div
-                          className="flex w-[190px] shrink-0 items-center justify-center gap-2 text-center text-[0.92rem] uppercase tracking-[0.20em] text-black leading-tight"
-                          style={{ fontFamily: '"Luxeline", serif' }}
-                        >
-                          <span className="text-[1rem] leading-none">✦</span>
-                          <span>{collection.label}</span>
+                        <div className="flex w-[220px] shrink-0 items-center justify-center self-center pl-2">
+                          <div
+                            className="flex items-center justify-center gap-3 text-center text-[0.9rem] uppercase tracking-[0.18em] leading-tight text-[#b98a3e]"
+                            style={{ fontFamily: '"Luxeline", serif' }}
+                          >
+                            <span className="text-[1rem] leading-none text-[#b98a3e]">✦</span>
+                            <span className="whitespace-nowrap text-[#b98a3e]">
+                              {collection.label}
+                            </span>
+                            <span className="text-[1rem] leading-none text-[#b98a3e]">✦</span>
+                          </div>
                         </div>
                       ) : null}
-                    </div>
-
-                    <div className="mt-3 text-xs tracking-[0.22em] uppercase text-black/45">
-                      View details
                     </div>
                   </div>
                 </div>
