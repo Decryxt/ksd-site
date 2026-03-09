@@ -6,6 +6,7 @@ type Props = {
   subtitle?: string;
   imageUrl: string;
   heightClassName?: string;
+
   collections?: string[];
   activeCollection?: string;
   onCollectionChange?: (collection: string) => void;
@@ -43,59 +44,83 @@ export default function CategoryHero({
       ref={sectionRef}
       className={`relative w-full overflow-hidden ${heightClassName} mb-10 md:mb-14`}
     >
+      {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${imageUrl})` }}
       />
 
+      {/* Editorial gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-black/45" />
 
+      {/* Title + Collections */}
       <motion.div
         className="absolute inset-0 flex items-center justify-center px-6 text-center"
         style={{ opacity: titleOpacity, y: titleY }}
       >
         <div className="max-w-4xl">
+
           <h1 className="perandory-proof text-[42px] md:text-[76px] leading-[1.05] tracking-tight text-white">
             {title}
           </h1>
 
-          {subtitle ? (
+          {subtitle && (
             <p className="mt-5 text-[11px] uppercase tracking-[0.34em] text-white/90">
               {subtitle}
             </p>
-          ) : null}
+          )}
 
-          {normalizedCollections.length > 0 ? (
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-[11px] uppercase tracking-[0.32em]">
-              <button
-                type="button"
-                onClick={() => onCollectionChange?.("all")}
-                className={`transition ${
-                  activeCollection === "all" ? "text-white" : "text-white/60 hover:text-white"
-                }`}
-              >
-                All Pieces
-              </button>
+          {/* COLLECTION SELECTOR */}
+          {normalizedCollections.length > 0 && (
+            <div className="mt-10 flex justify-center">
 
-              {normalizedCollections.map((collection) => (
+              <div className="flex flex-wrap items-center justify-center gap-8 rounded-full bg-white/10 backdrop-blur-md px-8 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.25)]">
+
+                {/* ALL PIECES */}
                 <button
-                  key={collection}
                   type="button"
-                  onClick={() => onCollectionChange?.(collection)}
-                  className={`transition ${
-                    activeCollection === collection
+                  onClick={() => onCollectionChange?.("all")}
+                  className={`relative text-[13px] uppercase tracking-[0.36em] transition ${
+                    activeCollection === "all"
                       ? "text-white"
-                      : "text-white/60 hover:text-white"
+                      : "text-white/70 hover:text-white"
                   }`}
                 >
-                  {collection}
+                  All Pieces
+
+                  {activeCollection === "all" && (
+                    <span className="absolute left-0 -bottom-2 h-[2px] w-full bg-white"></span>
+                  )}
                 </button>
-              ))}
+
+                {/* COLLECTIONS */}
+                {normalizedCollections.map((collection) => (
+                  <button
+                    key={collection}
+                    type="button"
+                    onClick={() => onCollectionChange?.(collection)}
+                    className={`relative text-[13px] uppercase tracking-[0.36em] transition ${
+                      activeCollection === collection
+                        ? "text-white"
+                        : "text-white/70 hover:text-white"
+                    }`}
+                  >
+                    {collection}
+
+                    {activeCollection === collection && (
+                      <span className="absolute left-0 -bottom-2 h-[2px] w-full bg-white"></span>
+                    )}
+                  </button>
+                ))}
+              </div>
+
             </div>
-          ) : null}
+          )}
+
         </div>
       </motion.div>
 
+      {/* Scroll hint */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-[0.32em] text-white/85"
         animate={{ opacity: hasMoved ? 0 : 1 }}
