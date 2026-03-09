@@ -1,5 +1,6 @@
 import CategoryHero from "../../components/archive/CategoryHero";
 import ClickableProductGrid from "../../components/archive/ClickableProductGrid";
+import { productCopy } from "../../data/productCopy";
 
 import heroNecklace from "../../assets/NecklaceHero.png";
 
@@ -31,15 +32,15 @@ export default function Necklaces() {
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([path, url], idx) => {
       const slug = slugFromFilename(path);
-
-      // pass the clicked image into the product page:
       const href = `/product/necklaces/${slug}?img=${encodeURIComponent(url)}`;
+      const productMeta = productCopy.necklaces?.[slug];
 
       return {
         id: `neck-${idx + 1}`,
         name: titleFromFilename(path),
         imageUrl: url,
         href,
+        collection: productMeta?.collection,
       };
     });
 

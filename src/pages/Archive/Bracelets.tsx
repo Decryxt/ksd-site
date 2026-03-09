@@ -1,5 +1,6 @@
 import CategoryHero from "../../components/archive/CategoryHero";
 import ClickableProductGrid from "../../components/archive/ClickableProductGrid";
+import { productCopy } from "../../data/productCopy";
 
 import heroBracelet from "../../assets/BraceletHero.png";
 
@@ -32,12 +33,14 @@ export default function Bracelets() {
     .map(([path, url], idx) => {
       const slug = slugFromFilename(path);
       const href = `/product/bracelets/${slug}?img=${encodeURIComponent(url)}`;
+      const productMeta = productCopy.bracelets?.[slug];
 
       return {
         id: `br-${idx + 1}`,
         name: titleFromFilename(path),
         imageUrl: url,
         href,
+        collection: productMeta?.collection,
       };
     });
 

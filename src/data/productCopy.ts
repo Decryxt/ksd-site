@@ -8,6 +8,9 @@ export type ProductCopy = {
   price?: number;
   stripePriceId?: string;
   status?: "active" | "coming-soon" | "sold-out";
+
+  // NEW
+  collection?: string;
 };
 
 export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy>>> = {
@@ -17,7 +20,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8VytQfJ3BDSPk8uVP6km2H",
 
-      status: "coming-soon",
+      status: "active",
 
       shortDescription:
         "An organically shaped freshwater pearl cross suspended on a delicate 14k gold-filled chain—bold, luminous, and reverently refined.",
@@ -39,7 +42,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8W26QfJ3BDSPk8efg9LBpl",
 
-      status: "coming-soon",
+      status: "active",
 
       shortDescription:
         "A refined vertical strand pendant on a delicate 14k gold-filled chain—minimal, luminous, and quietly elevated.",
@@ -61,7 +64,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8W2vQfJ3BDSPk8c3j0SknU",
 
-      status: "coming-soon",
+      status: "active",
 
       shortDescription:
         "A delicate mother-of-pearl cross framed in gold on a fine 14k gold-filled chain—soft, meaningful, and timeless.",
@@ -83,7 +86,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8W0mQfJ3BDSPk8e0SCt6jB",
 
-      status: "coming-soon",
+      status: "active",
 
       shortDescription:
         "A delicate mother-of-pearl star pendant on a fine 14k gold-filled chain—softly luminous and effortlessly celestial.",
@@ -286,6 +289,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       stripePriceId: "price_1T8Ze4QfJ3BDSPk8gJjoWMXP",
 
       status: "active",
+      collection: "golden-hour-muse",
 
       shortDescription:
         "Pavé horseshoe charms set with vibrant stones, suspended from polished 14k gold-filled hoops—playful, radiant, and striking.",
@@ -308,6 +312,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       stripePriceId: "price_1T8ZbYQfJ3BDSPk8HC4PP8gS",
 
       status: "active",
+      collection: "golden-hour-muse",
 
       shortDescription:
         "Textured gold coin charms suspended from polished 14k gold-filled hoops—bold, sunlit, and effortlessly coastal.",
@@ -330,6 +335,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       stripePriceId: "price_1T8ZfKQfJ3BDSPk89sIfNvIF",
 
       status: "active",
+      collection: "golden-hour-muse",
 
       shortDescription:
         "Luminous freshwater pearl drops suspended from polished 14k gold-filled hoops—classic, feminine, and quietly elegant.",
@@ -412,30 +418,30 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
   },
 
-    "high-end-pearls": {
-      "pearl-bead-necklace": {
-        price: 200,
+  "high-end-pearls": {
+    "pearl-bead-necklace": {
+      price: 200,
 
-        stripePriceId: "price_1T8WEzQfJ3BDSPk8PLkf76rl",
+      stripePriceId: "price_1T8WEzQfJ3BDSPk8PLkf76rl",
 
-        status: "active",
+      status: "active",
 
-        shortDescription:
-          "A refined strand of luminous freshwater pearls accented with gold and subtle blue detailing—elevated, timeless, and quietly statement-making.",
+      shortDescription:
+        "A refined strand of luminous freshwater pearls accented with gold and subtle blue detailing—elevated, timeless, and quietly statement-making.",
 
-        description:
-          "The Pearl Bead Necklace is a refined expression of coastal luxury. A strand of luminous freshwater pearls is delicately accented with fine blue detailing and finished with polished gold elements, creating a piece that feels both heirloom-inspired and modern. Anchored by a centered pearl focal point, it balances softness with structure—designed to elevate linen, silk, or bare skin with effortless grace. This is pearl design at its most intentional: elevated, editorial, and unmistakably refined.",
+      description:
+        "The Pearl Bead Necklace is a refined expression of coastal luxury. A strand of luminous freshwater pearls is delicately accented with fine blue detailing and finished with polished gold elements, creating a piece that feels both heirloom-inspired and modern. Anchored by a centered pearl focal point, it balances softness with structure—designed to elevate linen, silk, or bare skin with effortless grace. This is pearl design at its most intentional: elevated, editorial, and unmistakably refined.",
 
-        details: [
-          "Freshwater pearl strand",
-          "Gold accent beads",
-          "Subtle blue bead detailing",
-          "Centered pearl focal design",
-          "Hand-assembled in small batches",
-        ],
-      },
-    },   // <-- THIS COMMA STAYS
-  };     // <-- THIS BRACE WAS MISSING
+      details: [
+        "Freshwater pearl strand",
+        "Gold accent beads",
+        "Subtle blue bead detailing",
+        "Centered pearl focal design",
+        "Hand-assembled in small batches",
+      ],
+    },
+  },
+};
 
 export function getFallbackCopy(category: CategoryKey) {
   const base = {

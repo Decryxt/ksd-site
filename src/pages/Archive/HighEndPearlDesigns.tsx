@@ -1,5 +1,6 @@
 import CategoryHero from "../../components/archive/CategoryHero";
 import ClickableProductGrid from "../../components/archive/ClickableProductGrid";
+import { productCopy } from "../../data/productCopy";
 
 import heroPearl from "../../assets/HighEndPearlDesignHero.png";
 
@@ -32,12 +33,14 @@ export default function HighEndPearlDesigns() {
     .map(([path, url], idx) => {
       const slug = slugFromFilename(path);
       const href = `/product/high-end-pearls/${slug}?img=${encodeURIComponent(url)}`;
+      const productMeta = productCopy["high-end-pearls"]?.[slug];
 
       return {
         id: `pearl-${idx + 1}`,
         name: titleFromFilename(path),
         imageUrl: url,
         href,
+        collection: productMeta?.collection,
       };
     });
 
