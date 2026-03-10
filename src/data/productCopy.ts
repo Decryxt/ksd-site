@@ -37,6 +37,30 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "poppy-necklace": {
+      price: 90,
+
+      stripePriceId: "price_1T9EEhQfJ3BDSPk8DkY8TAW5",
+
+      status: "active",
+
+      collection: "golden-hour-muse",
+
+      shortDescription:
+        "A refined gold-filled beaded necklace with softly spaced polished accents—minimal, luminous, and effortlessly elevated.",
+
+      description:
+        "The Poppy Necklace is a study in understated shine. Designed with delicate gold-filled beads and finished with softly spaced polished accents, it creates a look that feels both refined and quietly statement-making. The silhouette sits beautifully along the neckline, catching light with a warm, fluid glow that feels timeless yet modern. Minimal enough for everyday wear yet elevated enough to stand alone, Poppy is the kind of piece that brings effortless polish to everything it’s paired with.",
+
+      details: [
+        "Gold-filled beaded necklace",
+        "Spaced polished accent beads",
+        "Weighted, refined silhouette",
+        "Designed for everyday wear or layering",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "luxury-strand-necklace": {
       price: 60,
 
