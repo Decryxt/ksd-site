@@ -1,5 +1,6 @@
 import React from "react";
 import TopBar from "./TopBar/TopBar";
+import Footer from "./Footer";
 
 type Props = {
   children: React.ReactNode;
@@ -7,10 +8,16 @@ type Props = {
 
 export default function SiteLayout({ children }: Props) {
   return (
-    <div className="min-h-screen bg-white text-black">
+    <div className="min-h-screen bg-white text-black flex flex-col">
       <TopBar />
-      {/* Fixed header height offset */}
-      <div className="pt-16">{children}</div>
+
+      {/* Main content */}
+      <main className="flex-1 pt-16">
+        {children}
+      </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
