@@ -307,6 +307,30 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "pearl-drop-earrings": {
+      price: 60,
+
+      stripePriceId: "price_1T9cJLQfJ3BDSPk8vqj38Vur",
+
+      status: "active",
+
+      collection: "golden-hour-muse",
+
+      shortDescription:
+        "Luminous freshwater pearl drops suspended from delicate pavé-set studs—timeless, radiant, and quietly elegant.",
+
+      description:
+        "Graceful and effortlessly refined, the Cleo Earrings capture the soft glow of coastal light. Each luminous freshwater pearl is suspended from a delicate pavé-set stud, allowing the pearl to move gently and reflect light with subtle iridescence. The balance of sparkling detail and organic pearl form creates a design that feels both classic and modern. Lightweight yet striking, they bring a quiet elegance to everyday wear while remaining timeless enough for special occasions.",
+
+      details: [
+        "Round freshwater pearl drop",
+        "Pavé-set crystal stud",
+        "14k gold-filled setting",
+        "Elegant lightweight drop design",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "wild-child-earrings": {
       price: 75,
 
