@@ -307,7 +307,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
-    "pearl-drop-earrings": {
+    "cleo-earrings": {
       price: 60,
 
       stripePriceId: "price_1T9cJLQfJ3BDSPk8vqj38Vur",
