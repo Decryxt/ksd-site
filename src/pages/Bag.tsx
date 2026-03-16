@@ -55,6 +55,7 @@ export default function Bag() {
             quantity: i.quantity,
             slug: i.slug,
             category: i.category,
+            squareVariationId: i.squareVariationId
           }))
         }),
       });
