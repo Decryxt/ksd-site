@@ -61,6 +61,19 @@ export default async function handler(req: any, res: any) {
         pricing_options: {
           auto_apply_taxes: true,
         },
+        service_charges: [
+          {
+            uid: "shipping-fee",
+            name: "Shipping",
+            amount_money: {
+              amount: 800,
+              currency: "USD",
+            },
+            calculation_phase: "SUBTOTAL_PHASE",
+            taxable: false,
+            scope: "ORDER",
+          },
+        ],
       },
       checkout_options: {
         redirect_url: `${origin}/bag?success=1`,
