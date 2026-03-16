@@ -3,6 +3,7 @@ type Body = {
     title: string;
     price: number;
     quantity: number;
+    squareVariationId?: string;
   }>;
 };
 
@@ -35,13 +36,18 @@ export default async function handler(req: any, res: any) {
       return;
     }
 
+    for (const item of items) {
+      if (!item.squareVariationId) {
+        res.status(400).json({
+          error: `Missing squareVariationId for item: ${item.title}`,
+        });
+        return;
+      }
+    }
+
     const line_items = items.map((item) => ({
-      name: item.title,
+      catalog_object_id: item.squareVariationId,
       quantity: String(Math.max(1, Math.min(99, item.quantity))),
-      base_price_money: {
-        amount: Math.round(item.price * 100),
-        currency: "USD",
-      },
     }));
 
     const subtotal = items.reduce((sum, item) => {

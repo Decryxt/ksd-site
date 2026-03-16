@@ -8,6 +8,8 @@ export type ProductCopy = {
   price?: number;
   stripePriceId?: string;
   squareCheckoutUrl?: string;
+  squareVariationId?: string;
+  sku?: string;
   status?: "active" | "coming-soon" | "sold-out";
 
   // NEW
@@ -22,6 +24,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       stripePriceId: "price_1T8VytQfJ3BDSPk8uVP6km2H",
 
       squareCheckoutUrl: "https://square.link/u/wVLovtlm",
+
+      squareVariationId: "KZISXRWMZAXJUZUTHJT23HXM",
 
       status: "active",
 
@@ -44,6 +48,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 90,
 
       stripePriceId: "price_1T9EEhQfJ3BDSPk8DkY8TAW5",
+
+      squareVariationId: "S4WJVASEO5AX6WCE2FJOOOAH",
 
       status: "active",
 
@@ -69,6 +75,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8W26QfJ3BDSPk8efg9LBpl",
 
+      squareVariationId: "3A5CK3PFEDGOLCTQMZ5LZG34",
+
       status: "active",
 
       shortDescription:
@@ -91,6 +99,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8W2vQfJ3BDSPk8c3j0SknU",
 
+      squareVariationId: "EY3NLB43LP6VWI6WIQ2I3F76",
+
       status: "active",
 
       shortDescription:
@@ -112,6 +122,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 70,
 
       stripePriceId: "price_1T8W0mQfJ3BDSPk8e0SCt6jB",
+
+      squareVariationId: "6M27ETVVFB44CTZ5V6OJ55XA",
 
       status: "active",
 
@@ -137,6 +149,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8W48QfJ3BDSPk8RipDEUj5",
 
+      squareVariationId: "NDJ4RMTRTVZ3BVM4CC3FICTH",
+
       status: "active",
 
       shortDescription:
@@ -158,6 +172,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 100,
 
       stripePriceId: "price_1T8W76QfJ3BDSPk8WFr1B9Dd",
+
+      squareVariationId: "5URIATNLTNOGFZ2HD7MIKCB2",
 
       status: "coming-soon",
 
@@ -181,6 +197,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8W8BQfJ3BDSPk8h7wCh5Tz",
 
+      squareVariationId: "YXT2BH7CLTR2HPV6ZHGHHI6V",
+
       status: "active",
 
       shortDescription:
@@ -202,6 +220,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 80,
 
       stripePriceId: "price_1T8W95QfJ3BDSPk8RL5ngYdf",
+
+      squareVariationId: "6Y3CZN7PIRAURUWVIKSH7FMR",
 
       status: "active",
 
@@ -225,6 +245,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8WA1QfJ3BDSPk8DPTMiBGv",
 
+      squareVariationId: "OTUGCX2U6AEFPQHETEWCLCIO",
+
       status: "active",
 
       shortDescription:
@@ -247,6 +269,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8WAkQfJ3BDSPk86JzmanM7",
 
+      squareVariationId: "7IM3AYXBL6AJJGSIJJCOD4VU",
+
       status: "active",
 
       shortDescription:
@@ -268,6 +292,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 75,
 
       stripePriceId: "price_1T8W5GQfJ3BDSPk8A78pTHLM",
+
+      squareVariationId: "EZJXQD5VYW43JUDFCDJ6LUEL",
 
       status: "active",
 
@@ -293,6 +319,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8WCgQfJ3BDSPk8YcyO1FjV",
 
+      squareVariationId: "ZPCQOWPGUQNYNGW4JAUGZHFY",
+
       status: "active",
 
       shortDescription:
@@ -314,6 +342,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 60,
 
       stripePriceId: "price_1T9cJLQfJ3BDSPk8vqj38Vur",
+
+      squareVariationId: "E3R425X2BMCIBB2VECXUF3RH",
 
       status: "active",
 
@@ -339,6 +369,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8Ze4QfJ3BDSPk8gJjoWMXP",
 
+      squareVariationId: "ZUK2LP6Q5AZSWI4LP2V5I7S4",
+
       status: "active",
       collection: "golden-hour-muse",
 
@@ -361,6 +393,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 70,
 
       stripePriceId: "price_1T8ZbYQfJ3BDSPk8HC4PP8gS",
+
+      squareVariationId: "3MNZ6DT3LXFWZFFHIOUGKLBH",
 
       status: "active",
       collection: "golden-hour-muse",
@@ -385,6 +419,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8ZfKQfJ3BDSPk89sIfNvIF",
 
+      squareVariationId: "WVHAHVCQN2NJBSRMEP3QLWGD",
+
       status: "active",
       collection: "golden-hour-muse",
 
@@ -408,6 +444,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8WBuQfJ3BDSPk80tKTaKUv",
 
+      squareVariationId: "SHNPK6ZJXOYM3Y7EEOYSNUKM",
+
       status: "active",
 
       shortDescription:
@@ -429,6 +467,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 55,
 
       stripePriceId: "price_1T8WE9QfJ3BDSPk8kqaHcmQ2",
+
+      squareVariationId: "IFEGBZVPACINTIN7LYGBIVDL",
 
       status: "active",
 
@@ -452,6 +492,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       stripePriceId: "price_1T8WDOQfJ3BDSPk89pxVsEea",
 
+      squareVariationId: "H5BBXLT3P3RWGBIF2T3UU2IG",
+
       status: "active",
 
       shortDescription:
@@ -474,6 +516,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 200,
 
       stripePriceId: "price_1T8WEzQfJ3BDSPk8PLkf76rl",
+
+      squareVariationId: "UTFUZDA572W524XQXBAUTFP4",
 
       status: "active",
 
