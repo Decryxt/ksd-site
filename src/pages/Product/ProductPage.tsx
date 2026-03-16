@@ -172,7 +172,6 @@ export default function ProductPage() {
 
   // NEW: PRICE
   const priceText = formatUSD(custom?.price);
-  const stripePriceId = custom?.stripePriceId;
   const priceNumber = custom?.price ?? 0;
 
   return (
@@ -298,7 +297,6 @@ export default function ProductPage() {
                 slug={slug}
                 title={title}
                 price={priceNumber}
-                stripePriceId={stripePriceId}
                 status={custom?.status}
               />
 
