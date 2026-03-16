@@ -58,9 +58,14 @@ export default async function handler(req: any, res: any) {
       order: {
         location_id: locationId,
         line_items,
+        pricing_options: {
+          auto_apply_taxes: true,
+        },
       },
       checkout_options: {
         redirect_url: `${origin}/bag?success=1`,
+        ask_for_shipping_address: true,
+        merchant_support_email: "alyssa@katherinesterlingdesigns.com",
       },
     };
 
@@ -79,7 +84,8 @@ export default async function handler(req: any, res: any) {
     const data: any = await response.json();
 
     if (!response.ok) {
-      res.status(500).send(data);
+      console.error("Square error:", data);
+      res.status(500).json(data);
       return;
     }
 
@@ -92,6 +98,7 @@ export default async function handler(req: any, res: any) {
 
     res.status(200).json({ url });
   } catch (err: any) {
+    console.error("Checkout session error:", err);
     res.status(500).send(err?.message || "Server error");
   }
 }
