@@ -26,9 +26,7 @@ export default function Bag() {
   }, [success]);
 
   const canCheckout = useMemo(() => {
-    if (items.length === 0) return false;
-    // every item needs a stripePriceId
-    return items.every((i) => Boolean(i.stripePriceId));
+    return items.length > 0;
   }, [items]);
 
   const onCheckout = async () => {
@@ -52,9 +50,12 @@ export default function Bag() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           items: items.map((i) => ({
-            stripePriceId: i.stripePriceId,
+            title: i.title,
+            price: i.price,
             quantity: i.quantity,
-          })),
+            slug: i.slug,
+            category: i.category,
+          }))
         }),
       });
 
@@ -145,12 +146,6 @@ export default function Bag() {
                       <div className="mt-2 text-xs text-black/45 uppercase tracking-[0.28em]">
                         {i.category}
                       </div>
-
-                      {!i.stripePriceId && (
-                        <div className="mt-2 text-xs text-red-600">
-                          Missing Stripe Price ID (cannot checkout yet)
-                        </div>
-                      )}
                     </div>
 
                     <button
@@ -210,7 +205,7 @@ export default function Bag() {
                 </div>
 
                 <div className="mt-2 text-xs text-black/50 leading-relaxed">
-                  Taxes & shipping will be calculated in Stripe Checkout (launch mode).
+                  Taxes & shipping will be calculated during checkout.
                 </div>
 
                 {error && (

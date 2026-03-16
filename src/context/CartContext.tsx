@@ -5,7 +5,6 @@ type CartItem = {
   slug: string;
   title: string;
   price: number; // for display only
-  stripePriceId: string;
   status?: "active" | "coming-soon" | "sold-out";
   quantity: number;
 };

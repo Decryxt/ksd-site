@@ -7,6 +7,7 @@ export type ProductCopy = {
   details?: string[];
   price?: number;
   stripePriceId?: string;
+  squareCheckoutUrl?: string;
   status?: "active" | "coming-soon" | "sold-out";
 
   // NEW
@@ -19,6 +20,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       price: 70,
 
       stripePriceId: "price_1T8VytQfJ3BDSPk8uVP6km2H",
+
+      squareCheckoutUrl: "https://square.link/u/wVLovtlm",
 
       status: "active",
 

@@ -1,19 +1,14 @@
-import Stripe from "stripe";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
-
 type Body = {
   items: Array<{
-    stripePriceId: string;
+    title: string;
+    price: number;
     quantity: number;
   }>;
 };
 
-// $125 threshold (in cents)
-const FREE_SHIPPING_THRESHOLD_CENTS = 12500;
-
-// Your Stripe Shipping Rate ID for “Standard Shipping $10”
-const SHIPPING_RATE_ID = "shr_1T8WtiQfJ3BDSPk8WtU8hUt1";
+function generateIdempotencyKey() {
+  return Math.random().toString(36).substring(2) + Date.now().toString(36);
+}
 
 export default async function handler(req: any, res: any) {
   if (req.method !== "POST") {
@@ -22,13 +17,9 @@ export default async function handler(req: any, res: any) {
   }
 
   try {
-    if (!process.env.STRIPE_SECRET_KEY) {
-      res.status(500).send("Missing STRIPE_SECRET_KEY env var.");
-      return;
-    }
-
     const body: Body =
       typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+
     const items = body?.items || [];
 
     if (!Array.isArray(items) || items.length === 0) {
@@ -36,80 +27,70 @@ export default async function handler(req: any, res: any) {
       return;
     }
 
-    const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map(
-      (i) => ({
-        price: i.stripePriceId,
-        quantity: Math.max(1, Math.min(99, Number(i.quantity) || 1)),
-      })
-    );
+    const accessToken = process.env.SQUARE_ACCESS_TOKEN;
+    const locationId = process.env.SQUARE_LOCATION_ID;
 
-    const uniquePriceIds = Array.from(new Set(items.map((i) => i.stripePriceId)));
-
-    const prices = await Promise.all(
-      uniquePriceIds.map((pid) => stripe.prices.retrieve(pid))
-    );
-
-    const priceMap = new Map<string, Stripe.Price>();
-    for (const p of prices) {
-      priceMap.set(p.id, p);
+    if (!accessToken || !locationId) {
+      res.status(500).send("Missing Square environment variables.");
+      return;
     }
 
-    let subtotalCents = 0;
-
-    for (const item of items) {
-      const qty = Math.max(1, Math.min(99, Number(item.quantity) || 1));
-      const priceObj = priceMap.get(item.stripePriceId);
-
-      if (!priceObj) {
-        res.status(400).send(`Invalid price id: ${item.stripePriceId}`);
-        return;
-      }
-
-      const unitAmount = priceObj.unit_amount;
-      if (typeof unitAmount !== "number") {
-        res.status(400).send(`Price has no unit_amount: ${item.stripePriceId}`);
-        return;
-      }
-
-      subtotalCents += unitAmount * qty;
-    }
+    const line_items = items.map((item) => ({
+      name: item.title,
+      quantity: String(Math.max(1, Math.min(99, item.quantity))),
+      base_price_money: {
+        amount: Math.round(item.price * 100),
+        currency: "USD",
+      },
+    }));
 
     const origin =
       req.headers?.origin ||
-      (req.headers?.host ? `https://${req.headers.host}` : process.env.PUBLIC_SITE_URL);
+      (req.headers?.host ? `https://${req.headers.host}` : null);
 
     if (!origin) {
       res.status(500).send("Could not determine site origin.");
       return;
     }
 
-    const successUrl = `${origin}/bag?success=1`;
-    const cancelUrl = `${origin}/bag?canceled=1`;
-
-    const sessionParams: Stripe.Checkout.SessionCreateParams = {
-      mode: "payment",
-      line_items,
-      success_url: successUrl,
-      cancel_url: cancelUrl,
-      shipping_address_collection: {
-        allowed_countries: ["US"],
+    const payload = {
+      idempotency_key: generateIdempotencyKey(),
+      order: {
+        location_id: locationId,
+        line_items,
       },
-      phone_number_collection: {
-        enabled: true,
+      checkout_options: {
+        redirect_url: `${origin}/bag?success=1`,
       },
     };
 
-    if (subtotalCents < FREE_SHIPPING_THRESHOLD_CENTS) {
-      sessionParams.shipping_options = [
-        {
-          shipping_rate: SHIPPING_RATE_ID,
+    const response = await fetch(
+      "https://connect.squareup.com/v2/online-checkout/payment-links",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
         },
-      ];
+        body: JSON.stringify(payload),
+      }
+    );
+
+    const data: any = await response.json();
+
+    if (!response.ok) {
+      res.status(500).send(data);
+      return;
     }
 
-    const session = await stripe.checkout.sessions.create(sessionParams);
+    const url = data?.payment_link?.url;
 
-    res.status(200).json({ url: session.url });
+    if (!url) {
+      res.status(500).send("Square checkout URL not returned.");
+      return;
+    }
+
+    res.status(200).json({ url });
   } catch (err: any) {
     res.status(500).send(err?.message || "Server error");
   }

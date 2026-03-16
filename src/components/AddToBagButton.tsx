@@ -6,7 +6,6 @@ type Props = {
   slug: string;
   title: string;
   price: number;
-  stripePriceId?: string;
   status?: "active" | "coming-soon" | "sold-out";
 };
 
@@ -15,7 +14,6 @@ export default function AddToBagButton({
   slug,
   title,
   price,
-  stripePriceId,
   status = "active",
 }: Props) {
   const { addToCart } = useCart();
@@ -42,18 +40,12 @@ export default function AddToBagButton({
       return;
     }
 
-    if (!stripePriceId) {
-      setMsg("Missing Stripe Price ID for this item.");
-      return;
-    }
-
     addToCart(
       {
         category,
         slug,
         title,
         price,
-        stripePriceId,
         status,
       },
       1
