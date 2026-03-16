@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
 
+import { productCopy } from "../data/productCopy";
+import type { CategoryKey } from "../data/productCopy";
+
 type Props = {
-  category: string;
+  category: CategoryKey;
   slug: string;
   title: string;
   price: number;
@@ -40,6 +43,13 @@ export default function AddToBagButton({
       return;
     }
 
+    const product = productCopy?.[category]?.[slug];
+
+    if (!product) {
+      console.error("Product not found in productCopy", category, slug);
+      return;
+    }
+
     addToCart(
       {
         category,
@@ -47,6 +57,7 @@ export default function AddToBagButton({
         title,
         price,
         status,
+        squareVariationId: product?.squareVariationId as string
       },
       1
     );

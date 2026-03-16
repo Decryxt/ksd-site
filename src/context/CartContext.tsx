@@ -6,6 +6,7 @@ type CartItem = {
   title: string;
   price: number; // for display only
   status?: "active" | "coming-soon" | "sold-out";
+  squareVariationId?: string;
   quantity: number;
 };
 
