@@ -44,6 +44,13 @@ export default async function handler(req: any, res: any) {
       },
     }));
 
+    const subtotal = items.reduce((sum, item) => {
+      const quantity = Math.max(1, Math.min(99, item.quantity));
+      return sum + Math.round(item.price * 100) * quantity;
+    }, 0);
+
+    const shippingAmount = subtotal >= 12000 ? 0 : 800;
+
     const origin =
       req.headers?.origin ||
       (req.headers?.host ? `https://${req.headers.host}` : null);
@@ -61,19 +68,22 @@ export default async function handler(req: any, res: any) {
         pricing_options: {
           auto_apply_taxes: true,
         },
-        service_charges: [
-          {
-            uid: "shipping-fee",
-            name: "Shipping",
-            amount_money: {
-              amount: 800,
-              currency: "USD",
-            },
-            calculation_phase: "SUBTOTAL_PHASE",
-            taxable: false,
-            scope: "ORDER",
-          },
-        ],
+        service_charges:
+          shippingAmount > 0
+            ? [
+                {
+                  uid: "standard-shipping",
+                  name: "Standard Shipping",
+                  amount_money: {
+                    amount: shippingAmount,
+                    currency: "USD",
+                  },
+                  calculation_phase: "SUBTOTAL_PHASE",
+                  taxable: false,
+                  scope: "ORDER",
+                },
+              ]
+            : [],
       },
       checkout_options: {
         redirect_url: `${origin}/bag?success=1`,
