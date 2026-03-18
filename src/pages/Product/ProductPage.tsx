@@ -4,8 +4,14 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { getFallbackCopy, productCopy, type CategoryKey } from "../../data/productCopy";
 import AddToBagButton from "../../components/AddToBagButton";
 
+type ExtendedCategoryKey =
+  | CategoryKey
+  | "belly-chains"
+  | "hand-chains"
+  | "anklets";
+
 type Params = {
-  category?: CategoryKey;
+  category?: ExtendedCategoryKey;
   slug?: string;
 };
 
@@ -15,7 +21,16 @@ function titleFromSlug(slug: string) {
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-function categoryLabel(category: CategoryKey) {
+function isBaseCategory(category: ExtendedCategoryKey): category is CategoryKey {
+  return (
+    category === "necklaces" ||
+    category === "bracelets" ||
+    category === "earrings" ||
+    category === "high-end-pearls"
+  );
+}
+
+function categoryLabel(category: ExtendedCategoryKey) {
   switch (category) {
     case "necklaces":
       return "Necklaces";
@@ -25,10 +40,18 @@ function categoryLabel(category: CategoryKey) {
       return "Earrings";
     case "high-end-pearls":
       return "High End Pearl Designs";
+    case "belly-chains":
+      return "Belly Chains";
+    case "hand-chains":
+      return "Hand Chains";
+    case "anklets":
+      return "Anklets";
+    default:
+      return "Archive";
   }
 }
 
-function categoryBackHref(category: CategoryKey) {
+function categoryBackHref(category: ExtendedCategoryKey) {
   switch (category) {
     case "necklaces":
       return "/archive/necklaces";
@@ -38,6 +61,14 @@ function categoryBackHref(category: CategoryKey) {
       return "/archive/earrings";
     case "high-end-pearls":
       return "/archive/high-end-pearl-designs";
+    case "belly-chains":
+      return "/body-jewelry/belly-chains";
+    case "hand-chains":
+      return "/body-jewelry/hand-chains";
+    case "anklets":
+      return "/body-jewelry/anklets";
+    default:
+      return "/archive/necklaces";
   }
 }
 
@@ -75,18 +106,6 @@ function buildHeroMap(modules: Record<string, string>) {
   }, {} as Record<string, string>);
 }
 
-/**
- * Dedicated Hero loaders:
- * Put hero images in these folders:
- *  - src/assets/products/necklaces/Hero/
- *  - src/assets/products/bracelets/Hero/
- *  - src/assets/products/earrings/Hero/
- *  - src/assets/products/high-end-pearls/Hero/
- *
- * Filenames should end with "Hero" so slug-matching is consistent:
- *  "Heart Of Gold Bracelet Hero.png" -> "heart-of-gold-bracelet"
- */
-
 // Necklaces
 const necklaceHeroModules = import.meta.glob(
   "../../assets/products/necklaces/Hero/*.{png,jpg,jpeg,webp}",
@@ -108,7 +127,7 @@ const earringHeroModules = import.meta.glob(
 ) as Record<string, string>;
 const earringHeroBySlug = buildHeroMap(earringHeroModules);
 
-// High End Pearls (support both common folder naming patterns, just in case)
+// High End Pearls
 const highEndPearlsHeroModulesA = import.meta.glob(
   "../../assets/products/high-end-pearls/Hero/*.{png,jpg,jpeg,webp}",
   { eager: true, import: "default" }
@@ -124,24 +143,45 @@ const highEndPearlsHeroBySlug = buildHeroMap({
   ...highEndPearlsHeroModulesB,
 });
 
+// Belly Chains
+const bellyChainsHeroModules = import.meta.glob(
+  "../../assets/products/body-jewelry/belly-chains/Hero/*.{png,jpg,jpeg,webp}",
+  { eager: true, import: "default" }
+) as Record<string, string>;
+const bellyChainsHeroBySlug = buildHeroMap(bellyChainsHeroModules);
+
+// Hand Chains
+const handChainsHeroModules = import.meta.glob(
+  "../../assets/products/body-jewelry/hand-chains/Hero/*.{png,jpg,jpeg,webp}",
+  { eager: true, import: "default" }
+) as Record<string, string>;
+const handChainsHeroBySlug = buildHeroMap(handChainsHeroModules);
+
+// Anklets
+const ankletsHeroModules = import.meta.glob(
+  "../../assets/products/body-jewelry/anklets/Hero/*.{png,jpg,jpeg,webp}",
+  { eager: true, import: "default" }
+) as Record<string, string>;
+const ankletsHeroBySlug = buildHeroMap(ankletsHeroModules);
+
 // One lookup for all categories
-const heroByCategory: Record<CategoryKey, Record<string, string>> = {
+const heroByCategory: Record<ExtendedCategoryKey, Record<string, string>> = {
   necklaces: necklaceHeroBySlug,
   bracelets: braceletHeroBySlug,
   earrings: earringHeroBySlug,
   "high-end-pearls": highEndPearlsHeroBySlug,
+  "belly-chains": bellyChainsHeroBySlug,
+  "hand-chains": handChainsHeroBySlug,
+  anklets: ankletsHeroBySlug,
 };
 
 export default function ProductPage() {
   const { category, slug } = useParams<Params>();
   const [searchParams] = useSearchParams();
 
-  // fallback: clicked card image (query param)
   const clickedImg = searchParams.get("img") || "";
-
   const { scrollY } = useScroll();
 
-  // Keeps the elegant "fade quickly once scroll starts" behavior
   const titleOpacity = useTransform(scrollY, [0, 80], [1, 0]);
   const titleY = useTransform(scrollY, [0, 120], [0, -18]);
 
@@ -150,7 +190,10 @@ export default function ProductPage() {
       <div className="min-h-[70vh] bg-white text-black flex items-center justify-center px-6">
         <div className="max-w-lg text-center">
           <p className="text-black/70">That product could not be found.</p>
-          <Link to="/archive/necklaces" className="mt-6 inline-block underline underline-offset-4">
+          <Link
+            to="/archive/necklaces"
+            className="mt-6 inline-block underline underline-offset-4"
+          >
             Back to Archive
           </Link>
         </div>
@@ -158,27 +201,36 @@ export default function ProductPage() {
     );
   }
 
-  // Dedicated hero override (all categories), otherwise fallback to clicked image
   const categoryHeroMap = heroByCategory[category] || {};
   const heroImg = categoryHeroMap[slug] || clickedImg;
 
-  const custom = productCopy?.[category]?.[slug];
-  const fallback = getFallbackCopy(category);
+  const custom = (productCopy as Record<string, Record<string, any> | undefined>)?.[category]?.[slug];
+
+  const fallback = isBaseCategory(category)
+    ? getFallbackCopy(category)
+    : {
+        shortDescription: "A refined Katherine Sterling Designs piece.",
+        description:
+          "Designed with an elevated coastal-luxury sensibility, this piece blends softness, shine, and feminine detail for an effortlessly refined finish.",
+        details: [
+          "Designed with an elevated coastal aesthetic",
+          "Lightweight, refined construction",
+          "Feminine and versatile styling",
+          "Hand-assembled in small batches",
+        ],
+      };
 
   const title = custom?.title ?? titleFromSlug(slug);
   const shortDescription = custom?.shortDescription ?? fallback.shortDescription;
   const description = custom?.description ?? fallback.description;
   const details = custom?.details ?? fallback.details;
 
-  // NEW: PRICE
   const priceText = formatUSD(custom?.price);
   const priceNumber = custom?.price ?? 0;
 
   return (
     <div className="bg-white text-black">
-      {/* HERO (smaller, "old style": black title + fade-to-white at bottom) */}
       <section className="relative w-full overflow-hidden">
-        {/* Reduced height so it doesn't eat the screen */}
         <div className="relative w-full h-[60vh] md:h-[68vh]">
           {heroImg ? (
             <img
@@ -190,13 +242,8 @@ export default function ProductPage() {
             <div className="absolute inset-0 bg-black/5" />
           )}
 
-          {/* OLD STYLE OVERLAY:
-              - subtle dark at top for nav readability
-              - fades to white at bottom for the page transition
-          */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white" />
 
-          {/* Top Bar */}
           <div className="absolute top-0 left-0 right-0 z-10 mx-auto max-w-6xl px-6 pt-6">
             <div className="flex items-center justify-between">
               <Link
@@ -212,7 +259,6 @@ export default function ProductPage() {
             </div>
           </div>
 
-          {/* Title Overlay (BLACK, fades out when scroll begins) */}
           <motion.div
             style={{ opacity: titleOpacity, y: titleY }}
             className="absolute bottom-0 left-0 right-0 z-10 mx-auto max-w-6xl px-6 pb-10 md:pb-12"
@@ -222,7 +268,6 @@ export default function ProductPage() {
                 {categoryLabel(category)}
               </div>
 
-              {/* FORCE Perandory */}
               <h1
                 className="mt-3 text-4xl md:text-6xl leading-[1.02] tracking-[-0.01em] text-black"
                 style={{ fontFamily: '"Perandory", serif', fontWeight: 400 }}
@@ -234,7 +279,6 @@ export default function ProductPage() {
                 {shortDescription}
               </p>
 
-              {/* Optional subtle price in hero area */}
               {priceText ? (
                 <div className="mt-3 text-black/55 text-sm tracking-wide">{priceText}</div>
               ) : null}
@@ -243,10 +287,8 @@ export default function ProductPage() {
         </div>
       </section>
 
-      {/* CONTENT */}
       <section className="mx-auto max-w-6xl px-6 pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pt-10">
-          {/* LEFT COLUMN */}
           <div className="lg:col-span-7">
             <motion.div
               initial={{ opacity: 0, y: 14 }}
@@ -262,7 +304,7 @@ export default function ProductPage() {
 
               {details?.length ? (
                 <ul className="mt-8 space-y-3 text-black/65 text-sm">
-                  {details.map((d, idx) => (
+                  {details.map((d: string, idx: number) => (
                     <li key={idx} className="flex gap-3">
                       <span className="mt-[7px] h-[5px] w-[5px] rounded-full bg-black/35 shrink-0" />
                       <span>{d}</span>
@@ -273,7 +315,6 @@ export default function ProductPage() {
             </motion.div>
           </div>
 
-          {/* RIGHT COLUMN */}
           <div className="lg:col-span-5">
             <div className="rounded-2xl border border-black/10 bg-white p-8 sticky top-6 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
               <div className="text-black/55 text-xs tracking-[0.28em] uppercase">
@@ -293,7 +334,7 @@ export default function ProductPage() {
               </div>
 
               <AddToBagButton
-                category={category}
+                category={category as CategoryKey}
                 slug={slug}
                 title={title}
                 price={priceNumber}

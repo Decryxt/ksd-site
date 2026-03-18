@@ -8,6 +8,9 @@ import Contact from "./pages/Contact/Contact";
 import Necklaces from "./pages/Archive/Necklaces";
 import Bracelets from "./pages/Archive/Bracelets";
 import Earrings from "./pages/Archive/Earrings";
+import BellyChains from "./pages/Archive/BellyChains";
+import HandChains from "./pages/Archive/HandChains";
+import Anklets from "./pages/Archive/Anklets";
 import HighEndPearlDesigns from "./pages/Archive/HighEndPearlDesigns";
 import NotFound from "./pages/NotFound";
 import Bag from "./pages/Bag";
@@ -160,6 +163,60 @@ function AnimatedRoutes() {
                 transition={pageTransition}
               >
                 <HighEndPearlDesigns />
+              </motion.main>
+            </SiteLayout>
+          }
+        />
+
+        <Route
+          path="/body-jewelry/belly-chains"
+          element={
+            <SiteLayout>
+              <motion.main
+                className="min-h-screen"
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <BellyChains />
+              </motion.main>
+            </SiteLayout>
+          }
+        />
+
+        <Route
+          path="/body-jewelry/hand-chains"
+          element={
+            <SiteLayout>
+              <motion.main
+                className="min-h-screen"
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <HandChains />
+              </motion.main>
+            </SiteLayout>
+          }
+        />
+
+        <Route
+          path="/body-jewelry/anklets"
+          element={
+            <SiteLayout>
+              <motion.main
+                className="min-h-screen"
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <Anklets />
               </motion.main>
             </SiteLayout>
           }

@@ -29,6 +29,12 @@ const ARCHIVE_LINKS: NavLink[] = [
   { label: "High End Pearl Designs", to: "/archive/high-end-pearl-designs" },
 ];
 
+const BODY_JEWELRY_LINKS: NavLink[] = [
+  { label: "Belly Chains", to: "/body-jewelry/belly-chains" },
+  { label: "Hand Chains", to: "/body-jewelry/hand-chains" },
+  { label: "Anklets", to: "/body-jewelry/anklets" },
+];
+
 const luxuryEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const barTransition: Transition = { duration: 0.42, ease: luxuryEase };
 const panelTransition: Transition = { duration: 0.45, ease: luxuryEase };
@@ -299,20 +305,53 @@ export default function TopBar() {
                 </div>
 
                 <div className="col-span-7">
-                  <div className="grid grid-cols-2 gap-x-12 gap-y-6">
-                    {ARCHIVE_LINKS.map((item) => (
-                      <Link key={item.to} to={item.to} className="group block">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm uppercase tracking-[0.18em] text-black/80 group-hover:text-black transition-colors">
-                            {item.label}
-                          </span>
-                          <span className="text-[11px] uppercase tracking-[0.18em] text-black/40 group-hover:text-black/70 transition-colors">
-                            View
-                          </span>
-                        </div>
-                        <div className="mt-3 h-px w-full bg-black/10 group-hover:bg-black/20 transition-colors" />
-                      </Link>
-                    ))}
+                  <div className="grid grid-cols-2 gap-x-16 gap-y-10">
+
+                    {/* MAIN COLLECTIONS */}
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.28em] text-black/50 mb-4">
+                        Collections
+                      </p>
+
+                      <div className="space-y-6">
+                        {ARCHIVE_LINKS.map((item) => (
+                          <Link key={item.to} to={item.to} className="group block">
+                            <div className="flex items-center justify-between">
+                              <span className="text-sm uppercase tracking-[0.18em] text-black/80 group-hover:text-black transition-colors">
+                                {item.label}
+                              </span>
+                              <span className="text-[11px] uppercase tracking-[0.18em] text-black/40 group-hover:text-black/70 transition-colors">
+                                View
+                              </span>
+                            </div>
+                            <div className="mt-3 h-px w-full bg-black/10 group-hover:bg-black/20 transition-colors" />
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* BODY JEWELRY */}
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.28em] text-black/50 mb-4">
+                        Body Jewelry
+                      </p>
+
+                      <div className="space-y-6">
+                        {BODY_JEWELRY_LINKS.map((item) => (
+                          <Link key={item.to} to={item.to} className="group block">
+                            <div className="flex items-center justify-between">
+                              <span className="text-sm uppercase tracking-[0.18em] text-black/80 group-hover:text-black transition-colors">
+                                {item.label}
+                              </span>
+                              <span className="text-[11px] uppercase tracking-[0.18em] text-black/40 group-hover:text-black/70 transition-colors">
+                                View
+                              </span>
+                            </div>
+                            <div className="mt-3 h-px w-full bg-black/10 group-hover:bg-black/20 transition-colors" />
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -367,7 +406,25 @@ export default function TopBar() {
                       className="overflow-hidden border border-black/10"
                     >
                       <div className="p-2">
+                        {/* MAIN COLLECTIONS */}
                         {ARCHIVE_LINKS.map((item) => (
+                          <Link
+                            key={item.to}
+                            to={item.to}
+                            className="block px-3 py-3 text-sm text-black/75"
+                          >
+                            {item.label}
+                            <div className="mt-3 h-px w-full bg-black/10" />
+                          </Link>
+                        ))}
+
+                        {/* BODY JEWELRY HEADER */}
+                        <div className="px-3 pt-4 pb-2 text-[10px] uppercase tracking-[0.28em] text-black/50">
+                          Body Jewelry
+                        </div>
+
+                        {/* BODY JEWELRY LINKS */}
+                        {BODY_JEWELRY_LINKS.map((item) => (
                           <Link
                             key={item.to}
                             to={item.to}

@@ -1,4 +1,4 @@
-export type CategoryKey = "necklaces" | "bracelets" | "earrings" | "high-end-pearls";
+export type CategoryKey = "necklaces" | "bracelets" | "earrings" | "belly-chains" | "high-end-pearls";
 
 export type ProductCopy = {
   title?: string;
@@ -390,7 +390,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "stella-earrings": {
-      price: 70,
+      price: 45,
 
       stripePriceId: "price_1T8ZbYQfJ3BDSPk8HC4PP8gS",
 
@@ -506,6 +506,33 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
         "Freshwater pearl drop",
         "Gold-filled hardware",
         "Lightweight everyday wear",
+        "Hand-assembled in small batches",
+      ],
+    },
+  },
+
+  "belly-chains": {
+    "bohemian-belly-chain": {
+      price: 75,
+
+      squareVariationId: "EI7ZGQLOPJ4UXVNGXGPZITQT",
+
+      status: "coming-soon",
+
+      collection: "golden-hour-muse",
+
+      shortDescription:
+        "A delicate gold belly chain adorned with softly hammered disc charms—light-catching, feminine, and effortlessly coastal.",
+
+      description:
+        "The Bohemian Belly Chain is designed to move with you—subtle, radiant, and endlessly refined. A fine gold chain drapes gently along the waist, accented with softly hammered disc charms that catch the light with every shift and step. Each charm reflects a warm, sunlit glow, evoking the ease of coastal afternoons and golden hour skin.Lightweight and effortlessly elegant, this piece is made for layering or wearing alone as a quiet statement. Whether styled over swimwear or paired with soft knits, it brings a touch of warmth, femininity, and understated luxury to every look.",
+
+      details: [
+        "Delicate gold waist chain",
+        "Hammered gold disc charms",
+        "Light-catching textured finish",
+        "Adjustable fit for natural drape",
+        "Lightweight, comfortable wear",
         "Hand-assembled in small batches",
       ],
     },
