@@ -338,17 +338,17 @@ export default function TopBar() {
 
                       <div className="space-y-6">
                         {BODY_JEWELRY_LINKS.map((item) => (
-                          <Link key={item.to} to={item.to} className="group block">
+                          <div key={item.to} className="group block cursor-not-allowed opacity-60">
                             <div className="flex items-center justify-between">
-                              <span className="text-sm uppercase tracking-[0.18em] text-black/80 group-hover:text-black transition-colors">
+                              <span className="text-sm uppercase tracking-[0.18em] text-black/60">
                                 {item.label}
                               </span>
-                              <span className="text-[11px] uppercase tracking-[0.18em] text-black/40 group-hover:text-black/70 transition-colors">
-                                View
+                              <span className="text-[11px] uppercase tracking-[0.18em] text-black/30">
+                                Soon
                               </span>
                             </div>
-                            <div className="mt-3 h-px w-full bg-black/10 group-hover:bg-black/20 transition-colors" />
-                          </Link>
+                            <div className="mt-3 h-px w-full bg-black/5" />
+                          </div>
                         ))}
                       </div>
                     </div>
@@ -425,14 +425,16 @@ export default function TopBar() {
 
                         {/* BODY JEWELRY LINKS */}
                         {BODY_JEWELRY_LINKS.map((item) => (
-                          <Link
+                          <div
                             key={item.to}
-                            to={item.to}
-                            className="block px-3 py-3 text-sm text-black/75"
+                            className="block px-3 py-3 text-sm text-black/50 cursor-not-allowed"
                           >
                             {item.label}
-                            <div className="mt-3 h-px w-full bg-black/10" />
-                          </Link>
+                            <span className="ml-2 text-[10px] uppercase tracking-[0.2em] text-black/30">
+                              (Soon)
+                            </span>
+                            <div className="mt-3 h-px w-full bg-black/5" />
+                          </div>
                         ))}
                       </div>
                     </motion.div>
