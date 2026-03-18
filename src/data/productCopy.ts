@@ -338,6 +338,30 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "saltwater-star-earrings": {
+      price: 75,
+
+      squareVariationId: "HX7PE4YOOECG6M6BADDURLVM",
+
+      status: "active",
+
+      collection: "golden-hour-muse",
+
+      shortDescription:
+        "Luminous freshwater pearl stars suspended from delicate gold pavé hoops—celestial, radiant, and effortlessly feminine.",
+
+      description:
+        "The Saltwater Star Earrings are designed to capture light with a soft, celestial glow. Each organically shaped pearl star brings natural iridescence and subtle texture, suspended from delicate gold pavé hoops that add just the right amount of brilliance. Feminine yet refined, they strike a balance between playful charm and elevated elegance. Inspired by sunlit water and golden hour shimmer, this pair feels dreamy, polished, and endlessly wearable—made to stand out softly from day to night.",
+
+      details: [
+        "Freshwater pearl star charms",
+        "Gold pavé drop hoops",
+        "Soft natural iridescence",
+        "Lightweight statement silhouette",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "cleo-earrings": {
       price: 60,
 
