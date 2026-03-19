@@ -10,7 +10,8 @@ export type ProductCopy = {
   squareCheckoutUrl?: string;
   squareVariationId?: string;
   sku?: string;
-  status?: "active" | "coming-soon" | "sold-out";
+  status?: "active" | "coming-soon" | "sold-out" | "pre-order";
+  preorderShipDate?: string;
 
   // NEW
   collection?: string;
@@ -541,7 +542,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "EI7ZGQLOPJ4UXVNGXGPZITQT",
 
-      status: "coming-soon",
+      status: "pre-order",
+      preorderShipDate: "2026-03-22",
 
       collection: "golden-hour-muse",
 

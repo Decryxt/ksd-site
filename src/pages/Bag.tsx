@@ -9,6 +9,19 @@ function formatUSD(value: number) {
   }).format(value);
 }
 
+function formatShipDate(value?: string) {
+  if (!value) return null;
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+
+  return new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  }).format(date);
+}
+
 export default function Bag() {
   const { items, removeFromCart, setQty, subtotal, totalItems, clearCart } = useCart();
   const [searchParams] = useSearchParams();
@@ -28,6 +41,37 @@ export default function Bag() {
   const canCheckout = useMemo(() => {
     return items.length > 0;
   }, [items]);
+
+  const preorderItems = useMemo(
+    () => items.filter((i) => i.status === "preorder"),
+    [items]
+  );
+
+  const hasPreorderItems = preorderItems.length > 0;
+
+  const preorderNoticeText = useMemo(() => {
+    if (!hasPreorderItems) return null;
+
+    const shipDates = Array.from(
+      new Set(
+        preorderItems
+          .map((i) => i.preorderShipDate)
+          .filter(Boolean)
+      )
+    ) as string[];
+
+    if (shipDates.length === 1) {
+      return `Your bag contains one or more preorder items and will ship on or after ${formatShipDate(
+        shipDates[0]
+      )}.`;
+    }
+
+    if (shipDates.length > 1) {
+      return "Your bag contains one or more preorder items. Items will ship on or after their listed launch dates.";
+    }
+
+    return "Your bag contains one or more preorder items and will ship on or after their launch date.";
+  }, [hasPreorderItems, preorderItems]);
 
   const onCheckout = async () => {
     setError(null);
@@ -55,8 +99,8 @@ export default function Bag() {
             quantity: i.quantity,
             slug: i.slug,
             category: i.category,
-            squareVariationId: i.squareVariationId
-          }))
+            squareVariationId: i.squareVariationId,
+          })),
         }),
       });
 
@@ -114,6 +158,17 @@ export default function Bag() {
           </div>
         )}
 
+        {hasPreorderItems && items.length > 0 && (
+          <div className="mt-6 rounded-2xl bg-black px-5 py-4 text-white">
+            <div className="text-[11px] uppercase tracking-[0.28em] text-white/70">
+              Preorder Notice
+            </div>
+            <div className="mt-2 text-sm leading-relaxed text-white/90">
+              {preorderNoticeText}
+            </div>
+          </div>
+        )}
+
         {items.length === 0 ? (
           <div className="mt-10 rounded-2xl border border-black/10 p-8">
             <p className="text-black/70">Your bag is empty.</p>
@@ -128,62 +183,80 @@ export default function Bag() {
           <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* ITEMS */}
             <div className="lg:col-span-8 space-y-4">
-              {items.map((i) => (
-                <div
-                  key={i.slug}
-                  className="rounded-2xl border border-black/10 bg-white p-5 shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <div
-                        className="text-xl"
-                        style={{ fontFamily: '"Perandory", serif', fontWeight: 400 }}
-                      >
-                        {i.title}
-                      </div>
-                      <div className="mt-1 text-sm text-black/60">
-                        {formatUSD(i.price)}
-                      </div>
-                      <div className="mt-2 text-xs text-black/45 uppercase tracking-[0.28em]">
-                        {i.category}
-                      </div>
-                    </div>
+              {items.map((i) => {
+                const shipDate = formatShipDate(i.preorderShipDate);
 
-                    <button
-                      onClick={() => removeFromCart(i.slug)}
-                      className="text-sm text-black/55 hover:text-black underline underline-offset-4"
-                    >
-                      Remove
-                    </button>
-                  </div>
+                return (
+                  <div
+                    key={i.slug}
+                    className="rounded-2xl border border-black/10 bg-white p-5 shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <div
+                          className="text-xl"
+                          style={{ fontFamily: '"Perandory", serif', fontWeight: 400 }}
+                        >
+                          {i.title}
+                        </div>
+                        <div className="mt-1 text-sm text-black/60">
+                          {formatUSD(i.price)}
+                        </div>
+                        <div className="mt-2 text-xs text-black/45 uppercase tracking-[0.28em]">
+                          {i.category}
+                        </div>
 
-                  <div className="mt-5 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => setQty(i.slug, i.quantity - 1)}
-                        className="h-9 w-9 rounded-full border border-black/15 bg-black/5 hover:bg-black/10 transition"
-                        aria-label="Decrease quantity"
-                      >
-                        -
-                      </button>
+                        {i.status === "preorder" && (
+                          <div className="mt-3 space-y-1">
+                            <div className="text-[10px] uppercase tracking-[0.24em] text-black/40">
+                              Preorder
+                            </div>
 
-                      <div className="w-10 text-center text-sm">{i.quantity}</div>
+                            {shipDate && (
+                              <div className="text-xs text-black/55">
+                                Ships on or after {shipDate}
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
 
                       <button
-                        onClick={() => setQty(i.slug, i.quantity + 1)}
-                        className="h-9 w-9 rounded-full border border-black/15 bg-black/5 hover:bg-black/10 transition"
-                        aria-label="Increase quantity"
+                        onClick={() => removeFromCart(i.slug)}
+                        className="text-sm text-black/55 hover:text-black underline underline-offset-4"
                       >
-                        +
+                        Remove
                       </button>
                     </div>
 
-                    <div className="text-sm text-black/70">
-                      Line total: {formatUSD(i.price * i.quantity)}
+                    <div className="mt-5 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => setQty(i.slug, i.quantity - 1)}
+                          className="h-9 w-9 rounded-full border border-black/15 bg-black/5 hover:bg-black/10 transition"
+                          aria-label="Decrease quantity"
+                        >
+                          -
+                        </button>
+
+                        <div className="w-10 text-center text-sm">{i.quantity}</div>
+
+                        <button
+                          onClick={() => setQty(i.slug, i.quantity + 1)}
+                          className="h-9 w-9 rounded-full border border-black/15 bg-black/5 hover:bg-black/10 transition"
+                          aria-label="Increase quantity"
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      <div className="text-sm text-black/70">
+                        Line total: {formatUSD(i.price * i.quantity)}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
 
               <button
                 onClick={clearCart}
@@ -208,6 +281,12 @@ export default function Bag() {
                 <div className="mt-2 text-xs text-black/50 leading-relaxed">
                   Taxes & shipping will be calculated during checkout.
                 </div>
+
+                {hasPreorderItems && (
+                  <div className="mt-4 rounded-xl border border-black/10 bg-black/5 px-4 py-3 text-xs text-black/70 leading-relaxed">
+                    Preorder items in this bag will ship on or after their listed launch date.
+                  </div>
+                )}
 
                 {error && (
                   <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">

@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
 
-import { productCopy } from "../data/productCopy";
-import type { CategoryKey } from "../data/productCopy";
+type ProductStatus = "active" | "coming-soon" | "sold-out" | "preorder";
 
 type Props = {
-  category: CategoryKey;
+  category: string;
   slug: string;
   title: string;
   price: number;
-  status?: "active" | "coming-soon" | "sold-out";
+  status?: ProductStatus;
 };
 
 export default function AddToBagButton({
@@ -23,64 +22,58 @@ export default function AddToBagButton({
   const [msg, setMsg] = useState<string | null>(null);
 
   const isUnavailable = status === "coming-soon" || status === "sold-out";
+  const isPreorder = status === "preorder";
 
   const buttonLabel =
     status === "coming-soon"
       ? "Coming Soon"
       : status === "sold-out"
       ? "Sold Out"
+      : status === "preorder"
+      ? "Preorder"
       : "Add to Bag";
 
-  const onAdd = () => {
-    setMsg(null);
+  function handleAdd() {
+    if (isUnavailable) return;
 
-    if (isUnavailable) {
-      setMsg(
-        status === "coming-soon"
-          ? "This piece is coming soon."
-          : "This piece is sold out."
-      );
-      return;
-    }
+    addToCart({
+      category,
+      slug,
+      title,
+      price,
+      status,
+    });
 
-    const product = productCopy?.[category]?.[slug];
+    setMsg(isPreorder ? "Added as preorder" : "Added to bag");
 
-    if (!product) {
-      console.error("Product not found in productCopy", category, slug);
-      return;
-    }
-
-    addToCart(
-      {
-        category,
-        slug,
-        title,
-        price,
-        status,
-        squareVariationId: product?.squareVariationId as string
-      },
-      1
-    );
-
-    setMsg("Added to bag.");
-    setTimeout(() => setMsg(null), 1200);
-  };
+    window.setTimeout(() => {
+      setMsg(null);
+    }, 2200);
+  }
 
   return (
     <div className="mt-6">
       <button
-        onClick={onAdd}
+        type="button"
+        onClick={handleAdd}
         disabled={isUnavailable}
-        className={`w-full rounded-xl border py-3 font-medium tracking-wide transition ${
+        className={[
+          "w-full rounded-full border px-5 py-3 text-sm uppercase tracking-[0.22em] transition",
           isUnavailable
-            ? "cursor-not-allowed border-black/15 bg-black/[0.03] text-black/40"
-            : "border-black bg-white text-black hover:bg-black hover:text-white"
-        }`}
+            ? "cursor-not-allowed border-black/10 bg-black/5 text-black/35"
+            : "border-black bg-black text-white hover:bg-white hover:text-black",
+        ].join(" ")}
       >
         {buttonLabel}
       </button>
 
-      {msg && <div className="mt-2 text-xs text-black/50">{msg}</div>}
+      {isPreorder ? (
+        <p className="mt-3 text-xs leading-relaxed text-black/55">
+          This item is available for preorder and will ship once released.
+        </p>
+      ) : null}
+
+      {msg ? <p className="mt-3 text-xs text-black/55">{msg}</p> : null}
     </div>
   );
 }
