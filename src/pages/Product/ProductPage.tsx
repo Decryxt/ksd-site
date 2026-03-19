@@ -80,9 +80,6 @@ function formatUSD(value?: number) {
   }).format(value);
 }
 
-/**
- * "Large Pearl Cross Necklace Hero.png" -> "large-pearl-cross-necklace"
- */
 function toSlugFromHeroFilename(path: string) {
   const file = path.split("/").pop() || "";
   const base = file.replace(/\.(png|jpg|jpeg|webp)$/i, "");
@@ -106,28 +103,24 @@ function buildHeroMap(modules: Record<string, string>) {
   }, {} as Record<string, string>);
 }
 
-// Necklaces
 const necklaceHeroModules = import.meta.glob(
   "../../assets/products/necklaces/Hero/*.{png,jpg,jpeg,webp}",
   { eager: true, import: "default" }
 ) as Record<string, string>;
 const necklaceHeroBySlug = buildHeroMap(necklaceHeroModules);
 
-// Bracelets
 const braceletHeroModules = import.meta.glob(
   "../../assets/products/bracelets/Hero/*.{png,jpg,jpeg,webp}",
   { eager: true, import: "default" }
 ) as Record<string, string>;
 const braceletHeroBySlug = buildHeroMap(braceletHeroModules);
 
-// Earrings
 const earringHeroModules = import.meta.glob(
   "../../assets/products/earrings/Hero/*.{png,jpg,jpeg,webp}",
   { eager: true, import: "default" }
 ) as Record<string, string>;
 const earringHeroBySlug = buildHeroMap(earringHeroModules);
 
-// High End Pearls
 const highEndPearlsHeroModulesA = import.meta.glob(
   "../../assets/products/high-end-pearls/Hero/*.{png,jpg,jpeg,webp}",
   { eager: true, import: "default" }
@@ -143,28 +136,24 @@ const highEndPearlsHeroBySlug = buildHeroMap({
   ...highEndPearlsHeroModulesB,
 });
 
-// Belly Chains
 const bellyChainsHeroModules = import.meta.glob(
   "../../assets/products/body-jewelry/belly-chains/Hero/*.{png,jpg,jpeg,webp}",
   { eager: true, import: "default" }
 ) as Record<string, string>;
 const bellyChainsHeroBySlug = buildHeroMap(bellyChainsHeroModules);
 
-// Hand Chains
 const handChainsHeroModules = import.meta.glob(
   "../../assets/products/body-jewelry/hand-chains/Hero/*.{png,jpg,jpeg,webp}",
   { eager: true, import: "default" }
 ) as Record<string, string>;
 const handChainsHeroBySlug = buildHeroMap(handChainsHeroModules);
 
-// Anklets
 const ankletsHeroModules = import.meta.glob(
   "../../assets/products/body-jewelry/anklets/Hero/*.{png,jpg,jpeg,webp}",
   { eager: true, import: "default" }
 ) as Record<string, string>;
 const ankletsHeroBySlug = buildHeroMap(ankletsHeroModules);
 
-// One lookup for all categories
 const heroByCategory: Record<ExtendedCategoryKey, Record<string, string>> = {
   necklaces: necklaceHeroBySlug,
   bracelets: braceletHeroBySlug,
@@ -334,12 +323,13 @@ export default function ProductPage() {
               </div>
 
               <AddToBagButton
-                category={category as CategoryKey}
+                category={category}
                 slug={slug}
                 title={title}
                 price={priceNumber}
                 status={custom?.status}
                 preorderShipDate={custom?.preorderShipDate}
+                squareVariationId={custom?.squareVariationId}
               />
 
               <p className="mt-5 text-black/50 text-xs leading-relaxed">

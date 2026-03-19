@@ -9,7 +9,8 @@ type Props = {
   title: string;
   price: number;
   status?: ProductStatus;
-  preorderShipDate?: string; // ✅ ADD THIS
+  preorderShipDate?: string;
+  squareVariationId?: string;
 };
 
 export default function AddToBagButton({
@@ -18,7 +19,8 @@ export default function AddToBagButton({
   title,
   price,
   status = "active",
-  preorderShipDate, // ✅ ADD THIS
+  preorderShipDate,
+  squareVariationId,
 }: Props) {
   const { addToCart } = useCart();
   const [msg, setMsg] = useState<string | null>(null);
@@ -44,7 +46,8 @@ export default function AddToBagButton({
       title,
       price,
       status,
-      preorderShipDate, // ✅ PASS IT INTO CART
+      preorderShipDate,
+      squareVariationId,
     });
 
     setMsg(isPreorder ? "Added as preorder" : "Added to bag");
@@ -72,7 +75,7 @@ export default function AddToBagButton({
 
       {isPreorder ? (
         <p className="mt-3 text-xs leading-relaxed text-black/55">
-          This item is available for preorder and will ship once released.
+          This item is available for preorder and will ship on or after its launch date.
         </p>
       ) : null}
 

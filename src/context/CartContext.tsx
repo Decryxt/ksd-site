@@ -1,11 +1,13 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 
+type ProductStatus = "active" | "coming-soon" | "sold-out" | "preorder";
+
 type CartItem = {
   category: string;
   slug: string;
   title: string;
-  price: number; // for display only
-  status?: "active" | "coming-soon" | "sold-out" | "preorder";
+  price: number;
+  status?: ProductStatus;
   preorderShipDate?: string;
   squareVariationId?: string;
   quantity: number;
@@ -28,7 +30,6 @@ const STORAGE_KEY = "ksd_cart_v1";
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
 
-  // Load cart from localStorage once
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -40,7 +41,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  // Persist cart to localStorage whenever it changes
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
@@ -61,7 +61,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
       if (existing) {
         return prev.map((p) =>
-          p.slug === item.slug ? { ...p, quantity: p.quantity + safeQty } : p
+          p.slug === item.slug
+            ? {
+                ...p,
+                ...item,
+                quantity: p.quantity + safeQty,
+              }
+            : p
         );
       }
 
