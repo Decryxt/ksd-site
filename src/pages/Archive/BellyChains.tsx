@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import CategoryHero from "../../components/archive/CategoryHero";
 import ClickableProductGrid from "../../components/archive/ClickableProductGrid";
 
-import heroBodyJewelry from "../../assets/Bohemian Belly Chain Hero.png";
+import heroBodyJewelry from "../../assets/BellyChainsHero.png";
 import { productCopy } from "../../data/productCopy";
 
 const bellyChainImages = import.meta.glob(

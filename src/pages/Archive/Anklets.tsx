@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import CategoryHero from "../../components/archive/CategoryHero";
 import ClickableProductGrid from "../../components/archive/ClickableProductGrid";
 
-import heroBodyJewelry from "../../assets/Bohemian Belly Chain Hero.png";
+import heroBodyJewelry from "../../assets/OceanHero.png";
 import { productCopy } from "../../data/productCopy";
 
 const ankletImages = import.meta.glob(
@@ -75,7 +75,24 @@ export default function Anklets() {
         onCollectionChange={setActiveCollection}
       />
 
-      <ClickableProductGrid items={filteredItems} />
+      {filteredItems.length === 0 ? (
+        <div className="flex items-center justify-center py-28">
+            <div className="text-center">
+            <div
+                className="text-4xl md:text-6xl tracking-[-0.01em] text-black"
+                style={{ fontFamily: '"Perandory", serif', fontWeight: 400 }}
+            >
+                Coming Soon
+            </div>
+
+            <p className="mt-4 text-black/50 text-sm tracking-wide">
+                New pieces are currently in development.
+            </p>
+            </div>
+        </div>
+        ) : (
+        <ClickableProductGrid items={filteredItems} />
+        )}
     </div>
   );
 }
