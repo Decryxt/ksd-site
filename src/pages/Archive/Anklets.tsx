@@ -1,8 +1,9 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import CategoryHero from "../../components/archive/CategoryHero";
 import ClickableProductGrid from "../../components/archive/ClickableProductGrid";
 
 import heroBodyJewelry from "../../assets/Bohemian Belly Chain Hero.png";
+import { productCopy } from "../../data/productCopy";
 
 const ankletImages = import.meta.glob(
   "../../assets/products/body-jewelry/anklets/*.{png,jpg,jpeg,webp}",
@@ -27,32 +28,54 @@ function slugFromFilename(filePath: string) {
 }
 
 export default function Anklets() {
-  const items = useMemo(() => {
+  const [activeCollection, setActiveCollection] = useState("all");
+
+  const allItems = useMemo(() => {
     return Object.entries(ankletImages)
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([path, url], idx) => {
         const slug = slugFromFilename(path);
+        const custom = (productCopy as any)?.["anklets"]?.[slug];
 
         return {
           id: `anklet-${idx + 1}`,
-          name: titleFromFilename(path),
+          name: custom?.title ?? titleFromFilename(path),
           imageUrl: url,
           href: `/product/anklets/${slug}?img=${encodeURIComponent(url)}`,
+          collection: custom?.collection ?? "all",
         };
       });
   }, []);
+
+  const collections = useMemo(() => {
+    const unique = new Set<string>();
+
+    allItems.forEach((item) => {
+      if (item.collection && item.collection !== "all") {
+        unique.add(item.collection);
+      }
+    });
+
+    return ["all", ...Array.from(unique)];
+  }, [allItems]);
+
+  const filteredItems = useMemo(() => {
+    if (activeCollection === "all") return allItems;
+    return allItems.filter((item) => item.collection === activeCollection);
+  }, [allItems, activeCollection]);
 
   return (
     <div className="bg-white text-black">
       <CategoryHero
         title="Anklets"
-        subtitle="Coastal ease • Barefoot elegance • Coming soon"
+        subtitle="Coastal ease • Barefoot elegance • Sunlit shimmer"
         imageUrl={heroBodyJewelry}
-        collections={[]}
-        activeCollection="all"
-        onCollectionChange={() => {}}
+        collections={collections}
+        activeCollection={activeCollection}
+        onCollectionChange={setActiveCollection}
       />
-      <ClickableProductGrid items={items} />
+
+      <ClickableProductGrid items={filteredItems} />
     </div>
   );
 }

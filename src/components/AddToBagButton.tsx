@@ -9,6 +9,7 @@ type Props = {
   title: string;
   price: number;
   status?: ProductStatus;
+  preorderShipDate?: string; // ✅ ADD THIS
 };
 
 export default function AddToBagButton({
@@ -17,6 +18,7 @@ export default function AddToBagButton({
   title,
   price,
   status = "active",
+  preorderShipDate, // ✅ ADD THIS
 }: Props) {
   const { addToCart } = useCart();
   const [msg, setMsg] = useState<string | null>(null);
@@ -42,6 +44,7 @@ export default function AddToBagButton({
       title,
       price,
       status,
+      preorderShipDate, // ✅ PASS IT INTO CART
     });
 
     setMsg(isPreorder ? "Added as preorder" : "Added to bag");

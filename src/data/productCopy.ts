@@ -543,7 +543,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       squareVariationId: "EI7ZGQLOPJ4UXVNGXGPZITQT",
 
       status: "pre-order",
-      preorderShipDate: "2026-03-22",
+      preorderShipDate: "2026-04-02",
 
       collection: "golden-hour-muse",
 

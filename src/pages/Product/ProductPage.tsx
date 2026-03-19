@@ -339,6 +339,7 @@ export default function ProductPage() {
                 title={title}
                 price={priceNumber}
                 status={custom?.status}
+                preorderShipDate={custom?.preorderShipDate}
               />
 
               <p className="mt-5 text-black/50 text-xs leading-relaxed">
