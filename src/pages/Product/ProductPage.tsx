@@ -172,7 +172,7 @@ export default function ProductPage() {
   const clickedImg = searchParams.get("img") || "";
   const { scrollY } = useScroll();
 
-  const isFamilyNecklace = slug === "mothers-day-family-necklace";
+  const isFamilyNecklace = slug === "mothers-necklace";
 
   type Pendant = {
     type: "boy" | "girl";
