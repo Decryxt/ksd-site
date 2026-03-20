@@ -45,6 +45,30 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "midnight-shore-choker": {
+      price: 55,
+
+      squareVariationId: "OL2BBVF6OS44RWFUF7EAPCIG",
+
+      status: "active",
+      
+      collection: "golden-hour-muse",
+
+      shortDescription:
+        "Deep sapphire beads with luminous gold accents—sleek, coastal, and quietly captivating.",
+
+      description:
+        "The Midnight Shore Choker captures the quiet contrast of ocean depth and golden light. Rich sapphire-toned beads wrap delicately around the neckline, accented by polished gold spheres that reflect warmth with every movement. Designed to sit close to the collarbone, it offers a refined, modern silhouette—minimal yet striking. Effortlessly elegant and endlessly versatile, it brings a subtle coastal edge to both everyday wear and elevated moments.",
+
+      details: [
+        "Deep sapphire-toned beaded choker",
+        "Polished gold sphere accents",
+        "Close-to-neck, choker-length fit",
+        "Lightweight and comfortable for daily wear",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "poppy-necklace": {
       price: 90,
 
