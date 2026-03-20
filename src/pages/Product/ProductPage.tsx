@@ -226,12 +226,7 @@ export default function ProductPage() {
   const description = custom?.description ?? fallback.description;
   const details = custom?.details ?? fallback.details;
 
-  let priceNumber = custom?.price ?? 0;
-
-  if (isFamilyNecklace) {
-    priceNumber = 45 + pendants.length * 5;
-  }
-
+  const priceNumber = custom?.price ?? 0;
   const priceText = formatUSD(priceNumber);
 
   return (
