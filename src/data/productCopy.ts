@@ -20,7 +20,7 @@ export type ProductCopy = {
 export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy>>> = {
   necklaces: {
     "mothers-necklace": {
-      price: 45,
+      price: 65,
 
       squareVariationId: "M4AW2IE2G6GDHJ2KZCM6SOFL",
 
@@ -41,8 +41,6 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
         "1.8 mm boy/girl charm design",
         "Add as many pendants as desired",
         "Each pendant includes a selected birth month stone",
-        "Base chain price: $45",
-        "Each added pendant: $5",
       ],
     },
 
