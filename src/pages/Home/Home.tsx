@@ -14,8 +14,6 @@ import mothersNecklaceHero from "../../assets/products/necklaces/Hero/Mothers Ne
 
 const luxuryEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const BODY_JEWELRY_LAUNCH_DATE = "2026-04-02T11:11:00";
-const MOTHERS_NECKLACE_URL =
-  "https://www.katherinesterlingdesigns.com/product/necklaces/mothers-necklace?img=%2Fassets%2FMothers%2520Necklace-Dj-XzDZj.png";
 
 function getTimeRemaining(targetDate: string) {
   const now = new Date().getTime();
