@@ -1,4 +1,5 @@
 // src/pages/Product/ProductPage.tsx
+import { useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { getFallbackCopy, productCopy, type CategoryKey } from "../../data/productCopy";
@@ -171,6 +172,17 @@ export default function ProductPage() {
   const clickedImg = searchParams.get("img") || "";
   const { scrollY } = useScroll();
 
+  const isFamilyNecklace = slug === "mothers-day-family-necklace";
+
+  type Pendant = {
+    type: "boy" | "girl";
+    month: string;
+  };
+
+  const [pendants, setPendants] = useState<Pendant[]>([
+    { type: "girl", month: "jan" }, // default first pendant
+  ]);
+
   const titleOpacity = useTransform(scrollY, [0, 80], [1, 0]);
   const titleY = useTransform(scrollY, [0, 120], [0, -18]);
 
@@ -214,8 +226,13 @@ export default function ProductPage() {
   const description = custom?.description ?? fallback.description;
   const details = custom?.details ?? fallback.details;
 
-  const priceText = formatUSD(custom?.price);
-  const priceNumber = custom?.price ?? 0;
+  let priceNumber = custom?.price ?? 0;
+
+  if (isFamilyNecklace) {
+    priceNumber = 45 + pendants.length * 5;
+  }
+
+  const priceText = formatUSD(priceNumber);
 
   return (
     <div className="bg-white text-black">
@@ -322,6 +339,87 @@ export default function ProductPage() {
                 )}
               </div>
 
+              {isFamilyNecklace && (
+                <div className="mt-6 space-y-4">
+                  <div className="text-black/60 text-xs tracking-[0.28em] uppercase">
+                    Customize Your Necklace
+                  </div>
+
+                  {pendants.map((p, i) => (
+                    <div key={i} className="border border-black/10 rounded-xl p-4 space-y-3">
+                      <div className="text-sm text-black/70">Pendant {i + 1}</div>
+
+                      {/* Type */}
+                      <div className="flex gap-2">
+                        {["boy", "girl"].map((t) => (
+                          <button
+                            key={t}
+                            onClick={() =>
+                              setPendants((prev) =>
+                                prev.map((item, idx) =>
+                                  idx === i ? { ...item, type: t as "boy" | "girl" } : item
+                                )
+                              )
+                            }
+                            className={`px-3 py-1 rounded-full text-xs border ${
+                              p.type === t
+                                ? "bg-black text-white"
+                                : "border-black/20 text-black/70"
+                            }`}
+                          >
+                            {t.toUpperCase()}
+                          </button>
+                        ))}
+                      </div>
+
+                      {/* Month */}
+                      <select
+                        value={p.month}
+                        onChange={(e) =>
+                          setPendants((prev) =>
+                            prev.map((item, idx) =>
+                              idx === i ? { ...item, month: e.target.value } : item
+                            )
+                          )
+                        }
+                        className="w-full border border-black/15 rounded-md px-3 py-2 text-sm"
+                      >
+                        {[
+                          "jan","feb","mar","apr","may","jun",
+                          "jul","aug","sep","oct","nov","dec"
+                        ].map((m) => (
+                          <option key={m} value={m}>
+                            {m.toUpperCase()}
+                          </option>
+                        ))}
+                      </select>
+
+                      {/* Remove */}
+                      {pendants.length > 1 && (
+                        <button
+                          onClick={() =>
+                            setPendants((prev) => prev.filter((_, idx) => idx !== i))
+                          }
+                          className="text-xs text-red-500"
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
+                  ))}
+
+                  {/* Add Pendant */}
+                  <button
+                    onClick={() =>
+                      setPendants((prev) => [...prev, { type: "girl", month: "jan" }])
+                    }
+                    className="w-full border border-black/20 rounded-xl py-2 text-sm hover:bg-black hover:text-white transition"
+                  >
+                    + Add Another Pendant
+                  </button>
+                </div>
+              )}
+
               <AddToBagButton
                 category={category}
                 slug={slug}
@@ -330,6 +428,9 @@ export default function ProductPage() {
                 status={custom?.status}
                 preorderShipDate={custom?.preorderShipDate}
                 squareVariationId={custom?.squareVariationId}
+                customizations={
+                  isFamilyNecklace ? { pendants } : undefined
+                }
               />
 
               <p className="mt-5 text-black/50 text-xs leading-relaxed">

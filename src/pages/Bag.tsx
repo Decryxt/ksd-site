@@ -100,6 +100,7 @@ export default function Bag() {
             slug: i.slug,
             category: i.category,
             squareVariationId: i.squareVariationId,
+            customizations: i.customizations,
           })),
         }),
       });
@@ -183,7 +184,7 @@ export default function Bag() {
           <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* ITEMS */}
             <div className="lg:col-span-8 space-y-4">
-              {items.map((i) => {
+              {items.map((i, index) => {
                 const shipDate = formatShipDate(i.preorderShipDate);
 
                 return (
@@ -206,6 +207,20 @@ export default function Bag() {
                           {i.category}
                         </div>
 
+                        {i.customizations?.pendants?.length ? (
+                          <div className="mt-3 space-y-1">
+                            <div className="text-[10px] uppercase tracking-[0.24em] text-black/40">
+                              Pendants
+                            </div>
+
+                            {i.customizations.pendants.map((p, idx) => (
+                              <div key={idx} className="text-xs text-black/65">
+                                {p.type === "boy" ? "Boy" : "Girl"} — {p.month.toUpperCase()}
+                              </div>
+                            ))}
+                          </div>
+                        ) : null}
+
                         {i.status === "preorder" && (
                           <div className="mt-3 space-y-1">
                             <div className="text-[10px] uppercase tracking-[0.24em] text-black/40">
@@ -222,7 +237,7 @@ export default function Bag() {
                       </div>
 
                       <button
-                        onClick={() => removeFromCart(i.slug)}
+                        onClick={() => removeFromCart(i.slug + index)}
                         className="text-sm text-black/55 hover:text-black underline underline-offset-4"
                       >
                         Remove
@@ -232,7 +247,7 @@ export default function Bag() {
                     <div className="mt-5 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => setQty(i.slug, i.quantity - 1)}
+                          onClick={() => setQty(i.slug + index, i.quantity - 1)}
                           className="h-9 w-9 rounded-full border border-black/15 bg-black/5 hover:bg-black/10 transition"
                           aria-label="Decrease quantity"
                         >
@@ -242,7 +257,7 @@ export default function Bag() {
                         <div className="w-10 text-center text-sm">{i.quantity}</div>
 
                         <button
-                          onClick={() => setQty(i.slug, i.quantity + 1)}
+                          onClick={() => setQty(i.slug + index, i.quantity + 1)}
                           className="h-9 w-9 rounded-full border border-black/15 bg-black/5 hover:bg-black/10 transition"
                           aria-label="Increase quantity"
                         >

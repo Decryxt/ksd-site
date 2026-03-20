@@ -2,6 +2,15 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from "
 
 type ProductStatus = "active" | "coming-soon" | "sold-out" | "preorder";
 
+type Pendant = {
+  type: "boy" | "girl";
+  month: string;
+};
+
+type Customizations = {
+  pendants?: Pendant[];
+};
+
 type CartItem = {
   category: string;
   slug: string;
@@ -10,6 +19,9 @@ type CartItem = {
   status?: ProductStatus;
   preorderShipDate?: string;
   squareVariationId?: string;
+
+  customizations?: Customizations;
+
   quantity: number;
 };
 
@@ -57,32 +69,48 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const safeQty = Math.max(1, Math.min(99, qty));
 
     setItems((prev) => {
-      const existing = prev.find((p) => p.slug === item.slug);
+      const isSameCustomization = (a?: Customizations, b?: Customizations) => {
+        return JSON.stringify(a) === JSON.stringify(b);
+      };
+
+      const existing = prev.find(
+        (p) =>
+          p.slug === item.slug &&
+          isSameCustomization(p.customizations, item.customizations)
+      );
 
       if (existing) {
         return prev.map((p) =>
-          p.slug === item.slug
+          p.slug === item.slug &&
+          isSameCustomization(p.customizations, item.customizations)
             ? {
                 ...p,
-                ...item,
                 quantity: p.quantity + safeQty,
               }
             : p
         );
       }
 
-      return [...prev, { ...item, quantity: safeQty }];
+      return [
+        ...prev,
+        {
+          ...item,
+          customizations: item.customizations,
+          quantity: safeQty,
+        },
+      ];
     });
   };
 
   const removeFromCart: CartContextValue["removeFromCart"] = (slug) => {
-    setItems((prev) => prev.filter((p) => p.slug !== slug));
+    setItems((prev) => prev.filter((p, idx) => (p.slug + idx) !== slug))
   };
 
   const setQty: CartContextValue["setQty"] = (slug, qty) => {
     const safeQty = Math.max(1, Math.min(99, qty));
     setItems((prev) =>
-      prev.map((p) => (p.slug === slug ? { ...p, quantity: safeQty } : p))
+      prev.map((p, idx) =>
+                 (p.slug + idx === slug ? { ...p, quantity: safeQty } : p))
     );
   };
 

@@ -19,6 +19,33 @@ export type ProductCopy = {
 
 export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy>>> = {
   necklaces: {
+    "mothers-necklace": {
+      price: 45,
+
+      squareVariationId: "M4AW2IE2G6GDHJ2KZCM6SOFL",
+
+      status: "preorder",
+      preorderShipDate: "2026-04-28",
+
+      shortDescription:
+        "A limited Mother’s Day keepsake necklace designed to hold the ones she loves closest, with customizable boy or girl birthstone charms on a delicate gold-filled chain.",
+
+      description:
+        "The Mother’s Necklace is a sentimental keepsake designed to celebrate the people she loves most. Crafted with an 18” gold-filled chain and a delicate charm holder, this piece is made to be personalized with as many boy or girl birthstone charms as desired. Each pendant is chosen by figure and birth month, creating a necklace that feels deeply personal, meaningful, and made to treasure. Thoughtful, feminine, and giftable, it’s a limited-time design created especially for Mother’s Day.",
+
+      details: [
+        "Mother’s Day exclusive",
+        "Preorder item",
+        "18” gold-filled chain",
+        "3 mm charm holder",
+        "1.8 mm boy/girl charm design",
+        "Add as many pendants as desired",
+        "Each pendant includes a selected birth month stone",
+        "Base chain price: $45",
+        "Each added pendant: $5",
+      ],
+    },
+
     "large-pearl-cross-necklace": {
       price: 70,
 

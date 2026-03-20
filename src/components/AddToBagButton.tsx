@@ -3,6 +3,11 @@ import { useCart } from "../context/CartContext";
 
 type ProductStatus = "active" | "coming-soon" | "sold-out" | "preorder";
 
+type Pendant = {
+  type: "boy" | "girl";
+  month: string;
+};
+
 type Props = {
   category: string;
   slug: string;
@@ -11,6 +16,10 @@ type Props = {
   status?: ProductStatus;
   preorderShipDate?: string;
   squareVariationId?: string;
+
+  customizations?: {
+    pendants?: Pendant[];
+  };
 };
 
 export default function AddToBagButton({
@@ -21,6 +30,7 @@ export default function AddToBagButton({
   status = "active",
   preorderShipDate,
   squareVariationId,
+  customizations,
 }: Props) {
   const { addToCart } = useCart();
   const [msg, setMsg] = useState<string | null>(null);
@@ -48,6 +58,7 @@ export default function AddToBagButton({
       status,
       preorderShipDate,
       squareVariationId,
+      customizations,
     });
 
     setMsg(isPreorder ? "Added as preorder" : "Added to bag");
