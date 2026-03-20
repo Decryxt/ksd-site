@@ -22,7 +22,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     "mothers-necklace": {
       price: 65,
 
-      squareVariationId: "M4AW2IE2G6GDHJ2KZCM6SOFL",
+      squareVariationId: "F5ZIGZ63EFHEPLOIS5XB6K7G",
 
       status: "preorder",
       preorderShipDate: "2026-04-28",
