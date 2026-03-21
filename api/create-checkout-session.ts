@@ -68,6 +68,7 @@ export default async function handler(req: any, res: any) {
     }
 
     const line_items = items.map((item) => {
+      console.log("KSD line_items being sent to Square:", JSON.stringify(line_items, null, 2));
       const note = buildCustomizationNote(item.customizations);
 
       return {
@@ -138,6 +139,7 @@ export default async function handler(req: any, res: any) {
     );
 
     const data: any = await response.json();
+    console.log("Square create payment link response:", JSON.stringify(data, null, 2));
 
     if (!response.ok) {
       console.error("Square error:", data);
