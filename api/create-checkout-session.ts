@@ -1,14 +1,36 @@
+type Pendant = {
+  type: "boy" | "girl";
+  month: string;
+};
+
 type Body = {
   items: Array<{
     title: string;
     price: number;
     quantity: number;
     squareVariationId?: string;
+    customizations?: {
+      pendants?: Pendant[];
+    };
   }>;
 };
 
 function generateIdempotencyKey() {
   return Math.random().toString(36).substring(2) + Date.now().toString(36);
+}
+
+function buildCustomizationNote(
+  customizations?: {
+    pendants?: Pendant[];
+  }
+) {
+  const pendants = customizations?.pendants ?? [];
+
+  if (!pendants.length) return undefined;
+
+  return pendants
+    .map((p, index) => `Pendant ${index + 1}: ${p.type === "boy" ? "Boy" : "Girl"} - ${p.month}`)
+    .join(" | ");
 }
 
 export default async function handler(req: any, res: any) {
@@ -45,10 +67,15 @@ export default async function handler(req: any, res: any) {
       }
     }
 
-    const line_items = items.map((item) => ({
-      catalog_object_id: item.squareVariationId,
-      quantity: String(Math.max(1, Math.min(99, item.quantity))),
-    }));
+    const line_items = items.map((item) => {
+      const note = buildCustomizationNote(item.customizations);
+
+      return {
+        catalog_object_id: item.squareVariationId,
+        quantity: String(Math.max(1, Math.min(99, item.quantity))),
+        ...(note ? { note } : {}),
+      };
+    });
 
     const subtotal = items.reduce((sum, item) => {
       const quantity = Math.max(1, Math.min(99, item.quantity));
