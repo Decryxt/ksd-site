@@ -20,7 +20,7 @@ export type ProductCopy = {
 export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy>>> = {
   necklaces: {
     "mothers-necklace": {
-      price: 65,
+      price: 60,
 
       squareVariationId: "F5ZIGZ63EFHEPLOIS5XB6K7G",
 
@@ -45,7 +45,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "large-pearl-cross-necklace": {
-      price: 70,
+      price: 55,
 
       stripePriceId: "price_1T8VytQfJ3BDSPk8uVP6km2H",
 
@@ -71,7 +71,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "midnight-shore-choker": {
-      price: 55,
+      price: 50,
 
       squareVariationId: "OL2BBVF6OS44RWFUF7EAPCIG",
 
@@ -95,7 +95,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "poppy-necklace": {
-      price: 90,
+      price: 70,
 
       stripePriceId: "price_1T9EEhQfJ3BDSPk8DkY8TAW5",
 
@@ -121,7 +121,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "luxury-strand-necklace": {
-      price: 60,
+      price: 50,
 
       stripePriceId: "price_1T8W26QfJ3BDSPk8efg9LBpl",
 
@@ -145,7 +145,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "pearl-cross-necklace": {
-      price: 60,
+      price: 50,
 
       stripePriceId: "price_1T8W2vQfJ3BDSPk8c3j0SknU",
 
@@ -169,7 +169,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "lucky-star-necklace": {
-      price: 70,
+      price: 55,
 
       stripePriceId: "price_1T8W0mQfJ3BDSPk8e0SCt6jB",
 
@@ -195,7 +195,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
   bracelets: {
     "gold-design-bracelet": {
-      price: 70,
+      price: 55,
 
       stripePriceId: "price_1T8W48QfJ3BDSPk8RipDEUj5",
 
@@ -243,7 +243,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "lucky-star-bracelet": {
-      price: 70,
+      price: 55,
 
       stripePriceId: "price_1T8W8BQfJ3BDSPk8h7wCh5Tz",
 
@@ -267,7 +267,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "new-beginning-bracelet": {
-      price: 80,
+      price: 65,
 
       stripePriceId: "price_1T8W95QfJ3BDSPk8RL5ngYdf",
 
@@ -291,7 +291,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "new-hope-bracelet": {
-      price: 70,
+      price: 55,
 
       stripePriceId: "price_1T8WA1QfJ3BDSPk8DPTMiBGv",
 
@@ -315,7 +315,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "poppy-bracelet": {
-      price: 75,
+      price: 55,
 
       stripePriceId: "price_1T8WAkQfJ3BDSPk86JzmanM7",
 
@@ -339,7 +339,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "heart-of-gold-bracelet": {
-      price: 75,
+      price: 55,
 
       stripePriceId: "price_1T8W5GQfJ3BDSPk8A78pTHLM",
 
@@ -365,7 +365,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
   earrings: {
     "ophelia-earrings": {
-      price: 110,
+      price: 55,
 
       stripePriceId: "price_1T8WCgQfJ3BDSPk8YcyO1FjV",
 
@@ -389,7 +389,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "saltwater-star-earrings": {
-      price: 75,
+      price: 60,
 
       squareVariationId: "HX7PE4YOOECG6M6BADDURLVM",
 
@@ -413,7 +413,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "cleo-earrings": {
-      price: 60,
+      price: 50,
 
       stripePriceId: "price_1T9cJLQfJ3BDSPk8vqj38Vur",
 
@@ -439,7 +439,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "wild-child-earrings": {
-      price: 75,
+      price: 65,
 
       stripePriceId: "price_1T8Ze4QfJ3BDSPk8gJjoWMXP",
 
@@ -464,7 +464,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "stella-earrings": {
-      price: 45,
+      price: 35,
 
       stripePriceId: "price_1T8ZbYQfJ3BDSPk8HC4PP8gS",
 
@@ -489,7 +489,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "paloma-earrings": {
-      price: 70,
+      price: 55,
 
       stripePriceId: "price_1T8ZfKQfJ3BDSPk89sIfNvIF",
 
@@ -514,7 +514,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "lucky-star-earrings": {
-      price: 70,
+      price: 55,
 
       stripePriceId: "price_1T8WBuQfJ3BDSPk80tKTaKUv",
 
@@ -538,7 +538,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "sand-dollar-earrings": {
-      price: 55,
+      price: 40,
 
       stripePriceId: "price_1T8WE9QfJ3BDSPk8kqaHcmQ2",
 
@@ -562,7 +562,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
     },
 
     "pearl-bead-earrings": {
-      price: 60,
+      price: 40,
 
       stripePriceId: "price_1T8WDOQfJ3BDSPk89pxVsEea",
 
@@ -587,7 +587,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
   "belly-chains": {
     "bohemian-belly-chain": {
-      price: 75,
+      price: 60,
 
       squareVariationId: "EI7ZGQLOPJ4UXVNGXGPZITQT",
 
@@ -615,7 +615,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
   "high-end-pearls": {
     "pearl-bead-necklace": {
-      price: 200,
+      price: 150,
 
       stripePriceId: "price_1T8WEzQfJ3BDSPk8PLkf76rl",
 
