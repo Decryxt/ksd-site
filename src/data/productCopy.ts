@@ -153,6 +153,8 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       status: "sold-out",
 
+      collection: "one-of-one",
+
       shortDescription:
         "A delicate mother-of-pearl cross framed in gold on a fine 14k gold-filled chain—soft, meaningful, and timeless.",
 

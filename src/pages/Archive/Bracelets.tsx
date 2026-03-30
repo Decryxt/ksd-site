@@ -31,6 +31,8 @@ function collectionLabelFromKey(key: string) {
   switch (key) {
     case "golden-hour-muse":
       return "Golden Hour Muse";
+    case "one-of-one":
+      return "One Of One";
     default:
       return key
         .replace(/-/g, " ")

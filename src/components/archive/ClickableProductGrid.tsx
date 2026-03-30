@@ -21,6 +21,11 @@ const collectionStyles: Record<
     cardClassName:
       "border-[2px] border-[#d4b26a] shadow-[0_10px_30px_rgba(212,178,106,0.18)]",
   },
+  "one-of-one": {
+    label: "ONE OF ONE",
+    cardClassName:
+      "border-[2px] border-black shadow-[0_10px_30px_rgba(0,0,0,0.15)]",
+  },
 };
 
 export default function ClickableProductGrid({ items }: { items: ClickableGridItem[] }) {
