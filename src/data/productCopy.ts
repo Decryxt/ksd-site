@@ -120,6 +120,28 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "beaded-cross-choker": {
+      price: 45,
+
+      squareVariationId: "Q5CPCVIU4ZIL2DUHYFJ6ZAQG",
+
+      status: "active",
+
+      shortDescription:
+        "A delicate gold beaded choker centered with a luminous pearl cross—soft, radiant, and quietly statement-making.",
+
+      description:
+        "The Beaded Cross Choker is a refined balance of minimalism and meaning. Designed with a strand of polished gold-filled beads, it sits gently along the neckline, creating a soft, sculpted silhouette that catches light with every movement. At its center, a small freshwater pearl cross adds an organic, luminous focal point—subtle yet distinctive. The contrast between the structured beading and the natural texture of the pearl brings depth to the piece, making it feel both elevated and effortlessly wearable. Designed to layer or stand alone, it carries a quiet presence that feels timeless, feminine, and thoughtfully composed.",
+
+      details: [
+        "Gold-filled beaded choker",
+        "Freshwater pearl cross pendant",
+        "Structured yet delicate silhouette",
+        "Light-catching polished finish",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "luxury-strand-necklace": {
       price: 50,
 
@@ -154,13 +176,13 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       status: "active",
 
       shortDescription:
-        "A delicate mother-of-pearl cross framed in gold on a fine 14k gold-filled chain—soft, meaningful, and timeless.",
+        "A delicate freshwater pearl cross framed in gold on a fine 14k gold-filled chain—soft, meaningful, and timeless.",
 
       description:
         "The Pearl Cross Necklace is a refined expression of faith and femininity. A softly luminous mother-of-pearl cross is framed in gold and suspended from a delicate 14k gold-filled chain, creating a look that feels both timeless and modern. Subtle in size yet rich in detail, it’s designed for everyday wear—layered effortlessly or worn alone as a quiet statement. Light-catching and meaningful, it brings warmth and softness to any look.",
 
       details: [
-        "Mother-of-pearl cross pendant",
+        "Freshwater Pearl cross pendant",
         "Gold-framed setting",
         "14k gold-filled chain",
         "Lightweight everyday design",
@@ -178,13 +200,13 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       status: "active",
 
       shortDescription:
-        "A delicate mother-of-pearl star pendant on a fine 14k gold-filled chain—softly luminous and effortlessly celestial.",
+        "A delicate freshwater pearl star pendant on a fine 14k gold-filled chain—softly luminous and effortlessly celestial.",
 
       description:
         "The Lucky Star Necklace is a subtle nod to coastal nights and sunlit mornings. A softly sculpted mother-of-pearl star rests on a delicate 14k gold-filled chain, catching the light with a gentle, natural shimmer. Minimal yet meaningful, it’s designed to layer beautifully or stand alone as a refined everyday signature. Feminine, light, and quietly radiant, it brings a soft celestial glow to any look.",
 
       details: [
-        "Mother-of-pearl star pendant",
+        "freshwater pearl star pendant",
         "14k gold-filled chain",
         "Lightweight and ideal for layering",
         "Minimal celestial design",
