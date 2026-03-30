@@ -53,7 +53,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "KZISXRWMZAXJUZUTHJT23HXM",
 
-      status: "sold-out",
+      status: "active",
 
       shortDescription:
         "An organically shaped freshwater pearl cross suspended on a delicate 14k gold-filled chain—bold, luminous, and reverently refined.",
@@ -151,7 +151,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "EY3NLB43LP6VWI6WIQ2I3F76",
 
-      status: "sold-out",
+      status: "active",
 
       shortDescription:
         "A delicate mother-of-pearl cross framed in gold on a fine 14k gold-filled chain—soft, meaningful, and timeless.",
