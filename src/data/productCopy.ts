@@ -142,6 +142,28 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "boho-talisman-necklace": {
+      price: 45,
+
+      squareVariationId: "3EMPQEH47WAITLOOUSBKGPL2",
+
+      status: "active",
+
+      shortDescription:
+        "An organic freshwater pearl talisman set with delicate gold and gemstone details—textural, luminous, and quietly symbolic.",
+
+      description:
+        "The Boho Talisman Necklace is a piece defined by natural beauty and subtle storytelling. Centered around an organically shaped freshwater pearl, each pendant carries its own unique form and surface, softly reflecting light with an iridescent glow. Set into the pearl, delicate gold and gemstone accents create a talisman-like focal point—intimate, imperfect, and full of character. Suspended from a fine gold chain, the silhouette feels effortless yet elevated, blending coastal softness with a hint of vintage-inspired detail. Designed to be worn daily or layered with intention, it brings a sense of quiet individuality and warmth to any look.",
+
+      details: [
+        "Organic freshwater pearl pendant",
+        "Embedded gold and gemstone details",
+        "Each piece is naturally unique in shape",
+        "Delicate gold chain",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "luxury-strand-necklace": {
       price: 50,
 
