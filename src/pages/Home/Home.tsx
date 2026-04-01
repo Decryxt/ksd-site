@@ -341,7 +341,7 @@ export default function Home() {
                 transition={{ duration: 0.8, delay: 0.14, ease: luxuryEase }}
                 className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-black/60 md:text-base"
               >
-                A limited release of body jewelry pieces is set to launch on{" "}
+                Katherine Sterling Designs will appear at Miami Swim Week on{" "}
                 {launchDateLabel}. Explore the countdown below as the event
                 moves closer to date.
               </motion.p>
