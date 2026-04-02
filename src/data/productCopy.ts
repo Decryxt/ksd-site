@@ -164,6 +164,28 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "the-runway-necklace": {
+      price: 50,
+
+      squareVariationId: "RKR7BNTX6CDK4DMXRF5LB2VO",
+
+      status: "active",
+
+      shortDescription:
+        "A gold necklace anchored by a cluster of elongated baroque pearls—bold, luminous, and effortlessly editorial.",
+
+      description:
+        "The Runway Necklace is designed to make a statement through texture, movement, and form. Featuring a gold chain silhouette, the piece is centered by a cluster of elongated baroque freshwater pearls, each uniquely shaped and naturally luminous. The composition creates a sculptural focal point that feels both organic and elevated, catching light from every angle with a soft iridescent glow. Balanced by the delicacy of the chain, the design feels intentional yet effortless—bold enough to stand alone, yet fluid enough to layer. Inspired by coastal light and editorial styling, it brings a refined, runway-ready presence to any look.",
+
+      details: [
+        "Gold chain design",
+        "Cluster of elongated baroque freshwater pearls",
+        "Each pearl is naturally unique in shape",
+        "Sculptural, statement silhouette",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "luxury-strand-necklace": {
       price: 50,
 
