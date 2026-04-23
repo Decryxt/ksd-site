@@ -186,6 +186,30 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "sundial-necklace": {
+      price: 40,
+
+      squareVariationId: "2JOBJTAL7UQ3BXMSABRQ6Y7M",
+
+      status: "active",
+
+      collection: "golden-hour-muse",
+
+      shortDescription:
+        "A sculptural hammered brass spiral suspended on a delicate chain—warm, radiant, and effortlessly bold.",
+
+      description:
+        "The Sundial Necklace captures the quiet movement of light through a single sculptural form. Centered around a hand-textured hammered brass spiral, the pendant reflects light in soft, shifting tones—creating a warm, sunlit glow against the skin. The organic shape feels both intentional and free, echoing the natural rhythm of time and motion. Suspended from a fine gold-toned chain, the piece balances bold presence with everyday wearability. Earthy yet refined, it brings an artistic warmth and understated statement to any look.",
+
+      details: [
+        "Hammered brass spiral pendant",
+        "Textured surface for natural light reflection",
+        "Delicate gold-toned chain",
+        "Lightweight and comfortable for daily wear",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "luxury-strand-necklace": {
       price: 50,
 
@@ -500,6 +524,30 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
         "Pavé-set crystal stud",
         "14k gold-filled setting",
         "Elegant lightweight drop design",
+        "Hand-assembled in small batches",
+      ],
+    },
+
+    "sundial-earrings": {
+      price: 45,
+
+      squareVariationId: "IJUQQSO6WVTMWDPJIW3SX7SN",
+
+      status: "active",
+
+      collection: "golden-hour-muse",
+
+      shortDescription:
+        "Textured hammered brass spirals that catch the light with every movement—bold, radiant, and artfully organic.",
+
+      description:
+        "The Sundial Earrings are a statement in movement and light. Crafted from hammered brass, each spiral form reflects sunlight in shifting patterns, creating a warm, glowing effect with every turn. The organic, hand-textured surface gives each piece a sense of individuality, while the sculptural silhouette adds a bold yet effortless presence. Inspired by the natural rhythm of sun and shadow, these earrings feel both earthy and elevated—designed to stand out while remaining easy to wear. Lightweight and expressive, they bring a golden warmth and artistic edge to any look.",
+
+      details: [
+        "Hammered brass spiral design",
+        "Textured surface for dynamic light reflection",
+        "Lightweight statement drop",
+        "Warm golden tone",
         "Hand-assembled in small batches",
       ],
     },
