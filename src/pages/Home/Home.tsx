@@ -101,6 +101,29 @@ export default function Home() {
         className="border-t border-black/10 bg-[#faf7f2]"
       >
         <div className="mx-auto max-w-6xl px-6 pb-32 pt-24 md:pt-28">
+          {/* Standalone headline */}
+          <motion.div
+            initial={{ opacity: 0, y: 34 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 1, ease: luxuryEase }}
+            className="mb-20 text-center"
+          >
+            <div
+              className="text-[11px] uppercase tracking-[0.5em] text-black/40"
+              style={{ fontFamily: '"Perandory", serif' }}
+            >
+              Exclusive Release
+            </div>
+
+            <h2
+              className="mt-6 text-6xl uppercase leading-[0.88] tracking-[0.06em] text-black md:text-8xl lg:text-9xl"
+              style={{ fontFamily: '"BebasNeue", sans-serif' }}
+            >
+              Mother&apos;s Day
+            </h2>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 42 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -131,17 +154,6 @@ export default function Home() {
 
               <div className="relative flex items-center">
                 <div className="w-full px-8 py-14 md:px-14 md:py-16">
-                  {/* Top Editorial Headline */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 14 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 0.8, ease: luxuryEase }}
-                    className="text-[11px] uppercase tracking-[0.45em] text-black/45"
-                    style={{ fontFamily: '"Perandory", serif' }}
-                  >
-                    HEADLINES
-                  </motion.div>
                   <motion.div
                     initial={{ opacity: 0, letterSpacing: "0.18em" }}
                     whileInView={{ opacity: 1, letterSpacing: "0.32em" }}
