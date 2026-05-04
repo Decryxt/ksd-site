@@ -131,6 +131,17 @@ export default function Home() {
 
               <div className="relative flex items-center">
                 <div className="w-full px-8 py-14 md:px-14 md:py-16">
+                  {/* Top Editorial Headline */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 14 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.8, ease: luxuryEase }}
+                    className="text-[11px] uppercase tracking-[0.45em] text-black/45"
+                    style={{ fontFamily: '"Perandory", serif' }}
+                  >
+                    HEADLINES
+                  </motion.div>
                   <motion.div
                     initial={{ opacity: 0, letterSpacing: "0.18em" }}
                     whileInView={{ opacity: 1, letterSpacing: "0.32em" }}
