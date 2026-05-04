@@ -308,6 +308,30 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "aussie-pearl-bracelet": {
+      price: 55,
+
+      squareVariationId: "NMNHS7GZDT7VXLWHMZ7OKQMA",
+
+      status: "active",
+
+      collection: "golden-hour-muse",
+
+      shortDescription:
+        "A luminous freshwater pearl bracelet finished with delicate gold beading—soft, coastal, and effortlessly refined.",
+
+      description:
+        "The Aussie Pearl Bracelet is a softly radiant piece designed with an easy coastal elegance. A row of organic freshwater pearls brings natural texture and iridescent warmth, while delicate gold-toned beading adds a refined shimmer around the wrist. Each pearl carries its own subtle shape and glow, giving the bracelet a collected, heirloom-inspired feeling. Lightweight and effortless, it is perfect worn alone as a delicate statement or layered into a golden bracelet stack.",
+
+      details: [
+        "Organic freshwater pearl accents",
+        "Delicate gold-toned beaded bracelet band",
+        "Each pearl is naturally unique in shape and luster",
+        "Lightweight and comfortable for daily wear",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "initial-and-birth-stone-bracelet": {
       price: 100,
 
