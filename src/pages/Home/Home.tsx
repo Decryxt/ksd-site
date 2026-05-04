@@ -109,18 +109,12 @@ export default function Home() {
             transition={{ duration: 1, ease: luxuryEase }}
             className="mb-20 text-center"
           >
-            <div
-              className="text-[11px] uppercase tracking-[0.5em] text-black/40"
-              style={{ fontFamily: '"Perandory", serif' }}
-            >
-              Exclusive Release
-            </div>
 
             <h2
               className="mt-6 text-6xl uppercase leading-[0.88] tracking-[0.06em] text-black md:text-8xl lg:text-9xl"
-              style={{ fontFamily: '"BebasNeue", sans-serif' }}
+              style={{ fontFamily: '"Perandory", serif' }}
             >
-              Mother&apos;s Day
+              HEADLINES
             </h2>
           </motion.div>
 
