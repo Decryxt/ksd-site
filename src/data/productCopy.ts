@@ -235,6 +235,29 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "poppy-x-initial-&-birthstone-necklace": {
+      price: 90,
+
+      squareVariationId: "RZN3KE4RZHQSGGCOFF7WEAKR",
+
+      status: "active",
+
+      shortDescription:
+        "A polished gold beaded necklace personalized with initial charms and birthstones—sweet, sentimental, and made to feel uniquely yours.",
+
+      description:
+        "The Poppy X Initial & Birthstone Necklace is a personal keepsake designed with playful charm and meaningful detail. Crafted with a delicate strand of polished gold beads, the necklace features custom initial charms paired with dainty birthstone accents, creating a piece that feels intimate, sentimental, and effortlessly wearable. Each charm adds a small touch of story—whether chosen for children, loved ones, initials, or special months—while the gold beaded silhouette keeps the design bright, feminine, and timeless. Sweet yet elevated, it is perfect for everyday layering or wearing on its own as a personalized statement.",
+
+      details: [
+        "Polished gold beaded necklace",
+        "Custom gold initial charms",
+        "Dainty birthstone charm accents",
+        "Personalized design made to order",
+        "Lightweight and comfortable for daily wear",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "luxury-strand-necklace": {
       price: 50,
 

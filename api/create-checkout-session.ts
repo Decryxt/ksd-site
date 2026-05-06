@@ -3,15 +3,29 @@ type Pendant = {
   month: string;
 };
 
+type CharmSet = {
+  initial: string;
+  birthstone: string;
+};
+
+type Customizations = {
+  pendants?: Pendant[];
+
+  // New multi-set system
+  charmSets?: CharmSet[];
+
+  // Kept for compatibility with older cart items
+  initial?: string;
+  birthstone?: string;
+};
+
 type Body = {
   items: Array<{
     title: string;
     price: number;
     quantity: number;
     squareVariationId?: string;
-    customizations?: {
-      pendants?: Pendant[];
-    };
+    customizations?: Customizations;
   }>;
 };
 
@@ -19,18 +33,50 @@ function generateIdempotencyKey() {
   return Math.random().toString(36).substring(2) + Date.now().toString(36);
 }
 
-function buildCustomizationNote(
-  customizations?: {
-    pendants?: Pendant[];
+function buildCustomizationNote(customizations?: Customizations) {
+  if (!customizations) return undefined;
+
+  const parts: string[] = [];
+
+  const pendants = customizations.pendants ?? [];
+  const charmSets = customizations.charmSets ?? [];
+
+  if (pendants.length) {
+    const pendantNote = pendants
+      .map(
+        (p, index) =>
+          `Pendant ${index + 1}: ${
+            p.type === "boy" ? "Boy" : "Girl"
+          } - ${p.month}`
+      )
+      .join(" | ");
+
+    parts.push(pendantNote);
   }
-) {
-  const pendants = customizations?.pendants ?? [];
 
-  if (!pendants.length) return undefined;
+  if (charmSets.length) {
+    const charmSetNote = charmSets
+      .map(
+        (set, index) =>
+          `Set ${index + 1}: Initial ${set.initial} - Birthstone ${
+            set.birthstone
+          }`
+      )
+      .join(" | ");
 
-  return pendants
-    .map((p, index) => `Pendant ${index + 1}: ${p.type === "boy" ? "Boy" : "Girl"} - ${p.month}`)
-    .join(" | ");
+    parts.push(charmSetNote);
+  }
+
+  // Compatibility fallback for any older cart items
+  if (!charmSets.length && customizations.initial) {
+    parts.push(`Initial: ${customizations.initial}`);
+  }
+
+  if (!charmSets.length && customizations.birthstone) {
+    parts.push(`Birthstone: ${customizations.birthstone}`);
+  }
+
+  return parts.length ? parts.join(" | ") : undefined;
 }
 
 export default async function handler(req: any, res: any) {
@@ -77,7 +123,10 @@ export default async function handler(req: any, res: any) {
       };
     });
 
-    console.log("KSD line_items being sent to Square:", JSON.stringify(line_items, null, 2));
+    console.log(
+      "KSD line_items being sent to Square:",
+      JSON.stringify(line_items, null, 2)
+    );
 
     const subtotal = items.reduce((sum, item) => {
       const quantity = Math.max(1, Math.min(99, item.quantity));
@@ -140,8 +189,11 @@ export default async function handler(req: any, res: any) {
     );
 
     const data: any = await response.json();
-    
-    console.log("Square create payment link response:", JSON.stringify(data, null, 2));
+
+    console.log(
+      "Square create payment link response:",
+      JSON.stringify(data, null, 2)
+    );
 
     if (!response.ok) {
       console.error("Square error:", data);

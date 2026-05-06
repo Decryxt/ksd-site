@@ -8,6 +8,22 @@ type Pendant = {
   month: string;
 };
 
+type CharmSet = {
+  initial: string;
+  birthstone: string;
+};
+
+type Customizations = {
+  pendants?: Pendant[];
+
+  // New multi-set system
+  charmSets?: CharmSet[];
+
+  // Kept for compatibility
+  initial?: string;
+  birthstone?: string;
+};
+
 type Props = {
   category: string;
   slug: string;
@@ -17,9 +33,7 @@ type Props = {
   preorderShipDate?: string;
   squareVariationId?: string;
 
-  customizations?: {
-    pendants?: Pendant[];
-  };
+  customizations?: Customizations;
 };
 
 export default function AddToBagButton({
@@ -86,7 +100,8 @@ export default function AddToBagButton({
 
       {isPreorder ? (
         <p className="mt-3 text-xs leading-relaxed text-black/55">
-          This item is available for preorder and will ship on or after its launch date.
+          This item is available for preorder and will ship on or after its
+          launch date.
         </p>
       ) : null}
 

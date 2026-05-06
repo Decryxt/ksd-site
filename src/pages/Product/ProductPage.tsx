@@ -2,7 +2,11 @@
 import { useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { getFallbackCopy, productCopy, type CategoryKey } from "../../data/productCopy";
+import {
+  getFallbackCopy,
+  productCopy,
+  type CategoryKey,
+} from "../../data/productCopy";
 import AddToBagButton from "../../components/AddToBagButton";
 
 type ExtendedCategoryKey =
@@ -15,6 +19,74 @@ type Params = {
   category?: ExtendedCategoryKey;
   slug?: string;
 };
+
+type Pendant = {
+  type: "boy" | "girl";
+  month: string;
+};
+
+type CharmSet = {
+  initial: string;
+  birthstone: string;
+};
+
+type PreviewItem = {
+  type: "initial" | "birthstone";
+  label: string;
+  image?: string;
+};
+
+const INITIAL_BIRTHSTONE_PRODUCT_SLUGS = [
+  "poppy-x-initial-&-birthstone-necklace",
+  "initial-and-birth-stone-bracelet",
+];
+
+const MAX_CHARM_SETS = 6;
+
+const INITIAL_OPTIONS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+const BIRTHSTONE_OPTIONS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const initialCharmModules = import.meta.glob(
+  "../../assets/customizations/initials/*.{png,jpg,jpeg,webp}",
+  { eager: true, import: "default" }
+) as Record<string, string>;
+
+const birthstoneCharmModules = import.meta.glob(
+  "../../assets/customizations/birthstones/*.{png,jpg,jpeg,webp}",
+  { eager: true, import: "default" }
+) as Record<string, string>;
+
+function keyFromAssetPath(path: string) {
+  const file = path.split("/").pop() || "";
+  return file
+    .replace(/\.(png|jpg|jpeg|webp)$/i, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "");
+}
+
+function buildAssetMap(modules: Record<string, string>) {
+  return Object.entries(modules).reduce((acc, [path, url]) => {
+    acc[keyFromAssetPath(path)] = url;
+    return acc;
+  }, {} as Record<string, string>);
+}
+
+const initialCharmByKey = buildAssetMap(initialCharmModules);
+const birthstoneCharmByKey = buildAssetMap(birthstoneCharmModules);
 
 function titleFromSlug(slug: string) {
   return slug
@@ -75,6 +147,7 @@ function categoryBackHref(category: ExtendedCategoryKey) {
 
 function formatUSD(value?: number) {
   if (typeof value !== "number") return null;
+
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -173,18 +246,53 @@ export default function ProductPage() {
   const { scrollY } = useScroll();
 
   const isFamilyNecklace = slug === "mothers-necklace";
-
-  type Pendant = {
-    type: "boy" | "girl";
-    month: string;
-  };
+  const isInitialBirthstoneProduct =
+    !!slug && INITIAL_BIRTHSTONE_PRODUCT_SLUGS.includes(slug);
 
   const [pendants, setPendants] = useState<Pendant[]>([
-    { type: "girl", month: "jan" }, // default first pendant
+    { type: "girl", month: "jan" },
   ]);
+
+  const [charmSets, setCharmSets] = useState<CharmSet[]>([
+    { initial: "A", birthstone: "January" },
+  ]);
+
+  const [previewItem, setPreviewItem] = useState<PreviewItem | null>(null);
 
   const titleOpacity = useTransform(scrollY, [0, 80], [1, 0]);
   const titleY = useTransform(scrollY, [0, 120], [0, -18]);
+
+  function updateCharmSet(
+    index: number,
+    field: "initial" | "birthstone",
+    value: string
+  ) {
+    setCharmSets((prev) =>
+      prev.map((set, idx) =>
+        idx === index
+          ? {
+              ...set,
+              [field]: value,
+            }
+          : set
+      )
+    );
+  }
+
+  function addCharmSet() {
+    setCharmSets((prev) => {
+      if (prev.length >= MAX_CHARM_SETS) return prev;
+
+      return [...prev, { initial: "A", birthstone: "January" }];
+    });
+  }
+
+  function removeCharmSet(index: number) {
+    setCharmSets((prev) => {
+      if (prev.length <= 1) return prev;
+      return prev.filter((_, idx) => idx !== index);
+    });
+  }
 
   if (!category || !slug) {
     return (
@@ -205,7 +313,9 @@ export default function ProductPage() {
   const categoryHeroMap = heroByCategory[category] || {};
   const heroImg = categoryHeroMap[slug] || clickedImg;
 
-  const custom = (productCopy as Record<string, Record<string, any> | undefined>)?.[category]?.[slug];
+  const custom = (
+    productCopy as Record<string, Record<string, any> | undefined>
+  )?.[category]?.[slug];
 
   const fallback = isBaseCategory(category)
     ? getFallbackCopy(category)
@@ -228,6 +338,23 @@ export default function ProductPage() {
 
   const priceNumber = custom?.price ?? 0;
   const priceText = formatUSD(priceNumber);
+
+  const firstCharmSet = charmSets[0] ?? {
+    initial: "A",
+    birthstone: "January",
+  };
+
+  const selectedInitialImage =
+    initialCharmByKey[firstCharmSet.initial.toLowerCase()];
+  const selectedBirthstoneImage =
+    birthstoneCharmByKey[firstCharmSet.birthstone.toLowerCase()];
+
+  const activePreviewImage =
+    previewItem?.image || selectedBirthstoneImage || selectedInitialImage;
+
+  const activePreviewLabel =
+    previewItem?.label ||
+    `Set 1: ${firstCharmSet.initial} Initial + ${firstCharmSet.birthstone} Birthstone`;
 
   return (
     <div className="bg-white text-black">
@@ -281,7 +408,9 @@ export default function ProductPage() {
               </p>
 
               {priceText ? (
-                <div className="mt-3 text-black/55 text-sm tracking-wide">{priceText}</div>
+                <div className="mt-3 text-black/55 text-sm tracking-wide">
+                  {priceText}
+                </div>
               ) : null}
             </div>
           </motion.div>
@@ -301,7 +430,9 @@ export default function ProductPage() {
                 Product Description
               </div>
 
-              <p className="mt-6 text-black/70 leading-relaxed">{description}</p>
+              <p className="mt-6 text-black/70 leading-relaxed">
+                {description}
+              </p>
 
               {details?.length ? (
                 <ul className="mt-8 space-y-3 text-black/65 text-sm">
@@ -326,10 +457,13 @@ export default function ProductPage() {
                 <div className="text-black/90 text-lg">{title}</div>
 
                 {priceText ? (
-                  <div className="text-black/70 mt-2 text-sm tracking-wide">{priceText}</div>
+                  <div className="text-black/70 mt-2 text-sm tracking-wide">
+                    {priceText}
+                  </div>
                 ) : (
                   <div className="text-black/55 mt-2 text-sm">
-                    Add a price in <span className="font-mono">productCopy.ts</span>
+                    Add a price in{" "}
+                    <span className="font-mono">productCopy.ts</span>
                   </div>
                 )}
               </div>
@@ -341,18 +475,28 @@ export default function ProductPage() {
                   </div>
 
                   {pendants.map((p, i) => (
-                    <div key={i} className="border border-black/10 rounded-xl p-4 space-y-3">
-                      <div className="text-sm text-black/70">Pendant {i + 1}</div>
+                    <div
+                      key={i}
+                      className="border border-black/10 rounded-xl p-4 space-y-3"
+                    >
+                      <div className="text-sm text-black/70">
+                        Pendant {i + 1}
+                      </div>
 
-                      {/* Type */}
                       <div className="flex gap-2">
                         {["boy", "girl"].map((t) => (
                           <button
                             key={t}
+                            type="button"
                             onClick={() =>
                               setPendants((prev) =>
                                 prev.map((item, idx) =>
-                                  idx === i ? { ...item, type: t as "boy" | "girl" } : item
+                                  idx === i
+                                    ? {
+                                        ...item,
+                                        type: t as "boy" | "girl",
+                                      }
+                                    : item
                                 )
                               )
                             }
@@ -367,21 +511,32 @@ export default function ProductPage() {
                         ))}
                       </div>
 
-                      {/* Month */}
                       <select
                         value={p.month}
                         onChange={(e) =>
                           setPendants((prev) =>
                             prev.map((item, idx) =>
-                              idx === i ? { ...item, month: e.target.value } : item
+                              idx === i
+                                ? { ...item, month: e.target.value }
+                                : item
                             )
                           )
                         }
                         className="w-full border border-black/15 rounded-md px-3 py-2 text-sm"
                       >
                         {[
-                          "jan","feb","mar","apr","may","jun",
-                          "jul","aug","sep","oct","nov","dec"
+                          "jan",
+                          "feb",
+                          "mar",
+                          "apr",
+                          "may",
+                          "jun",
+                          "jul",
+                          "aug",
+                          "sep",
+                          "oct",
+                          "nov",
+                          "dec",
                         ].map((m) => (
                           <option key={m} value={m}>
                             {m.toUpperCase()}
@@ -389,11 +544,13 @@ export default function ProductPage() {
                         ))}
                       </select>
 
-                      {/* Remove */}
                       {pendants.length > 1 && (
                         <button
+                          type="button"
                           onClick={() =>
-                            setPendants((prev) => prev.filter((_, idx) => idx !== i))
+                            setPendants((prev) =>
+                              prev.filter((_, idx) => idx !== i)
+                            )
                           }
                           className="text-xs text-red-500"
                         >
@@ -403,14 +560,231 @@ export default function ProductPage() {
                     </div>
                   ))}
 
-                  {/* Add Pendant */}
                   <button
+                    type="button"
                     onClick={() =>
-                      setPendants((prev) => [...prev, { type: "girl", month: "jan" }])
+                      setPendants((prev) => [
+                        ...prev,
+                        { type: "girl", month: "jan" },
+                      ])
                     }
                     className="w-full border border-black/20 rounded-xl py-2 text-sm hover:bg-black hover:text-white transition"
                   >
                     + Add Another Pendant
+                  </button>
+                </div>
+              )}
+
+              {isInitialBirthstoneProduct && (
+                <div className="mt-6 space-y-5">
+                  <div>
+                    <div className="text-black/60 text-xs tracking-[0.28em] uppercase">
+                      Personalize Your Piece
+                    </div>
+
+                    <p className="mt-2 text-xs leading-relaxed text-black/50">
+                      Add one or more charm sets. Each set includes one initial
+                      and one birthstone. Your selections will be attached to
+                      your order before checkout.
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-black/10 bg-[#faf7f2] p-4">
+                    <div className="mb-3 flex items-center justify-between gap-4">
+                      <div>
+                        <div className="text-[10px] uppercase tracking-[0.24em] text-black/45">
+                          Preview
+                        </div>
+                        <div className="mt-1 text-sm text-black/75">
+                          {activePreviewLabel}
+                        </div>
+                      </div>
+
+                      <div className="text-right text-[10px] uppercase tracking-[0.18em] text-black/35">
+                        Hover options
+                      </div>
+                    </div>
+
+                    {activePreviewImage ? (
+                      <img
+                        src={activePreviewImage}
+                        alt={activePreviewLabel}
+                        className="h-28 w-full rounded-xl border border-black/10 bg-white object-contain p-3"
+                      />
+                    ) : (
+                      <div className="flex h-28 items-center justify-center rounded-xl border border-dashed border-black/15 bg-white text-center text-xs leading-relaxed text-black/40">
+                        Add charm images to
+                        <br />
+                        src/assets/customizations
+                      </div>
+                    )}
+                  </div>
+
+                  {charmSets.map((set, setIndex) => (
+                    <div
+                      key={setIndex}
+                      className="rounded-2xl border border-black/10 p-4"
+                    >
+                      <div className="mb-4 flex items-center justify-between gap-4">
+                        <div>
+                          <div className="text-[10px] uppercase tracking-[0.24em] text-black/45">
+                            Charm Set {setIndex + 1}
+                          </div>
+
+                          <div className="mt-1 text-xs text-black/55">
+                            Initial {set.initial} · {set.birthstone}
+                          </div>
+                        </div>
+
+                        {charmSets.length > 1 ? (
+                          <button
+                            type="button"
+                            onClick={() => removeCharmSet(setIndex)}
+                            className="text-xs text-red-500"
+                          >
+                            Remove
+                          </button>
+                        ) : null}
+                      </div>
+
+                      <div>
+                        <div className="mb-3 flex items-center justify-between">
+                          <div className="text-[10px] uppercase tracking-[0.24em] text-black/45">
+                            Initial
+                          </div>
+
+                          <div className="text-xs text-black/55">
+                            Selected: {set.initial}
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-6 gap-2 sm:grid-cols-9">
+                          {INITIAL_OPTIONS.map((letter) => {
+                            const image =
+                              initialCharmByKey[letter.toLowerCase()];
+                            const isSelected = set.initial === letter;
+
+                            return (
+                              <button
+                                key={letter}
+                                type="button"
+                                onClick={() =>
+                                  updateCharmSet(
+                                    setIndex,
+                                    "initial",
+                                    letter
+                                  )
+                                }
+                                onMouseEnter={() =>
+                                  setPreviewItem({
+                                    type: "initial",
+                                    label: `Set ${
+                                      setIndex + 1
+                                    }: ${letter} Initial Charm`,
+                                    image,
+                                  })
+                                }
+                                onMouseLeave={() => setPreviewItem(null)}
+                                onFocus={() =>
+                                  setPreviewItem({
+                                    type: "initial",
+                                    label: `Set ${
+                                      setIndex + 1
+                                    }: ${letter} Initial Charm`,
+                                    image,
+                                  })
+                                }
+                                onBlur={() => setPreviewItem(null)}
+                                className={`rounded-full border px-3 py-2 text-xs transition ${
+                                  isSelected
+                                    ? "border-black bg-black text-white"
+                                    : "border-black/15 text-black/65 hover:border-black/50"
+                                }`}
+                              >
+                                {letter}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      <div className="mt-5">
+                        <div className="mb-3 flex items-center justify-between">
+                          <div className="text-[10px] uppercase tracking-[0.24em] text-black/45">
+                            Birthstone
+                          </div>
+
+                          <div className="text-xs text-black/55">
+                            Selected: {set.birthstone}
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                          {BIRTHSTONE_OPTIONS.map((month) => {
+                            const image =
+                              birthstoneCharmByKey[month.toLowerCase()];
+                            const isSelected = set.birthstone === month;
+
+                            return (
+                              <button
+                                key={month}
+                                type="button"
+                                onClick={() =>
+                                  updateCharmSet(
+                                    setIndex,
+                                    "birthstone",
+                                    month
+                                  )
+                                }
+                                onMouseEnter={() =>
+                                  setPreviewItem({
+                                    type: "birthstone",
+                                    label: `Set ${
+                                      setIndex + 1
+                                    }: ${month} Birthstone Charm`,
+                                    image,
+                                  })
+                                }
+                                onMouseLeave={() => setPreviewItem(null)}
+                                onFocus={() =>
+                                  setPreviewItem({
+                                    type: "birthstone",
+                                    label: `Set ${
+                                      setIndex + 1
+                                    }: ${month} Birthstone Charm`,
+                                    image,
+                                  })
+                                }
+                                onBlur={() => setPreviewItem(null)}
+                                className={`rounded-full border px-3 py-2 text-xs transition ${
+                                  isSelected
+                                    ? "border-black bg-black text-white"
+                                    : "border-black/15 text-black/65 hover:border-black/50"
+                                }`}
+                              >
+                                {month}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+
+                  <button
+                    type="button"
+                    onClick={addCharmSet}
+                    disabled={charmSets.length >= MAX_CHARM_SETS}
+                    className={[
+                      "w-full rounded-xl border py-2 text-sm transition",
+                      charmSets.length >= MAX_CHARM_SETS
+                        ? "cursor-not-allowed border-black/10 bg-black/5 text-black/35"
+                        : "border-black/20 hover:bg-black hover:text-white",
+                    ].join(" ")}
+                  >
+                    {charmSets.length >= MAX_CHARM_SETS
+                      ? "Maximum Charm Sets Added"
+                      : "+ Add Another Charm Set"}
                   </button>
                 </div>
               )}
@@ -424,13 +798,13 @@ export default function ProductPage() {
                 preorderShipDate={custom?.preorderShipDate}
                 squareVariationId={custom?.squareVariationId}
                 customizations={
-                  isFamilyNecklace ? { pendants } : undefined
+                  isFamilyNecklace
+                    ? { pendants }
+                    : isInitialBirthstoneProduct
+                    ? { charmSets }
+                    : undefined
                 }
               />
-
-              <p className="mt-5 text-black/50 text-xs leading-relaxed">
-                Next: structured metadata, pricing logic, and gallery system.
-              </p>
             </div>
           </div>
         </div>

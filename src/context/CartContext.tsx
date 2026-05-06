@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 type ProductStatus = "active" | "coming-soon" | "sold-out" | "preorder";
 
@@ -7,8 +13,22 @@ type Pendant = {
   month: string;
 };
 
+type CharmSet = {
+  initial: string;
+  birthstone: string;
+};
+
 type Customizations = {
   pendants?: Pendant[];
+
+  // New system for bracelet/necklace products:
+  // Set 1: Initial A + Birthstone October
+  // Set 2: Initial B + Birthstone May
+  charmSets?: CharmSet[];
+
+  // Kept for compatibility in case old cart items already exist
+  initial?: string;
+  birthstone?: string;
 };
 
 type CartItem = {
@@ -46,6 +66,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
+
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed)) setItems(parsed);
     } catch {
@@ -70,7 +91,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
     setItems((prev) => {
       const isSameCustomization = (a?: Customizations, b?: Customizations) => {
-        return JSON.stringify(a) === JSON.stringify(b);
+        return JSON.stringify(a ?? {}) === JSON.stringify(b ?? {});
       };
 
       const existing = prev.find(
@@ -103,14 +124,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   };
 
   const removeFromCart: CartContextValue["removeFromCart"] = (slug) => {
-    setItems((prev) => prev.filter((p, idx) => (p.slug + idx) !== slug))
+    setItems((prev) => prev.filter((p, idx) => p.slug + idx !== slug));
   };
 
   const setQty: CartContextValue["setQty"] = (slug, qty) => {
     const safeQty = Math.max(1, Math.min(99, qty));
+
     setItems((prev) =>
       prev.map((p, idx) =>
-                 (p.slug + idx === slug ? { ...p, quantity: safeQty } : p))
+        p.slug + idx === slug ? { ...p, quantity: safeQty } : p
+      )
     );
   };
 
@@ -141,6 +164,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
 export function useCart() {
   const ctx = useContext(CartContext);
-  if (!ctx) throw new Error("useCart must be used inside CartProvider");
+
+  if (!ctx) {
+    throw new Error("useCart must be used inside CartProvider");
+  }
+
   return ctx;
 }
