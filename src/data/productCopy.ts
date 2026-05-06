@@ -120,6 +120,31 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "the-signature-necklace": {
+      price: 60,
+
+      squareVariationId: "7WKS3OBT5KVEU3LVGUQ6GSK2",
+
+      status: "active",
+
+      collection: "golden-hour-muse",
+
+      shortDescription:
+        "A brushed gold medallion with delicate crystal accents—personal, luminous, and effortlessly timeless.",
+
+      description:
+        "The Signature Necklace is designed as a modern keepsake—minimal in form, yet rich in meaning. A softly brushed gold medallion creates a warm, satin-like glow, centered with an engraving. Surrounding crystal accents catch the light with subtle brilliance, adding just enough radiance to elevate the piece without overpowering its simplicity. Suspended from a fine gold chain, the silhouette feels clean, intentional, and endlessly wearable. Whether worn as a personal signature or a meaningful gift, it’s a piece that carries both presence and sentiment in perfect balance.",
+
+      details: [
+        "Brushed gold medallion pendant",
+        "Engraved centerpiece",
+        "Subtle crystal accent stones",
+        "Delicate gold-toned chain",
+        "Lightweight and comfortable for daily wear",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "beaded-cross-choker": {
       price: 45,
 
