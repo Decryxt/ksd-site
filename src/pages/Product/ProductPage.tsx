@@ -37,7 +37,7 @@ type PreviewItem = {
 };
 
 const INITIAL_BIRTHSTONE_PRODUCT_SLUGS = [
-  "poppy-x-initial-&-birthstone-necklace",
+  "poppy-x-initial-and-birthstone-necklace",
   "initial-and-birth-stone-bracelet",
 ];
 

@@ -235,7 +235,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
-    "poppy-x-initial-&-birthstone-necklace": {
+    "poppy-x-initial-and-birthstone-necklace": {
       price: 90,
 
       squareVariationId: "RZN3KE4RZHQSGGCOFF7WEAKR",
@@ -410,7 +410,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "5URIATNLTNOGFZ2HD7MIKCB2",
 
-      status: "coming-soon",
+      status: "active",
 
       shortDescription:
         "A polished gold-bead bracelet personalized with a gold initial charm and a delicate birthstone accent—meaningful, modern, and uniquely yours.",
