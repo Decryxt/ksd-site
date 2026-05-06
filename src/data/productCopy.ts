@@ -333,6 +333,29 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "luxe-bracelet": {
+      price: 60,
+
+      squareVariationId: "V4BYHOHUOM4MXTNSXSXYCGN3",
+
+      status: "active",
+
+      shortDescription:
+        "A bold, high-weight gold-filled bracelet with a sculptural beaded form—substantial, radiant, and unmistakably elevated.",
+
+      description:
+        "The Luxe Bracelet is the most substantial piece in the collection—designed with presence, weight, and undeniable impact. Crafted from 18K gold-filled beads, its perfectly rounded silhouette reflects light with a rich, mirror-like glow, creating a striking balance between minimalism and bold luxury. With a heavier feel that sets it apart, the bracelet carries a sense of permanence and intention, sitting confidently on the wrist. Whether worn alone as a statement or layered for added depth, Luxe embodies refined strength and elevated simplicity in its purest form.",
+
+      details: [
+        "18K gold-filled beaded bracelet",
+        "High-weight design (approximately 1/2 pound)",
+        "Polished spherical beads for maximum light reflection",
+        "Bold, structured silhouette",
+        "Designed for statement wear or layering",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "aussie-pearl-bracelet": {
       price: 55,
 
