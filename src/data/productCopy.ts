@@ -260,6 +260,31 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "lydia-necklace": {
+      price: 85,
+
+      squareVariationId: "RW64DN2GV66LHU3HUWUKJCD7",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A radiant gold beaded necklace finished with a crystal butterfly charm—bold, feminine, and sun-warmed with Southern romance.",
+
+      description:
+        "The Lydia Necklace brings a golden, feminine softness to the Southern Solstice collection. Designed with polished gold-filled beading and accented by a luminous crystal butterfly charm, the piece catches the light with a warm, radiant glow. The butterfly detail adds a romantic sense of movement and transformation, while the structured beaded silhouette gives the necklace a bold yet wearable presence. Effortless on its own and striking when layered, Lydia feels sunlit, expressive, and deeply feminine—an ode to golden Southern warmth and heirloom-inspired charm.",
+
+      details: [
+        "Gold-filled beaded necklace",
+        "Crystal butterfly charm centerpiece",
+        "Polished gold bead detailing",
+        "Warm, radiant statement silhouette",
+        "Designed for everyday wear or layering",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "poppy-x-initial-and-birthstone-necklace": {
       price: 90,
 
