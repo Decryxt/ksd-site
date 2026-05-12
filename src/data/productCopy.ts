@@ -235,6 +235,31 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "poppy-necklace-summer-26": {
+      price: 90,
+
+      squareVariationId: "QWVD6G6S35CMX2FODGYICCFH",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A gold-filled beaded necklace finished with a personalized initial charm—sunlit, feminine, and effortlessly coastal.",
+
+      description:
+        "The Poppy Necklace Summer 26 is a personalized take on one of Katherine Sterling Designs’ signature golden silhouettes. Designed with luminous gold-filled beading, the necklace catches the light with a warm, polished glow while sitting beautifully along the neckline. A single initial charm adds a personal, keepsake-like detail, making the piece feel both meaningful and easy to wear. Refined yet playful, it brings a sunlit coastal elegance to everyday styling and layers effortlessly with other gold favorites.",
+
+      details: [
+        "Gold-filled beaded necklace",
+        "Personalized single initial charm",
+        "Polished gold bead detailing",
+        "Designed for everyday wear or layering",
+        "Lightweight, feminine silhouette",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "poppy-x-initial-and-birthstone-necklace": {
       price: 90,
 

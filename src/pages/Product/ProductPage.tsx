@@ -41,6 +41,8 @@ const INITIAL_BIRTHSTONE_PRODUCT_SLUGS = [
   "initial-and-birth-stone-bracelet",
 ];
 
+const INITIAL_ONLY_PRODUCT_SLUGS = ["poppy-necklace-summer-26"];
+
 const MAX_CHARM_SETS = 6;
 
 const INITIAL_OPTIONS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -249,6 +251,9 @@ export default function ProductPage() {
   const isInitialBirthstoneProduct =
     !!slug && INITIAL_BIRTHSTONE_PRODUCT_SLUGS.includes(slug);
 
+  const isInitialOnlyProduct =
+    !!slug && INITIAL_ONLY_PRODUCT_SLUGS.includes(slug);
+
   const [pendants, setPendants] = useState<Pendant[]>([
     { type: "girl", month: "jan" },
   ]);
@@ -256,6 +261,8 @@ export default function ProductPage() {
   const [charmSets, setCharmSets] = useState<CharmSet[]>([
     { initial: "A", birthstone: "January" },
   ]);
+
+  const [singleInitial, setSingleInitial] = useState("A");
 
   const [previewItem, setPreviewItem] = useState<PreviewItem | null>(null);
 
@@ -789,6 +796,105 @@ export default function ProductPage() {
                 </div>
               )}
 
+              {isInitialOnlyProduct && (
+                <div className="mt-6 space-y-5">
+                  <div>
+                    <div className="text-black/60 text-xs tracking-[0.28em] uppercase">
+                      Choose Your Initial
+                    </div>
+
+                    <p className="mt-2 text-xs leading-relaxed text-black/50">
+                      Select one initial for your necklace. Your selection will be attached to
+                      your order before checkout.
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-black/10 bg-[#faf7f2] p-4">
+                    <div className="mb-3 flex items-center justify-between gap-4">
+                      <div>
+                        <div className="text-[10px] uppercase tracking-[0.24em] text-black/45">
+                          Preview
+                        </div>
+                        <div className="mt-1 text-sm text-black/75">
+                          {previewItem?.label || `${singleInitial} Initial Charm`}
+                        </div>
+                      </div>
+
+                      <div className="text-right text-[10px] uppercase tracking-[0.18em] text-black/35">
+                        Hover options
+                      </div>
+                    </div>
+
+                    {previewItem?.image || initialCharmByKey[singleInitial.toLowerCase()] ? (
+                      <img
+                        src={
+                          previewItem?.image ||
+                          initialCharmByKey[singleInitial.toLowerCase()]
+                        }
+                        alt={previewItem?.label || `${singleInitial} Initial Charm`}
+                        className="h-28 w-full rounded-xl border border-black/10 bg-white object-contain p-3"
+                      />
+                    ) : (
+                      <div className="flex h-28 items-center justify-center rounded-xl border border-dashed border-black/15 bg-white text-center text-xs leading-relaxed text-black/40">
+                        Add initial images to
+                        <br />
+                        src/assets/customizations/initials
+                      </div>
+                    )}
+                  </div>
+
+                  <div>
+                    <div className="mb-3 flex items-center justify-between">
+                      <div className="text-[10px] uppercase tracking-[0.24em] text-black/45">
+                        Initial
+                      </div>
+
+                      <div className="text-xs text-black/55">
+                        Selected: {singleInitial}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-6 gap-2 sm:grid-cols-9">
+                      {INITIAL_OPTIONS.map((letter) => {
+                        const image = initialCharmByKey[letter.toLowerCase()];
+                        const isSelected = singleInitial === letter;
+
+                        return (
+                          <button
+                            key={letter}
+                            type="button"
+                            onClick={() => setSingleInitial(letter)}
+                            onMouseEnter={() =>
+                              setPreviewItem({
+                                type: "initial",
+                                label: `${letter} Initial Charm`,
+                                image,
+                              })
+                            }
+                            onMouseLeave={() => setPreviewItem(null)}
+                            onFocus={() =>
+                              setPreviewItem({
+                                type: "initial",
+                                label: `${letter} Initial Charm`,
+                                image,
+                              })
+                            }
+                            onBlur={() => setPreviewItem(null)}
+                            className={`rounded-full border px-3 py-2 text-xs transition ${
+                              isSelected
+                                ? "border-black bg-black text-white"
+                                : "border-black/15 text-black/65 hover:border-black/50"
+                            }`}
+                          >
+                            {letter}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <AddToBagButton
                 category={category}
                 slug={slug}
@@ -802,6 +908,8 @@ export default function ProductPage() {
                     ? { pendants }
                     : isInitialBirthstoneProduct
                     ? { charmSets }
+                    : isInitialOnlyProduct
+                    ? { initial: singleInitial }
                     : undefined
                 }
               />
