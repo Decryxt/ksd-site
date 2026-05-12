@@ -453,6 +453,56 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "golden-spur-bracelet": {
+      price: 50,
+
+      squareVariationId: "U4R6U57XBEZBYFSA6LD3MXZV",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A bold gold beaded bracelet accented with ribbed statement beads—warm, textured, and rooted in Southern charm.",
+
+      description:
+        "The Golden Spur Bracelet brings a bold, sun-warmed edge to the Southern Solstice collection. Designed with polished gold-filled beads and accented by ribbed statement beads, the piece carries a textured richness that feels both elevated and grounded. The alternating bead pattern catches light from every angle, creating a warm golden glow with subtle Western influence. Strong enough to wear alone yet easy to layer into a bracelet stack, Golden Spur is a refined nod to Alyssa’s Texas roots—radiant, feminine, and full of character.",
+
+      details: [
+        "Gold-filled beaded bracelet",
+        "Ribbed gold accent beads",
+        "Polished round bead detailing",
+        "Textured Southern-inspired design",
+        "Comfortable stretch bracelet silhouette",
+        "Hand-assembled in small batches",
+      ],
+    },
+
+    "queen-of-hearts-bracelet": {
+      price: 30,
+
+      squareVariationId: "CSSVFELJBB3KFIGNRUTBQQPS",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A gold beaded bracelet finished with a vivid red heart charm—playful, romantic, and full of Southern charm.",
+
+      description:
+        "The Queen Of Hearts Bracelet brings a bold romantic accent to the Southern Solstice collection. Designed with polished gold-filled beads, textured ribbed accents, and a vivid red heart charm, the piece feels playful while still carrying a refined golden warmth. The heart detail adds a sweet, expressive focal point, while the mixed bead texture gives the bracelet depth, shine, and personality. Feminine, spirited, and easy to layer, Queen Of Hearts is a sun-warmed statement made for everyday charm and a little extra confidence.",
+
+      details: [
+        "Gold-filled beaded bracelet",
+        "Vivid red heart charm",
+        "Textured ribbed gold accent beads",
+        "Polished round bead detailing",
+        "Comfortable stretch bracelet silhouette",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "initial-and-birth-stone-bracelet": {
       price: 100,
 
