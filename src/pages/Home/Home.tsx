@@ -4,12 +4,15 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import hero from "../../assets/MainHero.png";
 import heroLogo from "../../assets/KSDTransparentWhite.png";
-import mothersNecklaceHero from "../../assets/products/necklaces/Hero/Mothers Necklace Hero.png";
+
+import queenOfHearts from "../../assets/products/bracelets/Queen Of Hearts Bracelet.jpg";
+import goldenSpur from "../../assets/products/bracelets/Golden Spur Bracelet.jpg";
+import lydiaNecklace from "../../assets/products/necklaces/Lydia Necklace.png";
 
 const luxuryEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -28,21 +31,12 @@ export default function Home() {
   const overlayOpacity = useTransform(scrollY, [0, 35], [1, 0]);
   const overlayY = useTransform(scrollY, [0, 35], [0, -10]);
 
-  const mothersRef = useRef<HTMLElement | null>(null);
-  const { scrollYProgress: mothersProgress } = useScroll({
-    target: mothersRef,
-    offset: ["start end", "end start"],
-  });
-
-  const mothersImageY = useTransform(mothersProgress, [0, 1], [26, -26]);
-  const mothersImageScale = useTransform(mothersProgress, [0, 1], [1.05, 1]);
-
-  function handleViewMothersNecklace() {
+  function handleViewSouthernSolstice() {
     setIsNavigating(true);
 
     window.setTimeout(() => {
       navigate(
-        "/product/necklaces/mothers-necklace?img=%2Fassets%2FMothers%2520Necklace-Dj-XzDZj.png"
+        "/product/bracelets/golden-spur-bracelet?img=%2Fassets%2FGolden%2520Spur%2520Bracelet-DODqSCu-.jpg"
       );
     }, 650);
   }
@@ -95,57 +89,105 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Mother's Day Feature */}
-      <section
-        ref={mothersRef}
-        className="border-t border-black/10 bg-[#faf7f2]"
-      >
-        <div className="mx-auto max-w-6xl px-6 pb-32 pt-24 md:pt-28">
-          {/* Standalone headline */}
+      {/* Southern Solstice Collection Feature */}
+      <section className="relative overflow-hidden border-t border-black/10 bg-[#f7efe4]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(199,127,69,0.28),transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.55),rgba(247,239,228,1))]" />
+
+        <div className="pointer-events-none absolute -left-24 top-20 h-72 w-72 rounded-full bg-[#c77f45]/20 blur-3xl" />
+        <div className="pointer-events-none absolute -right-20 bottom-10 h-80 w-80 rounded-full bg-[#9f4f2c]/20 blur-3xl" />
+
+        <div className="relative mx-auto max-w-6xl px-6 py-28 md:py-36">
           <motion.div
             initial={{ opacity: 0, y: 34 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 1, ease: luxuryEase }}
-            className="mb-20 text-center"
+            className="mb-16 text-center"
           >
+            <div className="text-[11px] uppercase tracking-[0.45em] text-black/45">
+              New Collection
+            </div>
 
             <h2
-              className="mt-6 text-6xl uppercase leading-[0.88] tracking-[0.06em] text-black md:text-8xl lg:text-9xl"
-              style={{ fontFamily: '"Perandory", serif' }}
+              className="mt-6 text-6xl uppercase leading-[0.9] tracking-[0.04em] text-[#8f472a] md:text-8xl lg:text-9xl"
+              style={{ fontFamily: '"Durango Western", serif' }}
             >
-              HEADLINES
+              Southern
+              <br />
+              Solstice
             </h2>
+
+            <p className="mx-auto mt-7 max-w-2xl text-sm leading-relaxed text-black/60 md:text-base">
+              A sun-warmed collection inspired by Alyssa’s Texas roots —
+              polished gold, feminine keepsakes, Western romance, and heirloom
+              details shaped by Southern light.
+            </p>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 42 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.18 }}
+            initial={{ opacity: 0, y: 42, scale: 0.985 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.22 }}
             transition={{ duration: 1, ease: luxuryEase }}
-            className="overflow-hidden rounded-[2rem] border border-black/10 bg-white shadow-[0_22px_70px_rgba(0,0,0,0.07)]"
+            className="relative overflow-hidden rounded-[2rem] border border-[#c77f45]/35 bg-white/80 shadow-[0_28px_90px_rgba(143,71,42,0.18)] backdrop-blur"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2">
-              <motion.div
-                className="relative h-[520px] overflow-hidden md:h-[690px]"
-                initial={{ opacity: 0, scale: 1.02 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 1.05, ease: luxuryEase }}
-              >
-                <motion.img
-                  src={mothersNecklaceHero}
-                  alt="The Mother's Necklace"
-                  className="h-full w-full object-cover"
-                  style={{
-                    y: mothersImageY,
-                    scale: mothersImageScale,
-                  }}
-                />
+            <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(199,127,69,0.16)_0%,rgba(255,244,224,0.65)_30%,rgba(177,98,51,0.14)_55%,rgba(255,239,218,0.72)_80%,rgba(199,127,69,0.16)_100%)]" />
 
-                <div className="absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-white/10" />
-              </motion.div>
+            <div className="relative grid grid-cols-1 md:grid-cols-2">
+              {/* Product Image Collage */}
+              <div className="relative min-h-[560px] overflow-hidden bg-[#3a2118] md:min-h-[680px]">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(255,211,142,0.45),transparent_34%),linear-gradient(145deg,#2a1711,#8f472a_48%,#d59a61)]" />
 
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.94, rotate: -2 }}
+                  whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                  viewport={{ once: true, amount: 0.35 }}
+                  transition={{ duration: 1.05, delay: 0.1, ease: luxuryEase }}
+                  className="absolute left-[9%] top-[10%] h-[52%] w-[58%] overflow-hidden rounded-[1.5rem] border border-white/25 bg-white shadow-[0_22px_70px_rgba(0,0,0,0.28)]"
+                >
+                  <img
+                    src={lydiaNecklace}
+                    alt="Lydia Necklace"
+                    className="h-full w-full object-cover"
+                  />
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.94, rotate: 3 }}
+                  whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                  viewport={{ once: true, amount: 0.35 }}
+                  transition={{ duration: 1.05, delay: 0.22, ease: luxuryEase }}
+                  className="absolute bottom-[11%] right-[8%] h-[46%] w-[54%] overflow-hidden rounded-[1.5rem] border border-white/25 bg-white shadow-[0_22px_70px_rgba(0,0,0,0.3)]"
+                >
+                  <img
+                    src={goldenSpur}
+                    alt="Golden Spur Bracelet"
+                    className="h-full w-full object-cover"
+                  />
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 30, scale: 0.92 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.35 }}
+                  transition={{ duration: 1.05, delay: 0.34, ease: luxuryEase }}
+                  className="absolute bottom-[8%] left-[10%] h-[34%] w-[36%] overflow-hidden rounded-full border border-white/30 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.32)]"
+                >
+                  <img
+                    src={queenOfHearts}
+                    alt="Queen Of Hearts Bracelet"
+                    className="h-full w-full object-cover"
+                  />
+                </motion.div>
+
+                <div className="absolute left-8 top-8 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-[10px] uppercase tracking-[0.3em] text-white/80 backdrop-blur">
+                  Southern Solstice
+                </div>
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-white/5" />
+              </div>
+
+              {/* Text Side */}
               <div className="relative flex items-center">
                 <div className="w-full px-8 py-14 md:px-14 md:py-16">
                   <motion.div
@@ -153,68 +195,94 @@ export default function Home() {
                     whileInView={{ opacity: 1, letterSpacing: "0.32em" }}
                     viewport={{ once: true, amount: 0.45 }}
                     transition={{ duration: 0.8, ease: luxuryEase }}
-                    className="text-[10px] uppercase text-black/38 md:text-[11px]"
+                    className="text-[10px] uppercase text-[#8f472a]/70 md:text-[11px]"
                   >
-                    Mother’s Day Exclusive
+                    Southern Solstice
                   </motion.div>
 
                   <motion.h3
                     initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.4 }}
-                    transition={{ duration: 0.95, delay: 0.06, ease: luxuryEase }}
-                    className="mt-5 text-5xl leading-[0.92] text-black md:text-7xl"
-                    style={{ fontFamily: '"Alyana", serif', fontWeight: 400 }}
+                    transition={{
+                      duration: 0.95,
+                      delay: 0.06,
+                      ease: luxuryEase,
+                    }}
+                    className="mt-5 text-5xl uppercase leading-[0.95] tracking-[0.04em] text-black md:text-7xl"
+                    style={{
+                      fontFamily: '"Durango Western", serif',
+                      fontWeight: 400,
+                    }}
                   >
-                    The Mother&apos;s
+                    New pieces
                     <br />
-                    Necklace
+                    have arrived
                   </motion.h3>
 
                   <motion.div
                     initial={{ opacity: 0, scaleX: 0.7 }}
                     whileInView={{ opacity: 1, scaleX: 1 }}
                     viewport={{ once: true, amount: 0.45 }}
-                    transition={{ duration: 0.85, delay: 0.14, ease: luxuryEase }}
-                    className="mt-8 h-px w-full max-w-[170px] origin-left bg-black/12"
+                    transition={{
+                      duration: 0.85,
+                      delay: 0.14,
+                      ease: luxuryEase,
+                    }}
+                    className="mt-8 h-px w-full max-w-[190px] origin-left bg-[#8f472a]/25"
                   />
 
                   <motion.p
                     initial={{ opacity: 0, y: 18 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.4 }}
-                    transition={{ duration: 0.9, delay: 0.16, ease: luxuryEase }}
+                    transition={{
+                      duration: 0.9,
+                      delay: 0.16,
+                      ease: luxuryEase,
+                    }}
                     className="mt-8 max-w-xl text-sm leading-relaxed text-black/62 md:text-base"
                   >
-                    A sentimental keepsake designed to hold the ones she loves
-                    most close. The Mother&apos;s Necklace pairs an elevated
-                    gold-filled silhouette with personalized charm detailing,
-                    creating a piece that feels deeply meaningful, soft in
-                    presence, and refined enough to wear as an everyday heirloom.
+                    Discover the first pieces from Southern Solstice — golden
+                    beaded silhouettes, romantic charms, and bold feminine
+                    details inspired by Texas warmth and Alyssa’s Southern
+                    heritage.
                   </motion.p>
 
-                  <motion.p
+                  <motion.div
                     initial={{ opacity: 0, y: 14 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.45 }}
-                    transition={{ duration: 0.82, delay: 0.22, ease: luxuryEase }}
-                    className="mt-6 text-xs uppercase tracking-[0.28em] text-black/36"
+                    transition={{
+                      duration: 0.82,
+                      delay: 0.22,
+                      ease: luxuryEase,
+                    }}
+                    className="mt-7 grid grid-cols-1 gap-3 text-xs uppercase tracking-[0.22em] text-black/45 sm:grid-cols-3"
                   >
-                    Personalized · Limited Release · Preorder
-                  </motion.p>
+                    <div className="rounded-full border border-[#c77f45]/25 px-4 py-3 text-center">
+                      Lydia
+                    </div>
+                    <div className="rounded-full border border-[#c77f45]/25 px-4 py-3 text-center">
+                      Golden Spur
+                    </div>
+                    <div className="rounded-full border border-[#c77f45]/25 px-4 py-3 text-center">
+                      Queen Of Hearts
+                    </div>
+                  </motion.div>
 
                   <motion.button
                     type="button"
-                    onClick={handleViewMothersNecklace}
+                    onClick={handleViewSouthernSolstice}
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.45 }}
                     whileHover={{ y: -2, scale: 1.015 }}
                     whileTap={{ scale: 0.985 }}
                     transition={{ duration: 0.32, ease: luxuryEase }}
-                    className="mt-10 inline-flex items-center justify-center rounded-full border border-black px-7 py-3 text-[11px] uppercase tracking-[0.32em] text-black transition hover:bg-black hover:text-white"
+                    className="mt-10 inline-flex items-center justify-center rounded-full border border-[#8f472a] px-7 py-3 text-[11px] uppercase tracking-[0.32em] text-[#8f472a] transition hover:bg-[#8f472a] hover:text-white"
                   >
-                    View
+                    Explore Golden Spur
                   </motion.button>
                 </div>
               </div>
