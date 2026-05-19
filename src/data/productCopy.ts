@@ -356,6 +356,32 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "star-of-the-sea-necklace": {
+      price: 45,
+
+      squareVariationId: "DNK67YFOYN6H3KZY6XPKEPYB",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A radiant gold starfish pendant with a sculptural spiral center—coastal, sunlit, and effortlessly statement-making.",
+
+      description:
+        "The Star Of The Sea Necklace is a bold coastal statement inspired by warm ocean light and seaside treasures. Centered around a polished gold starfish pendant, the design features a raised spiral detail that adds movement, texture, and a touch of bohemian charm. The hammered, reflective surface catches the light beautifully, creating a golden glow that feels both playful and elevated. Suspended from a sleek gold-toned chain, this necklace brings a sun-kissed, beach-luxe finish to any look—perfect worn alone as a statement piece or layered with delicate chains for a more collected coastal feel.",
+
+      details: [
+        "Gold starfish pendant necklace",
+        "Raised spiral center detail",
+        "Textured reflective finish",
+        "Gold-toned chain",
+        "Coastal-inspired statement design",
+        "Lightweight and comfortable for wear",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "lucky-star-necklace": {
       price: 55,
 
