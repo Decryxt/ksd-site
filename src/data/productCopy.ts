@@ -1,4 +1,4 @@
-export type CategoryKey = "necklaces" | "bracelets" | "earrings" | "belly-chains" | "high-end-pearls";
+export type CategoryKey = "necklaces" | "bracelets" | "earrings" | "belly-chains" | "anklets" | "high-end-pearls";
 
 export type ProductCopy = {
   title?: string;
@@ -926,8 +926,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "EI7ZGQLOPJ4UXVNGXGPZITQT",
 
-      status: "preorder",
-      preorderShipDate: "2026-04-02",
+      status: "active",
 
       collection: "golden-hour-muse",
 
@@ -943,6 +942,33 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
         "Light-catching textured finish",
         "Adjustable fit for natural drape",
         "Lightweight, comfortable wear",
+        "Hand-assembled in small batches",
+      ],
+    },
+  },
+
+  "anklets": {
+    "sand-dollar-anklet": {
+      price: 35,
+
+      squareVariationId: "YQ2JPYBQ574MXCBHWEQ63MRK",
+
+      status: "active",
+
+      collection: "golden-hour-muse",
+
+      shortDescription:
+        "A delicate gold anklet finished with a radiant sand dollar charm—sunlit, coastal, and effortlessly feminine.",
+
+      description:
+        "The Sand Dollar Anklet captures the quiet beauty of golden hour by the shore. A delicate gold chain wraps softly around the ankle, finished with a small sand dollar charm that catches the light with subtle warmth and movement. Its coastal-inspired detail brings a soft, beachside elegance while remaining refined enough for everyday wear. Lightweight and easy to style, this anklet is perfect worn alone as a delicate statement or layered with other ankle pieces for a more bohemian look. Whether paired with sandals, swimwear, or summer dresses, it adds a sunlit touch of charm, femininity, and effortless coastal beauty.",
+
+      details: [
+        "Delicate gold anklet chain",
+        "Sand dollar charm detail",
+        "Light-catching polished finish",
+        "Adjustable fit for comfortable wear",
+        "Lightweight and easy to layer",
         "Hand-assembled in small batches",
       ],
     },
