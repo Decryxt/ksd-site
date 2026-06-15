@@ -35,7 +35,7 @@ export default function Anklets() {
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([path, url], idx) => {
         const slug = slugFromFilename(path);
-        const custom = (productCopy as any)?.["anklets"]?.[slug];
+        const custom = (productCopy as any)?.anklets?.[slug];
 
         return {
           id: `anklet-${idx + 1}`,
@@ -68,31 +68,14 @@ export default function Anklets() {
     <div className="bg-white text-black">
       <CategoryHero
         title="Anklets"
-        subtitle="Coastal ease • Barefoot elegance • Sunlit shimmer"
+        subtitle="Golden shimmer • Coastal charm • Barefoot elegance"
         imageUrl={heroBodyJewelry}
         collections={collections}
         activeCollection={activeCollection}
         onCollectionChange={setActiveCollection}
       />
 
-      {filteredItems.length === 0 ? (
-        <div className="flex items-center justify-center py-28">
-            <div className="text-center">
-            <div
-                className="text-4xl md:text-6xl tracking-[-0.01em] text-black"
-                style={{ fontFamily: '"Perandory", serif', fontWeight: 400 }}
-            >
-                Coming Soon
-            </div>
-
-            <p className="mt-4 text-black/50 text-sm tracking-wide">
-                New pieces are currently in development.
-            </p>
-            </div>
-        </div>
-        ) : (
-        <ClickableProductGrid items={filteredItems} />
-        )}
+      <ClickableProductGrid items={filteredItems} />
     </div>
   );
 }
