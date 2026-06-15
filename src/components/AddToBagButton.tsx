@@ -22,6 +22,7 @@ type Customizations = {
   // Kept for compatibility
   initial?: string;
   birthstone?: string;
+  charm?: string;
 };
 
 type Props = {

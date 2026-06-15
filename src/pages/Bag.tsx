@@ -22,8 +22,82 @@ function formatShipDate(value?: string) {
   }).format(date);
 }
 
+function hasCustomizations(item: any) {
+  const c = item.customizations;
+
+  return Boolean(
+    c?.pendants?.length ||
+      c?.charmSets?.length ||
+      c?.initial ||
+      c?.birthstone ||
+      c?.charm
+  );
+}
+
+function CustomizationDetails({ item }: { item: any }) {
+  const customizations = item.customizations;
+
+  if (!customizations || !hasCustomizations(item)) return null;
+
+  return (
+    <div className="mt-3 space-y-2 rounded-xl border border-black/10 bg-[#faf7f2] px-4 py-3">
+      <div className="text-[10px] uppercase tracking-[0.24em] text-black/40">
+        Customization
+      </div>
+
+      {customizations.pendants?.length ? (
+        <div className="space-y-1">
+          {customizations.pendants.map((p: any, idx: number) => (
+            <div key={idx} className="text-xs text-black/65">
+              Pendant {idx + 1}: {p.type === "boy" ? "Boy" : "Girl"} —{" "}
+              {p.month.toUpperCase()}
+            </div>
+          ))}
+        </div>
+      ) : null}
+
+      {customizations.charmSets?.length ? (
+        <div className="space-y-1">
+          {customizations.charmSets.map((set: any, idx: number) => (
+            <div key={idx} className="text-xs text-black/65">
+              Charm Set {idx + 1}: Initial {set.initial} —{" "}
+              {set.birthstone}
+            </div>
+          ))}
+        </div>
+      ) : null}
+
+      {customizations.initial ? (
+        <div className="text-xs text-black/65">
+          Initial — {customizations.initial}
+        </div>
+      ) : null}
+
+      {customizations.birthstone ? (
+        <div className="text-xs text-black/65">
+          Birthstone — {customizations.birthstone}
+        </div>
+      ) : null}
+
+      {customizations.charm ? (
+        <div className="text-xs text-black/65">
+          Charm — {customizations.charm}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 export default function Bag() {
-  const { items, removeFromCart, setQty, subtotal, totalItems, clearCart } = useCart();
+  const {
+    items,
+    removeFromCart,
+    setQty,
+    subtotal,
+    totalItems,
+    clearCart,
+  } = useCart();
+
   const [searchParams] = useSearchParams();
 
   const [loading, setLoading] = useState(false);
@@ -32,7 +106,6 @@ export default function Bag() {
   const success = searchParams.get("success") === "1";
   const canceled = searchParams.get("canceled") === "1";
 
-  // If they return from successful checkout, clear bag (lean mode)
   useEffect(() => {
     if (success) clearCart();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,7 +155,7 @@ export default function Bag() {
     }
 
     if (!canCheckout) {
-      setError("One or more items are missing Stripe Price IDs.");
+      setError("One or more items are missing checkout information.");
       return;
     }
 
@@ -121,9 +194,9 @@ export default function Bag() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black px-6 py-10">
+    <div className="min-h-screen bg-white px-6 py-10 text-black">
       <div className="mx-auto w-full max-w-4xl">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           <h1
             className="text-4xl tracking-[-0.01em]"
             style={{ fontFamily: '"Perandory", serif', fontWeight: 400 }}
@@ -131,7 +204,10 @@ export default function Bag() {
             Bag
           </h1>
 
-          <Link to="/" className="text-sm text-black/60 hover:text-black underline underline-offset-4">
+          <Link
+            to="/"
+            className="text-sm text-black/60 underline underline-offset-4 hover:text-black"
+          >
             Continue Shopping
           </Link>
         </div>
@@ -140,12 +216,11 @@ export default function Bag() {
           {totalItems} item{totalItems === 1 ? "" : "s"}
         </div>
 
-        {/* RETURN BANNERS */}
         {success && (
           <div className="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-emerald-900">
             <div className="text-sm font-medium">Payment successful.</div>
-            <div className="text-xs mt-1 text-emerald-900/70">
-              Your order is confirmed. A receipt will be sent by Stripe.
+            <div className="mt-1 text-xs text-emerald-900/70">
+              Your order is confirmed. A receipt will be sent after checkout.
             </div>
           </div>
         )}
@@ -153,7 +228,7 @@ export default function Bag() {
         {canceled && (
           <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-amber-900">
             <div className="text-sm font-medium">Checkout canceled.</div>
-            <div className="text-xs mt-1 text-amber-900/70">
+            <div className="mt-1 text-xs text-amber-900/70">
               No worries — your bag is still here.
             </div>
           </div>
@@ -164,6 +239,7 @@ export default function Bag() {
             <div className="text-[11px] uppercase tracking-[0.28em] text-white/70">
               Preorder Notice
             </div>
+
             <div className="mt-2 text-sm leading-relaxed text-white/90">
               {preorderNoticeText}
             </div>
@@ -173,53 +249,47 @@ export default function Bag() {
         {items.length === 0 ? (
           <div className="mt-10 rounded-2xl border border-black/10 p-8">
             <p className="text-black/70">Your bag is empty.</p>
+
             <Link
               to="/archive/necklaces"
-              className="mt-4 inline-block text-sm underline underline-offset-4 text-black/70 hover:text-black"
+              className="mt-4 inline-block text-sm text-black/70 underline underline-offset-4 hover:text-black"
             >
               Browse the Archive
             </Link>
           </div>
         ) : (
-          <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* ITEMS */}
-            <div className="lg:col-span-8 space-y-4">
+          <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-12">
+            <div className="space-y-4 lg:col-span-8">
               {items.map((i, index) => {
                 const shipDate = formatShipDate(i.preorderShipDate);
+                const cartKey = i.slug + index;
 
                 return (
                   <div
-                    key={i.slug}
+                    key={cartKey}
                     className="rounded-2xl border border-black/10 bg-white p-5 shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
                   >
                     <div className="flex items-start justify-between gap-4">
-                      <div>
+                      <div className="min-w-0">
                         <div
                           className="text-xl"
-                          style={{ fontFamily: '"Perandory", serif', fontWeight: 400 }}
+                          style={{
+                            fontFamily: '"Perandory", serif',
+                            fontWeight: 400,
+                          }}
                         >
                           {i.title}
                         </div>
+
                         <div className="mt-1 text-sm text-black/60">
                           {formatUSD(i.price)}
                         </div>
-                        <div className="mt-2 text-xs text-black/45 uppercase tracking-[0.28em]">
+
+                        <div className="mt-2 text-xs uppercase tracking-[0.28em] text-black/45">
                           {i.category}
                         </div>
 
-                        {i.customizations?.pendants?.length ? (
-                          <div className="mt-3 space-y-1">
-                            <div className="text-[10px] uppercase tracking-[0.24em] text-black/40">
-                              Pendants
-                            </div>
-
-                            {i.customizations.pendants.map((p, idx) => (
-                              <div key={idx} className="text-xs text-black/65">
-                                {p.type === "boy" ? "Boy" : "Girl"} — {p.month.toUpperCase()}
-                              </div>
-                            ))}
-                          </div>
-                        ) : null}
+                        <CustomizationDetails item={i} />
 
                         {i.status === "preorder" && (
                           <div className="mt-3 space-y-1">
@@ -237,28 +307,33 @@ export default function Bag() {
                       </div>
 
                       <button
-                        onClick={() => removeFromCart(i.slug + index)}
-                        className="text-sm text-black/55 hover:text-black underline underline-offset-4"
+                        type="button"
+                        onClick={() => removeFromCart(cartKey)}
+                        className="shrink-0 text-sm text-black/55 underline underline-offset-4 hover:text-black"
                       >
                         Remove
                       </button>
                     </div>
 
-                    <div className="mt-5 flex items-center justify-between">
+                    <div className="mt-5 flex items-center justify-between gap-4">
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => setQty(i.slug + index, i.quantity - 1)}
-                          className="h-9 w-9 rounded-full border border-black/15 bg-black/5 hover:bg-black/10 transition"
+                          type="button"
+                          onClick={() => setQty(cartKey, i.quantity - 1)}
+                          className="h-9 w-9 rounded-full border border-black/15 bg-black/5 transition hover:bg-black/10"
                           aria-label="Decrease quantity"
                         >
                           -
                         </button>
 
-                        <div className="w-10 text-center text-sm">{i.quantity}</div>
+                        <div className="w-10 text-center text-sm">
+                          {i.quantity}
+                        </div>
 
                         <button
-                          onClick={() => setQty(i.slug + index, i.quantity + 1)}
-                          className="h-9 w-9 rounded-full border border-black/15 bg-black/5 hover:bg-black/10 transition"
+                          type="button"
+                          onClick={() => setQty(cartKey, i.quantity + 1)}
+                          className="h-9 w-9 rounded-full border border-black/15 bg-black/5 transition hover:bg-black/10"
                           aria-label="Increase quantity"
                         >
                           +
@@ -274,32 +349,36 @@ export default function Bag() {
               })}
 
               <button
+                type="button"
                 onClick={clearCart}
-                className="text-sm text-black/55 hover:text-black underline underline-offset-4"
+                className="text-sm text-black/55 underline underline-offset-4 hover:text-black"
               >
                 Clear bag
               </button>
             </div>
 
-            {/* SUMMARY */}
             <div className="lg:col-span-4">
-              <div className="rounded-2xl border border-black/10 bg-white p-6 sticky top-6 shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
-                <div className="text-xs text-black/55 uppercase tracking-[0.28em]">
+              <div className="sticky top-6 rounded-2xl border border-black/10 bg-white p-6 shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
+                <div className="text-xs uppercase tracking-[0.28em] text-black/55">
                   Summary
                 </div>
 
                 <div className="mt-4 flex items-center justify-between">
-                  <div className="text-black/60 text-sm">Subtotal</div>
-                  <div className="text-black/90 text-sm">{formatUSD(subtotal)}</div>
+                  <div className="text-sm text-black/60">Subtotal</div>
+                  <div className="text-sm text-black/90">
+                    {formatUSD(subtotal)}
+                  </div>
                 </div>
 
-                <div className="mt-2 text-xs text-black/50 leading-relaxed">
-                  Taxes & shipping will be calculated during checkout.
+                <div className="mt-2 text-xs leading-relaxed text-black/50">
+                  Taxes, shipping, and discounts will be calculated during
+                  checkout.
                 </div>
 
                 {hasPreorderItems && (
-                  <div className="mt-4 rounded-xl border border-black/10 bg-black/5 px-4 py-3 text-xs text-black/70 leading-relaxed">
-                    Preorder items in this bag will ship on or after their listed launch date.
+                  <div className="mt-4 rounded-xl border border-black/10 bg-black/5 px-4 py-3 text-xs leading-relaxed text-black/70">
+                    Preorder items in this bag will ship on or after their
+                    listed launch date.
                   </div>
                 )}
 
@@ -310,17 +389,18 @@ export default function Bag() {
                 )}
 
                 <button
+                  type="button"
                   onClick={onCheckout}
                   disabled={loading}
-                  className="mt-6 w-full rounded-xl border border-black/15 bg-black text-white py-3 text-sm tracking-wide hover:bg-black/90 transition disabled:opacity-60"
-                  type="button"
+                  className="mt-6 w-full rounded-xl border border-black/15 bg-black py-3 text-sm tracking-wide text-white transition hover:bg-black/90 disabled:opacity-60"
                 >
                   {loading ? "Redirecting to checkout..." : "Checkout"}
                 </button>
 
                 {!canCheckout && (
                   <div className="mt-3 text-xs text-black/55">
-                    Add Stripe Price IDs to all items you want to sell before checkout will work.
+                    Add checkout information to all items before checkout will
+                    work.
                   </div>
                 )}
               </div>

@@ -649,6 +649,31 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "initial-x-charm-bracelet": {
+      price: 35,
+
+      squareVariationId: "WQYFKVMHAWZ7VLLYRPWHZG2M",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A personalized gold charm bracelet finished with your chosen initial and a butterfly or heart charm—playful, sunlit, and uniquely yours.",
+
+      description:
+        "The Initial X Charm Bracelet is made to feel personal, golden, and effortlessly coastal. A delicate gold chain wraps softly around the wrist, finished with your selected initial and your choice of a butterfly or heart charm. The mix of personalized detail and playful charm styling gives the bracelet a sweet, meaningful feel while still keeping it light, feminine, and easy to wear.\n\nPerfect on its own or layered with your everyday favorites, this piece brings a customized touch to any jewelry stack. Whether you choose a letter for yourself, someone you love, or something symbolic, the Initial X Charm Bracelet is designed to carry a little meaning with every wear.",
+
+      details: [
+        "Delicate gold bracelet chain",
+        "Custom initial charm selection",
+        "Choice of butterfly or heart charm",
+        "Lightweight and comfortable for everyday wear",
+        "Perfect for stacking or wearing alone",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "heart-of-gold-bracelet": {
       price: 55,
 

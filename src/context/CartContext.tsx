@@ -29,6 +29,7 @@ type Customizations = {
   // Kept for compatibility in case old cart items already exist
   initial?: string;
   birthstone?: string;
+  charm?: string;
 };
 
 type CartItem = {

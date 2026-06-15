@@ -42,10 +42,12 @@ const INITIAL_BIRTHSTONE_PRODUCT_SLUGS = [
 ];
 
 const INITIAL_ONLY_PRODUCT_SLUGS = ["poppy-necklace-summer-26"];
+const INITIAL_X_CHARM_PRODUCT_SLUGS = ["initial-x-charm-bracelet"];
 
 const MAX_CHARM_SETS = 6;
 
 const INITIAL_OPTIONS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const CHARM_OPTIONS = ["Butterfly", "Heart"];
 
 const BIRTHSTONE_OPTIONS = [
   "January",
@@ -254,6 +256,9 @@ export default function ProductPage() {
   const isInitialOnlyProduct =
     !!slug && INITIAL_ONLY_PRODUCT_SLUGS.includes(slug);
 
+  const isInitialXCharmProduct =
+  !!slug && INITIAL_X_CHARM_PRODUCT_SLUGS.includes(slug);
+
   const [pendants, setPendants] = useState<Pendant[]>([
     { type: "girl", month: "jan" },
   ]);
@@ -263,6 +268,7 @@ export default function ProductPage() {
   ]);
 
   const [singleInitial, setSingleInitial] = useState("A");
+  const [selectedCharm, setSelectedCharm] = useState("Butterfly");
 
   const [previewItem, setPreviewItem] = useState<PreviewItem | null>(null);
 
@@ -895,6 +901,97 @@ export default function ProductPage() {
                 </div>
               )}
 
+              {isInitialXCharmProduct && (
+                <div className="mt-6 space-y-5">
+                  <div>
+                    <div className="text-black/60 text-xs tracking-[0.28em] uppercase">
+                      Customize Your Bracelet
+                    </div>
+
+                    <p className="mt-2 text-xs leading-relaxed text-black/50">
+                      Choose one initial and select either a butterfly or heart charm. Your
+                      selections will be attached to your order before checkout.
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-black/10 bg-[#faf7f2] p-4">
+                    <div className="text-[10px] uppercase tracking-[0.24em] text-black/45">
+                      Selected Customization
+                    </div>
+
+                    <div className="mt-1 text-sm text-black/75">
+                      {singleInitial} Initial · {selectedCharm} Charm
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="mb-3 flex items-center justify-between">
+                      <div className="text-[10px] uppercase tracking-[0.24em] text-black/45">
+                        Initial
+                      </div>
+
+                      <div className="text-xs text-black/55">
+                        Selected: {singleInitial}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-6 gap-2 sm:grid-cols-9">
+                      {INITIAL_OPTIONS.map((letter) => {
+                        const isSelected = singleInitial === letter;
+
+                        return (
+                          <button
+                            key={letter}
+                            type="button"
+                            onClick={() => setSingleInitial(letter)}
+                            className={`rounded-full border px-3 py-2 text-xs transition ${
+                              isSelected
+                                ? "border-black bg-black text-white"
+                                : "border-black/15 text-black/65 hover:border-black/50"
+                            }`}
+                          >
+                            {letter}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="mb-3 flex items-center justify-between">
+                      <div className="text-[10px] uppercase tracking-[0.24em] text-black/45">
+                        Charm
+                      </div>
+
+                      <div className="text-xs text-black/55">
+                        Selected: {selectedCharm}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2">
+                      {CHARM_OPTIONS.map((charm) => {
+                        const isSelected = selectedCharm === charm;
+
+                        return (
+                          <button
+                            key={charm}
+                            type="button"
+                            onClick={() => setSelectedCharm(charm)}
+                            className={`rounded-full border px-4 py-3 text-xs transition ${
+                              isSelected
+                                ? "border-black bg-black text-white"
+                                : "border-black/15 text-black/65 hover:border-black/50"
+                            }`}
+                          >
+                            {charm}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <AddToBagButton
                 category={category}
                 slug={slug}
@@ -910,6 +1007,8 @@ export default function ProductPage() {
                     ? { charmSets }
                     : isInitialOnlyProduct
                     ? { initial: singleInitial }
+                    : isInitialXCharmProduct
+                    ? { initial: singleInitial, charm: selectedCharm }
                     : undefined
                 }
               />

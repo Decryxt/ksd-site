@@ -17,6 +17,7 @@ type Customizations = {
   // Kept for compatibility with older cart items
   initial?: string;
   birthstone?: string;
+  charm?: string;
 };
 
 type Body = {
@@ -74,6 +75,10 @@ function buildCustomizationNote(customizations?: Customizations) {
 
   if (!charmSets.length && customizations.birthstone) {
     parts.push(`Birthstone: ${customizations.birthstone}`);
+  }
+
+  if (!charmSets.length && customizations.charm) {
+    parts.push(`Charm: ${customizations.charm}`);
   }
 
   return parts.length ? parts.join(" | ") : undefined;
