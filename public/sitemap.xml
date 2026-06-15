@@ -1,46 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
-    <loc>https://katherinesterlingdesigns.com/</loc>
-    <changefreq>weekly</changefreq>
+    <loc>https://www.katherinesterlingdesigns.com/</loc>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://katherinesterlingdesigns.com/about</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://www.katherinesterlingdesigns.com/about</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.katherinesterlingdesigns.com/contact</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.katherinesterlingdesigns.com/archive</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.katherinesterlingdesigns.com/archive/necklaces</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.katherinesterlingdesigns.com/archive/bracelets</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.katherinesterlingdesigns.com/archive/earrings</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.katherinesterlingdesigns.com/archive/high-end-pearl-designs</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.katherinesterlingdesigns.com/body-jewelry/belly-chains</loc>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://katherinesterlingdesigns.com/contact</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://www.katherinesterlingdesigns.com/body-jewelry/hand-chains</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.katherinesterlingdesigns.com/body-jewelry/anklets</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.katherinesterlingdesigns.com/privacy</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://www.katherinesterlingdesigns.com/terms</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://www.katherinesterlingdesigns.com/shipping</loc>
     <priority>0.6</priority>
   </url>
-
-  <url>
-    <loc>https://katherinesterlingdesigns.com/archive/necklaces</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://katherinesterlingdesigns.com/archive/bracelets</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://katherinesterlingdesigns.com/archive/earrings</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://katherinesterlingdesigns.com/archive/high-end-pearl-designs</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
 </urlset>

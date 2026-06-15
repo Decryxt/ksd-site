@@ -7,7 +7,7 @@ export default function Footer() {
     { label: "Necklaces", to: "/archive/necklaces" },
     { label: "Bracelets", to: "/archive/bracelets" },
     { label: "Earrings", to: "/archive/earrings" },
-    { label: "High End Pearls", to: "/archive/high-end-pearls" },
+    { label: "High End Pearls", to: "/archive/high-end-pearl-designs" },
   ];
 
   const bodyJewelryLinks = [
