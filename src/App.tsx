@@ -15,6 +15,10 @@ import HighEndPearlDesigns from "./pages/Archive/HighEndPearlDesigns";
 import NotFound from "./pages/NotFound";
 import Bag from "./pages/Bag";
 
+import PrivacyPolicy from "./pages/Policies/PrivacyPolicy";
+import Terms from "./pages/Policies/Terms";
+import ShippingReturns from "./pages/Policies/ShippingReturns";
+
 import ProductPage from "./pages/Product/ProductPage";
 
 import SiteLayout from "./components/layout/SiteLayout";
@@ -256,6 +260,60 @@ function AnimatedRoutes() {
                 transition={pageTransition}
               >
                 <Bag />
+              </motion.main>
+            </SiteLayout>
+          }
+        />
+
+        <Route
+          path="/privacy"
+          element={
+            <SiteLayout>
+              <motion.main
+                className="min-h-screen"
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <PrivacyPolicy />
+              </motion.main>
+            </SiteLayout>
+          }
+        />
+
+        <Route
+          path="/terms"
+          element={
+            <SiteLayout>
+              <motion.main
+                className="min-h-screen"
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <Terms />
+              </motion.main>
+            </SiteLayout>
+          }
+        />
+
+        <Route
+          path="/shipping"
+          element={
+            <SiteLayout>
+              <motion.main
+                className="min-h-screen"
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <ShippingReturns />
               </motion.main>
             </SiteLayout>
           }

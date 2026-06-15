@@ -11,7 +11,7 @@ export default function Footer() {
   ];
 
   const bodyJewelryLinks = [
-    { label: "Body Chains", to: "/body-jewelry/belly-chains" },
+    { label: "Belly Chains", to: "/body-jewelry/belly-chains" },
     { label: "Hand Chains", to: "/body-jewelry/hand-chains" },
     { label: "Anklets", to: "/body-jewelry/anklets" },
   ];
