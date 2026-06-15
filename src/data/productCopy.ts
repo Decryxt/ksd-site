@@ -897,6 +897,30 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "marina-earrings": {
+      price: 35,
+
+      squareVariationId: "2KJQ52EOY7MO37OTSETTW6PV",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "Tiny gold fish charms on polished 18k gold-filled hoops—playful, coastal, and made for sunlit everyday wear.",
+
+      description:
+        "Inspired by seaside docks, golden afternoons, and the easy charm of coastal living, the Marina Earrings bring a playful ocean detail to a classic everyday hoop. Tiny gold fish charms dangle from polished 18k gold-filled hoops, catching the light with subtle movement and a warm sunlit shine. Lightweight and effortless, they’re perfect for adding a touch of seaside personality to your daily stack while still feeling refined, minimal, and easy to wear.",
+
+      details: [
+        "Tiny gold fish charms",
+        "14k gold-filled hoops",
+        "Lightweight everyday wear",
+        "Playful coastal design",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "sand-dollar-earrings": {
       price: 40,
 
