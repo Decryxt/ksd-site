@@ -8,20 +8,25 @@ export default function Footer() {
     { label: "Bracelets", to: "/archive/bracelets" },
     { label: "Earrings", to: "/archive/earrings" },
     { label: "High End Pearls", to: "/archive/high-end-pearls" },
-    { label: "Body Jewelry", to: "/body-jewelry" },
   ];
 
-  const collectionLinks = [
-    { label: "Southern Solstice", to: "/collection/southern-solstice" },
-    { label: "Golden Hour Muse", to: "/collection/golden-hour-muse" },
-    { label: "One of One", to: "/collection/one-of-one" },
+  const bodyJewelryLinks = [
+    { label: "Body Chains", to: "/body-jewelry/body-chains" },
+    { label: "Hand Chains", to: "/body-jewelry/hand-chains" },
+    { label: "Anklets", to: "/body-jewelry/anklets" },
+  ];
+
+  const collectionLabels = [
+    "Southern Solstice",
+    "Golden Hour Muse",
+    "One of One",
   ];
 
   return (
     <footer className="relative overflow-hidden border-t border-black/10 bg-[#fbf7ef] text-black">
       <style>
         {`
-          @keyframes ksd-border-drift {
+          @keyframes ksd-gradient-border {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
@@ -32,34 +37,23 @@ export default function Footer() {
             50% { transform: translateY(-8px); opacity: 0.85; }
           }
 
-          .ksd-animated-border {
+          .ksd-footer-shell {
             position: relative;
-            border-radius: 1.5rem;
-            isolation: isolate;
-          }
-
-          .ksd-animated-border::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            padding: 1px;
-            border-radius: inherit;
-            background: linear-gradient(
-              120deg,
-              rgba(212, 178, 106, 0.25),
-              rgba(0, 0, 0, 0.10),
-              rgba(175, 126, 78, 0.28),
-              rgba(212, 178, 106, 0.25)
-            );
-            background-size: 250% 250%;
-            animation: ksd-border-drift 8s ease infinite;
-            -webkit-mask:
-              linear-gradient(#fff 0 0) content-box,
-              linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            z-index: -1;
+            border-radius: 1.75rem;
+            background:
+              linear-gradient(rgba(255,255,255,0.78), rgba(255,255,255,0.78)) padding-box,
+              linear-gradient(
+                120deg,
+                rgba(212, 178, 106, 0.95),
+                rgba(251, 247, 239, 0.75),
+                rgba(151, 97, 61, 0.70),
+                rgba(232, 205, 143, 0.95),
+                rgba(72, 54, 39, 0.28),
+                rgba(212, 178, 106, 0.95)
+              ) border-box;
+            border: 1.5px solid transparent;
+            background-size: 100% 100%, 320% 320%;
+            animation: ksd-gradient-border 9s ease infinite;
           }
 
           .ksd-footer-orb {
@@ -68,12 +62,11 @@ export default function Footer() {
         `}
       </style>
 
-      {/* Soft background detail */}
       <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-[#d4b26a]/10 blur-3xl ksd-footer-orb" />
       <div className="pointer-events-none absolute -right-24 bottom-8 h-80 w-80 rounded-full bg-[#9b6b3d]/10 blur-3xl ksd-footer-orb" />
 
       <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-20">
-        <div className="ksd-animated-border bg-white/55 p-6 shadow-[0_20px_70px_rgba(0,0,0,0.04)] backdrop-blur-sm md:p-8">
+        <div className="ksd-footer-shell p-6 shadow-[0_20px_70px_rgba(0,0,0,0.05)] backdrop-blur-sm md:p-8">
           <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
             {/* Brand */}
             <div className="md:col-span-5">
@@ -125,14 +118,14 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Collections */}
+            {/* Body Jewelry */}
             <div className="md:col-span-2">
               <div className="text-[11px] uppercase tracking-[0.28em] text-black/45">
-                Collections
+                Body Jewelry
               </div>
 
               <div className="mt-5 space-y-3 text-sm text-black/75">
-                {collectionLinks.map((link) => (
+                {bodyJewelryLinks.map((link) => (
                   <Link
                     key={link.to}
                     to={link.to}
@@ -140,6 +133,18 @@ export default function Footer() {
                   >
                     {link.label}
                   </Link>
+                ))}
+              </div>
+
+              <div className="mt-8 text-[11px] uppercase tracking-[0.28em] text-black/45">
+                Collections
+              </div>
+
+              <div className="mt-5 space-y-3 text-sm text-black/45">
+                {collectionLabels.map((label) => (
+                  <span key={label} className="block cursor-default">
+                    {label}
+                  </span>
                 ))}
               </div>
             </div>
