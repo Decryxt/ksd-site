@@ -955,7 +955,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       status: "active",
 
-      collection: "golden-hour-muse",
+      collection: "southern-solstice",
 
       shortDescription:
         "A delicate gold anklet finished with a radiant sand dollar charm—sunlit, coastal, and effortlessly feminine.",
