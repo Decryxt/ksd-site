@@ -120,6 +120,78 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "sacred-heart-necklace": {
+      price: 35,
+
+      squareVariationId: "5S5K73WKSRA4PN44ICTUYP22",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A textured sacred heart pendant with a deep garnet center, suspended from an 18k gold-filled chain for a romantic, meaningful everyday piece.",
+
+      description:
+        "The Sacred Heart Necklace is a romantic statement of warmth, devotion, and timeless beauty. Featuring a detailed textured heart pendant centered with a rich garnet stone, this piece brings a vintage-inspired feel to an effortless everyday necklace. Finished on an 18k gold-filled chain, it catches the light beautifully whether worn alone as a meaningful focal piece or layered into your favorite golden stack.",
+
+      details: [
+        "Sacred heart pendant design",
+        "Garnet stone center",
+        "18k gold-filled chain",
+        "Textured vintage-inspired finish",
+        "Perfect for layering or wearing alone",
+      ],
+    },
+
+    "the-ever-necklace": {
+      price: 45,
+
+      squareVariationId: "EV7VGRILYCTI6YQCAMSLVBFJ",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A colorful gemstone necklace finished with a radiant sacred heart pendant—bold, romantic, and made to bring warmth to every outfit.",
+
+      description:
+        "The Ever Necklace is made for golden days, color-filled moments, and jewelry that feels like it carries a story. Soft pink, coral, orange, and lavender gemstone beads create a warm sunset-inspired strand, finished with a radiant sacred heart pendant in gold. Playful yet meaningful, this necklace brings a little vintage romance to your stack and makes a beautiful statement worn on its own.",
+
+      details: [
+        "Multicolor gemstone bead strand",
+        "Pink, coral, orange, and lavender tones",
+        "Radiant sacred heart pendant",
+        "Gold-toned clasp and findings",
+        "One-of-a-kind statement piece",
+      ],
+    },
+
+    "flutter-necklace": {
+      price: 35,
+
+      squareVariationId: "FXNVWEQVO25S4SE6XT27EXX4",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A sparkling butterfly pendant on an 18k gold-filled chain—delicate, feminine, and made to bring a little lightness to your everyday stack.",
+
+      description:
+        "The Flutter Necklace captures the soft, playful beauty of a butterfly in a piece designed for everyday wear. A shimmering pavé butterfly pendant hangs from an 18k gold-filled chain, catching the light with every movement. Delicate enough to layer and special enough to wear on its own, it adds a feminine golden touch to everything from sunlit dresses to your everyday basics.",
+
+      details: [
+        "Pavé butterfly pendant",
+        "18k gold-filled chain",
+        "Delicate sparkling finish",
+        "Lightweight everyday wear",
+        "Perfect for layering or wearing alone",
+      ],
+    },
+
     "the-signature-necklace": {
       price: 60,
 
