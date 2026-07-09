@@ -270,7 +270,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "Q5CPCVIU4ZIL2DUHYFJ6ZAQG",
 
-      status: "active",
+      status: "sold-out",
 
       shortDescription:
         "A delicate gold beaded choker centered with a luminous pearl cross—soft, radiant, and quietly statement-making.",
