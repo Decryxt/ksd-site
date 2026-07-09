@@ -168,6 +168,54 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "turquoise-paradise-necklace": {
+      price: 60,
+
+      squareVariationId: "PUEFCZQ3WFTEBYWQ2YRGCAVB",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "Turquoise-inspired beads paired with polished gold accents—bold, sunlit, and made for a dreamy coastal-western stack.",
+
+      description:
+        "The Turquoise Paradise Necklace is made for warm days, golden light, and effortless statement styling. Vibrant turquoise-inspired beads are paired with polished gold accents for a bold yet easy-to-wear design that feels coastal, western, and sun-soaked all at once. Finished with a balanced beaded pattern and radiant shine, this necklace brings a pop of color to any outfit and looks beautiful worn alone or layered into your everyday stack.",
+
+      details: [
+        "Turquoise-inspired bead strand",
+        "Polished gold accent beads",
+        "Coastal-western statement design",
+        "Bold pop of color",
+        "Hand-assembled in small batches",
+      ],
+    },
+
+    "gunsmoke-necklace": {
+      price: 65,
+
+      squareVariationId: "EYJTAORE3VMD7QSNMKA35GKD",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "Turquoise-inspired beads mixed with smoky black, silver, and polished gold accents—bold, western, and made for statement layering.",
+
+      description:
+        "The Gunsmoke Necklace is made for bold western styling with a sunlit coastal edge. Turquoise-inspired beads are paired with smoky black and silver-toned accents, then finished with polished gold beads for a rich mix of color, shine, and texture. Striking without feeling overdone, this necklace brings a rugged yet feminine statement to your stack and looks beautiful worn alone or layered with your everyday favorites.",
+
+      details: [
+        "Turquoise-inspired bead strand",
+        "Smoky black and silver-toned accents",
+        "Polished gold accent beads",
+        "Bold western statement design",
+        "One-of-a-kind handcrafted piece",
+      ],
+    },
+
     "flutter-necklace": {
       price: 35,
 
@@ -842,6 +890,30 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
         "Pavé-set crystal stud",
         "14k gold-filled setting",
         "Elegant lightweight drop design",
+        "Hand-assembled in small batches",
+      ],
+    },
+
+    "cross-earrings": {
+      price: 35,
+
+      squareVariationId: "S3PH5GPELT4BKUAQGUQR2OPG",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "Delicate gold huggie hoops finished with sparkling cross charms—simple, meaningful, and perfect for everyday shine.",
+
+      description:
+        "The Cross Earrings are a delicate everyday pair with a meaningful touch. Polished gold huggie hoops hold dainty sparkling cross charms that catch the light with soft movement and subtle shine. Lightweight, feminine, and easy to style, they’re perfect worn alone for a simple statement or stacked with your favorite studs for a golden layered look.",
+
+      details: [
+        "Gold huggie hoop earrings",
+        "Sparkling cross charms",
+        "Lightweight everyday wear",
+        "Dainty faith-inspired design",
         "Hand-assembled in small batches",
       ],
     },
