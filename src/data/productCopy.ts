@@ -309,6 +309,56 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "sardine-dreams-necklace": {
+      price: 55,
+
+      squareVariationId: "JJGMDIQAUX4DTD6BG7PCPX35",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A polished gold chain finished with a vintage-inspired sardine charm and luminous pearl drop—playful, coastal, and effortlessly golden.",
+
+      description:
+        "The Sardine Dreams Necklace captures the playful spirit of sun-soaked coastlines and long summer days by the water. A polished gold chain is finished with a detailed sardine charm and an organic pearl drop, creating an unexpected pairing that feels both whimsical and refined. The mixed charms add movement, texture, and a collected seaside feel, while the warm golden finish makes it easy to style alone or layered with your favorite necklaces. Distinctive yet effortlessly wearable, it’s a coastal statement piece made for everyday adventures.",
+
+      details: [
+        "Polished gold chain",
+        "Vintage-inspired sardine charm",
+        "Organic pearl drop charm",
+        "Safety-pin-style charm holder",
+        "Playful coastal-inspired design",
+        "Hand-assembled in small batches",
+      ],
+    },
+
+    "moonstone-pendant-necklace": {
+      price: 75,
+
+      squareVariationId: "Z4KXTX25GHHIM47BA7PFV2WU",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A delicate gold necklace featuring a textured circular pendant centered with luminous moonstone—timeless, feminine, and quietly radiant.",
+
+      description:
+        "The Moonstone Pendant Necklace is natural stone imported from India. Pairs an understated golden silhouette with the soft, natural glow of moonstone. Suspended from a delicate gold chain, the textured circular pendant features a luminous moonstone center that catches the light with an ethereal shimmer. Its organic detailing gives the piece a vintage, heirloom-inspired feel while remaining refined enough for everyday wear. Elegant on its own and effortless to layer, it brings a subtle touch of warmth, meaning, and celestial beauty to any look.",
+
+      details: [
+        "Delicate gold chain",
+        "Textured circular pendant",
+        "Luminous moonstone center",
+        "Vintage-inspired detailing",
+        "Designed for everyday wear or layering",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "the-runway-necklace": {
       price: 50,
 
@@ -1168,6 +1218,31 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
   },
 
   "high-end-pearls": {
+    "strung-aussie-baroque-pearl-necklace": {
+      price: 300,
+
+      squareVariationId: "L5W6AMGZOSOS7NF7N47EGW2D",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A hand-strung necklace of luminous Australian baroque pearls—organic, heirloom-inspired, and naturally one of a kind.",
+
+      description:
+        "The Strung Aussie Baroque Pearl Necklace celebrates the natural beauty and individuality of Australian pearls. Each luminous baroque pearl is carefully selected and hand-strung, creating an organic silhouette filled with subtle variations in shape, texture, and iridescent glow. The softly irregular pearls give the necklace a relaxed, heirloom-inspired character while still feeling polished and elevated. Timeless yet distinctly coastal, it is a statement piece designed to be treasured for years and worn everywhere from sunlit celebrations to effortless everyday moments.",
+
+      details: [
+        "Genuine Australian baroque pearls",
+        "Individually hand-strung",
+        "Naturally irregular pearl shapes",
+        "Luminous iridescent finish",
+        "Each necklace is uniquely one of a kind",
+        "Handcrafted in small batches",
+      ],
+    },
+
     "pearl-bead-necklace": {
       price: 150,
 
