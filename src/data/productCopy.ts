@@ -53,7 +53,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "KZISXRWMZAXJUZUTHJT23HXM",
 
-      status: "active",
+      status: "sold-out",
 
       shortDescription:
         "An organically shaped freshwater pearl cross suspended on a delicate 14k gold-filled chain—bold, luminous, and reverently refined.",
@@ -75,7 +75,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "OL2BBVF6OS44RWFUF7EAPCIG",
 
-      status: "active",
+      status: "sold-out",
       
       collection: "golden-hour-muse",
 
@@ -149,7 +149,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "EV7VGRILYCTI6YQCAMSLVBFJ",
 
-      status: "active",
+      status: "sold-out",
 
       collection: "southern-solstice",
 
@@ -173,7 +173,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "PUEFCZQ3WFTEBYWQ2YRGCAVB",
 
-      status: "active",
+      status: "sold-out",
 
       collection: "southern-solstice",
 
@@ -292,7 +292,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "3EMPQEH47WAITLOOUSBKGPL2",
 
-      status: "active",
+      status: "sold-out",
 
       shortDescription:
         "An organic freshwater pearl talisman set with delicate gold and gemstone details—textural, luminous, and quietly symbolic.",
@@ -364,7 +364,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "RKR7BNTX6CDK4DMXRF5LB2VO",
 
-      status: "active",
+      status: "sold-out",
 
       shortDescription:
         "A gold necklace anchored by a cluster of elongated baroque pearls—bold, luminous, and effortlessly editorial.",
@@ -485,7 +485,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "3A5CK3PFEDGOLCTQMZ5LZG34",
 
-      status: "active",
+      status: "sold-out",
 
       shortDescription:
         "A refined vertical strand pendant on a delicate 14k gold-filled chain—minimal, luminous, and quietly elevated.",
@@ -730,7 +730,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "YXT2BH7CLTR2HPV6ZHGHHI6V",
 
-      status: "active",
+      status: "sold-out",
 
       shortDescription:
         "A polished gold-bead bracelet finished with a luminous mother-of-pearl star—coastal, celestial, and effortlessly refined.",
@@ -778,7 +778,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "OTUGCX2U6AEFPQHETEWCLCIO",
 
-      status: "active",
+      status: "sold-out",
 
       shortDescription:
         "Organic freshwater pearls centered with a polished gold floral charm—soft, luminous, and quietly symbolic.",
@@ -824,7 +824,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "WQYFKVMHAWZ7VLLYRPWHZG2M",
 
-      status: "active",
+      status: "sold-out",
 
       collection: "southern-solstice",
 
@@ -899,7 +899,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "HX7PE4YOOECG6M6BADDURLVM",
 
-      status: "active",
+      status: "sold-out",
 
       collection: "golden-hour-muse",
 
@@ -925,7 +925,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "E3R425X2BMCIBB2VECXUF3RH",
 
-      status: "active",
+      status: "sold-out",
 
       collection: "golden-hour-muse",
 
@@ -973,7 +973,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "IJUQQSO6WVTMWDPJIW3SX7SN",
 
-      status: "active",
+      status: "sold-out",
 
       collection: "golden-hour-muse",
 
@@ -999,7 +999,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "ZUK2LP6Q5AZSWI4LP2V5I7S4",
 
-      status: "active",
+      status: "sold-out",
       collection: "golden-hour-muse",
 
       shortDescription:
@@ -1024,7 +1024,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "3MNZ6DT3LXFWZFFHIOUGKLBH",
 
-      status: "active",
+      status: "sold-out",
       collection: "golden-hour-muse",
 
       shortDescription:
@@ -1074,7 +1074,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "SHNPK6ZJXOYM3Y7EEOYSNUKM",
 
-      status: "active",
+      status: "sold-out",
 
       shortDescription:
         "Delicate mother-of-pearl stars suspended from polished 14k gold-filled hoops—soft, luminous, and celestial.",
@@ -1122,7 +1122,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "IFEGBZVPACINTIN7LYGBIVDL",
 
-      status: "active",
+      status: "sold-out",
 
       shortDescription:
         "Tiny gold sand dollar drops on polished 14k gold-filled hoops—sunlit, coastal, and effortlessly wearable.",
@@ -1169,7 +1169,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "EI7ZGQLOPJ4UXVNGXGPZITQT",
 
-      status: "active",
+      status: "sold-out",
 
       collection: "golden-hour-muse",
 
@@ -1196,7 +1196,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "YQ2JPYBQ574MXCBHWEQ63MRK",
 
-      status: "active",
+      status: "sold-out",
 
       collection: "southern-solstice",
 
@@ -1250,7 +1250,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "UTFUZDA572W524XQXBAUTFP4",
 
-      status: "active",
+      status: "sold-out",
 
       shortDescription:
         "A refined strand of luminous freshwater pearls accented with gold and subtle blue detailing—elevated, timeless, and quietly statement-making.",
