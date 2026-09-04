@@ -208,7 +208,7 @@ export default function Home() {
                 className="mt-6 text-5xl uppercase leading-[0.9] tracking-[0.04em] text-[#4a2b1d] md:text-7xl"
                 style={{ fontFamily: '"Durango Western", serif' }}
               >
-                She&apos;s From
+                Shes From
                 <br />
                 Texas
               </h2>
