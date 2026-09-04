@@ -63,7 +63,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/35" />
 
         <motion.div
-          className="absolute inset-0 flex items-center justify-center"
+          className="absolute inset-0 flex items-center justify-center -translate-y-10"
           style={{ opacity: overlayOpacity, y: overlayY }}
         >
           <div className="flex flex-col items-center px-6 text-center">
@@ -75,7 +75,7 @@ export default function Home() {
             />
 
             <p className="mt-4 text-[11px] uppercase tracking-[0.34em] text-white/90">
-              Coastal luxury jewelry, refined in detail.
+              Hand crafted luxury jewelry, refined in detail.
             </p>
           </div>
         </motion.div>
