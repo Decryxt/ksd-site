@@ -334,6 +334,31 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "shes-from-texas-necklace": {
+      price: 45,
+
+      squareVariationId: "P5TJI4Y7RBGX46EAYQWX6EON",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A gold-filled chain featuring a stainless steel 'She's From Texas' pendant, finished with a CZ accent for a subtle touch of sparkle and Texas pride.",
+
+      description:
+        "The She's From Texas Necklace is a timeless nod to Southern roots and Texas pride. A classic gold-filled chain is paired with a stainless steel pendant engraved with 'She's From Texas,' accented by a delicate CZ stone set in the center of the 'O' in 'From.' Designed for effortless everyday wear, the necklace comes with a 20-inch standard chain and a 2-inch extender for an adjustable fit. The stainless steel pendant is made to resist tarnishing, keeping this statement piece shining season after season.",
+
+      details: [
+        "Gold-filled 20-inch chain",
+        "2-inch extender included",
+        "Stainless steel 'She's From Texas' pendant",
+        "CZ accent in the 'O' of 'From'",
+        "Tarnish-resistant pendant",
+        "Southern-inspired statement design",
+      ],
+    },
+
     "moonstone-pendant-necklace": {
       price: 75,
 
