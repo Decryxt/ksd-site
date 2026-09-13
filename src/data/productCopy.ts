@@ -10,10 +10,15 @@ export type ProductCopy = {
   squareCheckoutUrl?: string;
   squareVariationId?: string;
   sku?: string;
+
+  variants?: {
+    name: string;
+    squareVariationId: string;
+  }[];
+
   status?: "active" | "coming-soon" | "sold-out" | "preorder";
   preorderShipDate?: string;
 
-  // NEW
   collection?: string;
 };
 
@@ -403,6 +408,40 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
         "Each pearl is naturally unique in shape",
         "Sculptural, statement silhouette",
         "Hand-assembled in small batches",
+      ],
+    },
+
+    "sahara-necklace": {
+      price: 100,
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A sculptural crocodile pendant, hand carved, and paired with the signature Poppy Necklace, sunlit, and effortlessly Western.",
+
+      description:
+        "The Sahara Crocodile Necklace brings a touch of the untamed to your jewelry collection. A sculptural crocodile pendant is paired with our signature Poppy Necklace, creating a statement piece that feels earthy, elevated, and effortlessly bold. Available in two distinctive shades, choose luminous Turquoise for a softer sunlit look or deep Lapis for a richer, more dramatic finish.",
+
+      details: [
+        "Sculptural crocodile pendant",
+        "Gold beaded design",
+        "Available in Turquoise or Lapis",
+        "Western-inspired statement design",
+        "Hand-assembled in small batches",
+        "Hand carved to perfection",
+      ],
+
+      variants: [
+        {
+          name: "Turquoise",
+          squareVariationId: "QWTF2EGMKVHI6IASXO4SIQKJ",
+        },
+        {
+          name: "Lapis",
+          squareVariationId: "2JQSAINMNKTO5552C2AM277F",
+        },
       ],
     },
 

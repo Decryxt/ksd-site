@@ -1,5 +1,5 @@
 // src/pages/Product/ProductPage.tsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
@@ -272,6 +272,9 @@ export default function ProductPage() {
 
   const [previewItem, setPreviewItem] = useState<PreviewItem | null>(null);
 
+  const [selectedVariantName, setSelectedVariantName] =
+    useState<string | null>(null);
+
   const titleOpacity = useTransform(scrollY, [0, 80], [1, 0]);
   const titleY = useTransform(scrollY, [0, 120], [0, -18]);
 
@@ -329,6 +332,22 @@ export default function ProductPage() {
   const custom = (
     productCopy as Record<string, Record<string, any> | undefined>
   )?.[category]?.[slug];
+
+  const productVariants = Array.isArray(custom?.variants)
+    ? custom.variants
+    : [];
+
+  const selectedVariant =
+    productVariants.find(
+      (variant: { name: string }) => variant.name === selectedVariantName
+    ) ?? productVariants[0];
+
+  const selectedSquareVariationId =
+    selectedVariant?.squareVariationId ?? custom?.squareVariationId;
+
+  useEffect(() => {
+    setSelectedVariantName(null);
+  }, [slug]);
 
   const fallback = isBaseCategory(category)
     ? getFallbackCopy(category)
@@ -1038,6 +1057,40 @@ export default function ProductPage() {
                 </div>
               )}
 
+              {productVariants.length > 0 ? (
+                <div className="mt-6">
+                  <p className="mb-3 text-xs uppercase tracking-[0.22em] text-black/60">
+                    Color
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    {productVariants.map(
+                      (variant: { name: string; squareVariationId: string }) => {
+                        const isSelected =
+                          (selectedVariant?.name ?? productVariants[0]?.name) ===
+                          variant.name;
+
+                        return (
+                          <button
+                            key={variant.name}
+                            type="button"
+                            onClick={() => setSelectedVariantName(variant.name)}
+                            className={[
+                              "rounded-full border px-5 py-3 text-sm tracking-[0.08em] transition",
+                              isSelected
+                                ? "border-black bg-black text-white"
+                                : "border-black/20 bg-white text-black hover:border-black",
+                            ].join(" ")}
+                          >
+                            {variant.name}
+                          </button>
+                        );
+                      }
+                    )}
+                  </div>
+                </div>
+              ) : null}
+
               <AddToBagButton
                 category={category}
                 slug={slug}
@@ -1045,7 +1098,7 @@ export default function ProductPage() {
                 price={priceNumber}
                 status={custom?.status}
                 preorderShipDate={custom?.preorderShipDate}
-                squareVariationId={custom?.squareVariationId}
+                squareVariationId={selectedSquareVariationId}
                 customizations={
                   isFamilyNecklace
                     ? { pendants }
