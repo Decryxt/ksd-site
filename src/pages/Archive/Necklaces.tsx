@@ -85,7 +85,7 @@ export default function Necklaces() {
     <div className="bg-white text-black">
       <CategoryHero
         title="Necklaces"
-        subtitle="Layers • Light-catching details • Coastal femininity"
+        subtitle="Handcrafted pearl, gold-filled, coastal & Western-inspired necklaces"
         imageUrl={heroNecklace}
         collections={collections}
         activeCollection={activeCollection}
