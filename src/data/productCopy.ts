@@ -738,6 +738,31 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "sedona-bracelet": {
+      price: 50,
+
+      squareVariationId: "3JRESX5772A2SZMEIJJELFMU",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A sun-warmed beaded bracelet pairing luminous turquoise accents with polished gold-filled beads—bold, effortless, and inspired by the Southwest.",
+
+      description:
+        "The Sedona Bracelet captures the sunlit beauty and earthy character of the Southwest. Vibrant turquoise-toned beads are paired with polished gold accents in a balanced pattern that feels both bold and effortlessly wearable. The contrast between the cool turquoise and warm golden tones creates a striking desert-inspired palette, while the textured beadwork adds depth and movement to the design. Easy to wear on its own or layered into a stack, Sedona brings a radiant Southwestern spirit to everyday styling.",
+
+      details: [
+        "Turquoise-toned beaded design",
+        "Polished gold filled beads",
+        "Textured ribbed turquoise beads",
+        "Warm Southwestern-inspired color palette",
+        "Comfortable stretch bracelet silhouette",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "queen-of-hearts-bracelet": {
       price: 30,
 
