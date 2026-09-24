@@ -130,7 +130,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "5S5K73WKSRA4PN44ICTUYP22",
 
-      status: "active",
+      status: "sold-out",
 
       collection: "southern-solstice",
 
@@ -154,7 +154,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "EV7VGRILYCTI6YQCAMSLVBFJ",
 
-      status: "sold-out",
+      status: "active",
 
       collection: "southern-solstice",
 
@@ -202,7 +202,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "EYJTAORE3VMD7QSNMKA35GKD",
 
-      status: "active",
+      status: "sold-out",
 
       collection: "southern-solstice",
 
