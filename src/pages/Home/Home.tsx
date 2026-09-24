@@ -11,9 +11,9 @@ import { useNavigate } from "react-router-dom";
 import hero from "../../assets/MainHero.png";
 import heroLogo from "../../assets/KSDTransparentWhite.png";
 
-import MoonstonePendant from "../../assets/products/necklace/Moonstone Pendant Necklace.jpg";
+import MoonstonePendant from "../../assets/products/necklaces/Moonstone Pendant Necklace.jpg";
 import goldenSpur from "../../assets/products/bracelets/Golden Spur Bracelet.jpg";
-import FlutterNecklace from "../../assets/products/necklaces/Flutter Necklace.png";
+import FlutterNecklace from "../../assets/products/necklaces/Flutter Necklace.jpg";
 import shesFromTexas from "../../assets/products/necklaces/Shes From Texas Necklace.jpg";
 
 const luxuryEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
