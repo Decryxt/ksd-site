@@ -11,9 +11,9 @@ import { useNavigate } from "react-router-dom";
 import hero from "../../assets/MainHero.png";
 import heroLogo from "../../assets/KSDTransparentWhite.png";
 
-import queenOfHearts from "../../assets/products/bracelets/Queen Of Hearts Bracelet.jpg";
+import MoonstonePendant from "../../assets/products/necklace/Moonstone Pendant Necklace.jpg";
 import goldenSpur from "../../assets/products/bracelets/Golden Spur Bracelet.jpg";
-import lydiaNecklace from "../../assets/products/necklaces/Lydia Necklace.png";
+import FlutterNecklace from "../../assets/products/necklaces/Flutter Necklace.png";
 import shesFromTexas from "../../assets/products/necklaces/Shes From Texas Necklace.jpg";
 
 const luxuryEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -302,8 +302,8 @@ export default function Home() {
                   className="absolute left-[9%] top-[10%] h-[52%] w-[58%] overflow-hidden rounded-[1.5rem] border border-white/25 bg-white shadow-[0_22px_70px_rgba(0,0,0,0.28)]"
                 >
                   <img
-                    src={lydiaNecklace}
-                    alt="Lydia Necklace"
+                    src={FlutterNecklace}
+                    alt="Flutter Necklace"
                     className="h-full w-full object-cover"
                   />
                 </motion.div>
@@ -330,8 +330,8 @@ export default function Home() {
                   className="absolute bottom-[8%] left-[10%] h-[34%] w-[36%] overflow-hidden rounded-full border border-white/30 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.32)]"
                 >
                   <img
-                    src={queenOfHearts}
-                    alt="Queen Of Hearts Bracelet"
+                    src={MoonstonePendant}
+                    alt="Moonstone Pendant Necklace"
                     className="h-full w-full object-cover"
                   />
                 </motion.div>
@@ -417,7 +417,7 @@ export default function Home() {
                     className="mt-7 grid grid-cols-1 gap-3 text-xs uppercase tracking-[0.22em] text-black/45 sm:grid-cols-3"
                   >
                     <div className="rounded-full border border-[#c77f45]/25 px-4 py-3 text-center">
-                      Lydia
+                      Flutter
                     </div>
 
                     <div className="rounded-full border border-[#c77f45]/25 px-4 py-3 text-center">
@@ -425,7 +425,7 @@ export default function Home() {
                     </div>
 
                     <div className="rounded-full border border-[#c77f45]/25 px-4 py-3 text-center">
-                      Queen Of Hearts
+                      Moonstone Pendant
                     </div>
                   </motion.div>
 
