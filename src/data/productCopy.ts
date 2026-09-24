@@ -499,7 +499,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "RW64DN2GV66LHU3HUWUKJCD7",
 
-      status: "active",
+      status: "sold-out",
 
       collection: "southern-solstice",
 
@@ -623,7 +623,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "6M27ETVVFB44CTZ5V6OJ55XA",
 
-      status: "active",
+      status: "sold-out",
 
       shortDescription:
         "A delicate freshwater pearl star pendant on a fine 14k gold-filled chain—softly luminous and effortlessly celestial.",
@@ -649,7 +649,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "NDJ4RMTRTVZ3BVM4CC3FICTH",
 
-      status: "active",
+      status: "sold-out",
 
       shortDescription:
         "A polished gold-bead bracelet with graduated sizing—bold, minimal, and effortlessly elevated.",
@@ -694,7 +694,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "NMNHS7GZDT7VXLWHMZ7OKQMA",
 
-      status: "active",
+      status: "sold-out",
 
       collection: "golden-hour-muse",
 
@@ -743,7 +743,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       squareVariationId: "CSSVFELJBB3KFIGNRUTBQQPS",
 
-      status: "active",
+      status: "sold-out",
 
       collection: "southern-solstice",
 
