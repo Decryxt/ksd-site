@@ -780,7 +780,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
 
       details: [
         "Turquoise-toned natural stone beads",
-        "Gold-filled accent beads",
+        "18K Gold-filled accent beads",
         "Textured gold-filled bead detailing",
         "Organic stone variations",
         "Southwestern-inspired design",
@@ -805,7 +805,7 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
         "The Padme Bracelet is a refined take on the classic beaded bracelet, designed to let the warmth of gold take center stage. A delicate arrangement of polished gold-filled beads creates subtle variation and dimension, catching the light with every movement. Minimal yet distinctive, its understated silhouette makes it effortless to wear alone or layer into a curated bracelet stack. Timeless, feminine, and quietly radiant, Padme brings an elevated golden touch to everyday styling.",
 
       details: [
-        "Gold-filled beaded bracelet",
+        "18K Gold-filled beaded bracelet",
         "Mix of polished and textured beads",
         "Delicate, minimalist silhouette",
         "Warm luminous gold finish",
