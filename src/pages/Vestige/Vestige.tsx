@@ -7,7 +7,14 @@ const vestigeImages = import.meta.glob(
   { eager: true, import: "default" }
 ) as Record<string, string>;
 
-type ProductType = "necklaces" | "bracelets" | "earrings" | "body-jewelry";
+type VestigeCategory =
+  | "necklaces"
+  | "bracelets"
+  | "earrings"
+  | "high-end-pearls"
+  | "belly-chains"
+  | "hand-chains"
+  | "anklets";
 
 function titleFromFilename(filePath: string) {
   const file = filePath.split("/").pop() || "";
@@ -28,6 +35,31 @@ function slugFromFilename(filePath: string) {
     .replace(/^-+|-+$/g, "");
 }
 
+function categoryLabel(category: VestigeCategory) {
+  switch (category) {
+    case "necklaces":
+      return "Necklaces";
+
+    case "bracelets":
+      return "Bracelets";
+
+    case "earrings":
+      return "Earrings";
+
+    case "high-end-pearls":
+      return "High End Pearl Designs";
+
+    case "belly-chains":
+      return "Belly Chains";
+
+    case "hand-chains":
+      return "Hand Chains";
+
+    case "anklets":
+      return "Anklets";
+  }
+}
+
 function collectionLabelFromKey(key: string) {
   switch (key) {
     case "golden-hour-muse":
@@ -46,48 +78,45 @@ function collectionLabelFromKey(key: string) {
   }
 }
 
-function productTypeLabel(type: ProductType) {
-  switch (type) {
-    case "necklaces":
-      return "Necklaces";
-
-    case "bracelets":
-      return "Bracelets";
-
-    case "earrings":
-      return "Earrings";
-
-    case "body-jewelry":
-      return "Body Jewelry";
-  }
-}
-
 export default function Vestige() {
-  const [activeType, setActiveType] = useState("all");
+  const [activeCategory, setActiveCategory] = useState<
+    VestigeCategory | "all"
+  >("all");
+
   const [activeCollection, setActiveCollection] = useState("all");
 
   const allItems = useMemo(() => {
+    const categories: VestigeCategory[] = [
+      "necklaces",
+      "bracelets",
+      "earrings",
+      "high-end-pearls",
+      "belly-chains",
+      "hand-chains",
+      "anklets",
+    ];
+
     return Object.entries(vestigeImages)
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([path, url], idx) => {
         const slug = slugFromFilename(path);
 
-        const productMeta =
-          productCopy.necklaces?.[slug] ??
-          productCopy.bracelets?.[slug] ??
-          productCopy.earrings?.[slug] ??
-          productCopy["body-jewelry"]?.[slug];
+        let category: VestigeCategory | undefined;
+        let productMeta:
+          | (typeof productCopy.necklaces extends
+              Record<string, infer T>
+              ? T
+              : never)
+          | undefined;
 
-        let type: ProductType | undefined;
+        for (const candidate of categories) {
+          const categoryData = productCopy[candidate];
 
-        if (productCopy.necklaces?.[slug]) {
-          type = "necklaces";
-        } else if (productCopy.bracelets?.[slug]) {
-          type = "bracelets";
-        } else if (productCopy.earrings?.[slug]) {
-          type = "earrings";
-        } else if (productCopy["body-jewelry"]?.[slug]) {
-          type = "body-jewelry";
+          if (categoryData?.[slug]) {
+            category = candidate;
+            productMeta = categoryData[slug];
+            break;
+          }
         }
 
         return {
@@ -95,8 +124,10 @@ export default function Vestige() {
           slug,
           name: titleFromFilename(path),
           imageUrl: url,
-          type,
-          typeLabel: type ? productTypeLabel(type) : "Jewelry",
+          category,
+          categoryLabel: category
+            ? categoryLabel(category)
+            : "Jewelry",
           collection: productMeta?.collection,
           collectionLabel: productMeta?.collection
             ? collectionLabelFromKey(productMeta.collection)
@@ -108,14 +139,14 @@ export default function Vestige() {
       });
   }, []);
 
-  const typeOptions = useMemo(() => {
+  const categoryOptions = useMemo(() => {
     return Array.from(
       new Set(
         allItems
-          .map((item) => item.type)
+          .map((item) => item.category)
           .filter(Boolean)
       )
-    ) as ProductType[];
+    ) as VestigeCategory[];
   }, [allItems]);
 
   const collectionOptions = useMemo(() => {
@@ -130,25 +161,30 @@ export default function Vestige() {
 
   const filteredItems = useMemo(() => {
     return allItems.filter((item) => {
-      const typeMatches =
-        activeType === "all" || item.type === activeType;
+      const categoryMatches =
+        activeCategory === "all" ||
+        item.category === activeCategory;
 
       const collectionMatches =
         activeCollection === "all" ||
         item.collection === activeCollection;
 
-      return typeMatches && collectionMatches;
+      return categoryMatches && collectionMatches;
     });
-  }, [activeType, activeCollection, allItems]);
+  }, [activeCategory, activeCollection, allItems]);
 
   return (
     <div className="min-h-screen bg-white text-black">
+      {/* Hero */}
       <section className="px-6 pb-16 pt-28 text-center md:px-10 md:pb-24 md:pt-40">
         <p className="mb-5 text-[10px] uppercase tracking-[0.38em] text-black/50">
           Katherine Sterling Designs
         </p>
 
-        <h1 className="font-[Perfandory] text-6xl tracking-wide md:text-8xl">
+        <h1
+          className="text-6xl tracking-wide md:text-8xl"
+          style={{ fontFamily: '"Perandory", serif' }}
+        >
           Vestige
         </h1>
 
@@ -159,71 +195,78 @@ export default function Vestige() {
         </p>
       </section>
 
-      <section className="border-y border-black/10">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-3 px-6 py-6 md:px-10">
-          <button
-            type="button"
-            onClick={() => setActiveType("all")}
-            className={`px-4 py-2 text-[10px] uppercase tracking-[0.25em] transition ${
-              activeType === "all"
-                ? "bg-black text-white"
-                : "text-black/55 hover:text-black"
-            }`}
-          >
-            All
-          </button>
-
-          {typeOptions.map((type) => (
+      {/* Category Filters */}
+      {categoryOptions.length > 0 && (
+        <section className="border-y border-black/10">
+          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-2 px-6 py-6 md:px-10">
             <button
-              key={type}
               type="button"
-              onClick={() => setActiveType(type)}
+              onClick={() => setActiveCategory("all")}
               className={`px-4 py-2 text-[10px] uppercase tracking-[0.25em] transition ${
-                activeType === type
+                activeCategory === "all"
                   ? "bg-black text-white"
                   : "text-black/55 hover:text-black"
               }`}
             >
-              {productTypeLabel(type)}
-            </button>
-          ))}
-        </div>
-
-        {collectionOptions.length > 0 && (
-          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-3 border-t border-black/10 px-6 py-5 md:px-10">
-            <button
-              type="button"
-              onClick={() => setActiveCollection("all")}
-              className={`px-4 py-2 text-[10px] uppercase tracking-[0.25em] transition ${
-                activeCollection === "all"
-                  ? "bg-black text-white"
-                  : "text-black/55 hover:text-black"
-              }`}
-            >
-              All Collections
+              All
             </button>
 
-            {collectionOptions.map((collection) => (
+            {categoryOptions.map((category) => (
               <button
-                key={collection}
+                key={category}
                 type="button"
-                onClick={() => setActiveCollection(collection)}
+                onClick={() => setActiveCategory(category)}
                 className={`px-4 py-2 text-[10px] uppercase tracking-[0.25em] transition ${
-                  activeCollection === collection
+                  activeCategory === category
                     ? "bg-black text-white"
                     : "text-black/55 hover:text-black"
                 }`}
               >
-                {collectionLabelFromKey(collection)}
+                {categoryLabel(category)}
               </button>
             ))}
           </div>
-        )}
-      </section>
 
+          {/* Collection Filters */}
+          {collectionOptions.length > 0 && (
+            <div className="border-t border-black/10">
+              <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-2 px-6 py-5 md:px-10">
+                <button
+                  type="button"
+                  onClick={() => setActiveCollection("all")}
+                  className={`px-4 py-2 text-[10px] uppercase tracking-[0.25em] transition ${
+                    activeCollection === "all"
+                      ? "bg-black text-white"
+                      : "text-black/55 hover:text-black"
+                  }`}
+                >
+                  All Collections
+                </button>
+
+                {collectionOptions.map((collection) => (
+                  <button
+                    key={collection}
+                    type="button"
+                    onClick={() => setActiveCollection(collection)}
+                    className={`px-4 py-2 text-[10px] uppercase tracking-[0.25em] transition ${
+                      activeCollection === collection
+                        ? "bg-black text-white"
+                        : "text-black/55 hover:text-black"
+                    }`}
+                  >
+                    {collectionLabelFromKey(collection)}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* Product Grid */}
       <section className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
         {filteredItems.length > 0 ? (
-          <div className="grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-3 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-x-5 gap-y-14 md:grid-cols-3 lg:grid-cols-4">
             {filteredItems.map((item) => (
               <article key={item.id} className="group">
                 <div className="aspect-[4/5] overflow-hidden bg-[#f7f7f5]">
@@ -237,10 +280,13 @@ export default function Vestige() {
 
                 <div className="pt-4">
                   <p className="text-[9px] uppercase tracking-[0.28em] text-black/45">
-                    {item.collectionLabel || item.typeLabel}
+                    {item.collectionLabel || item.categoryLabel}
                   </p>
 
-                  <h2 className="mt-2 font-[Perfandory] text-2xl">
+                  <h2
+                    className="mt-2 text-2xl"
+                    style={{ fontFamily: '"Perandory", serif' }}
+                  >
                     {item.name}
                   </h2>
 
