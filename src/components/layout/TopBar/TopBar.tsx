@@ -250,6 +250,13 @@ export default function TopBar() {
                 </div>
 
                 <Link
+                  to="/vestige"
+                  className="text-[11px] uppercase tracking-[0.32em] leading-none text-black/70 hover:text-black transition-colors"
+                >
+                  Vestige
+                </Link>
+
+                <Link
                   to="/about"
                   className="text-[11px] uppercase tracking-[0.32em] leading-none text-black/70 hover:text-black transition-colors"
                 >
@@ -373,6 +380,15 @@ export default function TopBar() {
           >
             <div className="mx-auto max-w-6xl px-4 sm:px-6 py-5">
               <div className="space-y-3">
+              
+                <Link
+                  to="/vestige"
+                  className="text-[11px] uppercase tracking-[0.32em] leading-none text-black/70 hover:text-black transition-colors"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Vestige
+                </Link>
+
                 <Link
                   to="/about"
                   className="block border border-black/10 px-4 py-3 text-[11px] uppercase tracking-[0.32em] text-black/75"

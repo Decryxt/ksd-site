@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
+import Vestige from "./pages/Vestige/Vestige";
 import Necklaces from "./pages/Archive/Necklaces";
 import Bracelets from "./pages/Archive/Bracelets";
 import Earrings from "./pages/Archive/Earrings";
@@ -95,6 +96,24 @@ function AnimatedRoutes() {
                 transition={pageTransition}
               >
                 <Contact />
+              </motion.main>
+            </SiteLayout>
+          }
+        />
+
+        <Route
+          path="/vestige"
+          element={
+            <SiteLayout>
+              <motion.main
+                className="min-h-screen"
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <Vestige />
               </motion.main>
             </SiteLayout>
           }
