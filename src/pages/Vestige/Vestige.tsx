@@ -1,49 +1,57 @@
 import { useMemo, useState } from "react";
 
-import { productCopy } from "../../data/productCopy";
+import { productCopy, getFallbackCopy } from "../../data/productCopy";
 
 const vestigeImages = import.meta.glob(
   "../../assets/products/vestige/*.{png,jpg,jpeg,webp}",
-  { eager: true, import: "default" }
+  {
+    eager: true,
+    import: "default",
+  }
 ) as Record<string, string>;
 
-type BaseCategory =
+type CategoryKey =
   | "necklaces"
   | "bracelets"
   | "earrings"
+  | "belly-chains"
+  | "anklets"
   | "high-end-pearls";
 
-type BodyCategory = "belly-chains" | "hand-chains" | "anklets";
-
-type VestigeCategory = BaseCategory | BodyCategory;
-
-type VestigeProduct = {
+type VestigeItem = {
+  id: string;
+  slug: string;
+  name: string;
+  imageUrl: string;
+  category: CategoryKey;
   collection?: string;
-  shortDescription?: string;
-  description?: string;
-  details?: string[];
+  shortDescription: string;
+  description: string;
+  details: string[];
 };
 
-const bodyJewelryProducts: Record<
-  BodyCategory,
-  Record<string, VestigeProduct>
-> = {
-  "belly-chains": productCopy["belly-chains"] ?? {},
-  "hand-chains": productCopy["hand-chains"] ?? {},
-  anklets: productCopy.anklets ?? {},
-};
+const categories: CategoryKey[] = [
+  "necklaces",
+  "bracelets",
+  "earrings",
+  "belly-chains",
+  "anklets",
+  "high-end-pearls",
+];
 
 function titleFromFilename(filePath: string) {
   const file = filePath.split("/").pop() || "";
+
   const base = file.replace(/\.(png|jpg|jpeg|webp)$/i, "");
 
   return base
     .replace(/[-_]+/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+    .replace(/\b\w/g, (character) => character.toUpperCase());
 }
 
 function slugFromFilename(filePath: string) {
   const file = filePath.split("/").pop() || "";
+
   const base = file.replace(/\.(png|jpg|jpeg|webp)$/i, "");
 
   return base
@@ -52,7 +60,7 @@ function slugFromFilename(filePath: string) {
     .replace(/^-+|-+$/g, "");
 }
 
-function categoryLabel(category: VestigeCategory) {
+function categoryLabel(category: CategoryKey) {
   switch (category) {
     case "necklaces":
       return "Necklaces";
@@ -63,22 +71,19 @@ function categoryLabel(category: VestigeCategory) {
     case "earrings":
       return "Earrings";
 
-    case "high-end-pearls":
-      return "High End Pearl Designs";
-
     case "belly-chains":
       return "Belly Chains";
 
-    case "hand-chains":
-      return "Hand Chains";
-
     case "anklets":
       return "Anklets";
+
+    case "high-end-pearls":
+      return "High End Pearls";
   }
 }
 
-function collectionLabelFromKey(key: string) {
-  switch (key) {
+function collectionLabel(collection: string) {
+  switch (collection) {
     case "golden-hour-muse":
       return "Golden Hour Muse";
 
@@ -89,106 +94,83 @@ function collectionLabelFromKey(key: string) {
       return "Southern Solstice";
 
     default:
-      return key
-        .replace(/-/g, " ")
-        .replace(/\b\w/g, (c) => c.toUpperCase());
+      return collection
+        .replace(/[-_]+/g, " ")
+        .replace(/\b\w/g, (character) => character.toUpperCase());
   }
 }
 
 function findProduct(slug: string) {
-  const baseCategories: BaseCategory[] = [
-    "necklaces",
-    "bracelets",
-    "earrings",
-    "high-end-pearls",
-  ];
+  for (const category of categories) {
+    const categoryProducts = productCopy[category];
 
-  for (const category of baseCategories) {
-    const categoryData = productCopy[category];
+    const product = categoryProducts?.[slug];
 
-    if (categoryData?.[slug]) {
+    if (product) {
+      const fallback = getFallbackCopy(category);
+
       return {
         category,
-        product: categoryData[slug] as VestigeProduct,
+        product: {
+          shortDescription:
+            product.shortDescription ?? fallback.shortDescription,
+          description: product.description ?? fallback.description,
+          details: product.details ?? fallback.details,
+          collection: product.collection,
+        },
       };
     }
   }
 
-  const bodyCategories: BodyCategory[] = [
-    "belly-chains",
-    "hand-chains",
-    "anklets",
-  ];
-
-  for (const category of bodyCategories) {
-    const categoryData = bodyJewelryProducts[category];
-
-    if (categoryData?.[slug]) {
-      return {
-        category,
-        product: categoryData[slug],
-      };
-    }
-  }
-
-  return {
-    category: undefined,
-    product: undefined,
-  };
+  return null;
 }
 
 export default function Vestige() {
   const [activeCategory, setActiveCategory] = useState<
-    VestigeCategory | "all"
+    CategoryKey | "all"
   >("all");
 
   const [activeCollection, setActiveCollection] = useState("all");
 
-  const allItems = useMemo(() => {
+  const allItems = useMemo<VestigeItem[]>(() => {
     return Object.entries(vestigeImages)
       .sort(([a], [b]) => a.localeCompare(b))
-      .map(([path, url], idx) => {
+      .map(([path, imageUrl], index) => {
         const slug = slugFromFilename(path);
         const match = findProduct(slug);
 
+        /*
+         * If a Vestige image does not have matching product data,
+         * we still display it instead of hiding the image.
+         */
+        const category = match?.category ?? "high-end-pearls";
+
+        const fallback = getFallbackCopy(category);
+
         return {
-          id: `vestige-${idx + 1}`,
+          id: `vestige-${index + 1}`,
           slug,
           name: titleFromFilename(path),
-          imageUrl: url,
-          category: match.category,
-          categoryLabel: match.category
-            ? categoryLabel(match.category)
-            : "Jewelry",
-          collection: match.product?.collection,
-          collectionLabel: match.product?.collection
-            ? collectionLabelFromKey(match.product.collection)
-            : undefined,
-          shortDescription: match.product?.shortDescription,
-          description: match.product?.description,
-          details: match.product?.details,
+          imageUrl,
+          category,
+          collection: match?.product.collection,
+          shortDescription:
+            match?.product.shortDescription ?? fallback.shortDescription,
+          description:
+            match?.product.description ?? fallback.description,
+          details: match?.product.details ?? fallback.details,
         };
       });
   }, []);
-
-  const categoryOptions = useMemo(() => {
-    return Array.from(
-      new Set(
-        allItems
-          .map((item) => item.category)
-          .filter(Boolean)
-      )
-    ) as VestigeCategory[];
-  }, [allItems]);
 
   const collectionOptions = useMemo(() => {
     return Array.from(
       new Set(
         allItems
           .map((item) => item.collection)
-          .filter(Boolean)
+          .filter((collection): collection is string => Boolean(collection))
       )
-    ) as string[];
+    );
   }, [allItems]);
 
   const filteredItems = useMemo(() => {
@@ -206,129 +188,152 @@ export default function Vestige() {
   }, [activeCategory, activeCollection, allItems]);
 
   return (
-    <div className="min-h-screen bg-white text-black">
-      {/* Hero */}
-      <section className="px-6 pb-16 pt-28 text-center md:px-10 md:pb-24 md:pt-40">
-        <p className="mb-5 text-[10px] uppercase tracking-[0.38em] text-black/50">
+    <main className="min-h-screen bg-white text-black">
+      {/* =========================================================
+          HERO
+      ========================================================= */}
+
+      <section className="px-6 pb-16 pt-32 text-center md:px-10 md:pb-24 md:pt-44">
+        <p className="mb-5 text-[10px] uppercase tracking-[0.4em] text-black/45">
           Katherine Sterling Designs
         </p>
 
         <h1
-          className="text-6xl tracking-wide md:text-8xl"
+          className="text-7xl leading-none tracking-wide md:text-9xl"
           style={{ fontFamily: '"Perandory", serif' }}
         >
           Vestige
         </h1>
 
-        <p className="mx-auto mt-8 max-w-2xl text-sm leading-7 text-black/65 md:text-base">
-          A collection of past Katherine Sterling Designs pieces, preserved as
-          part of the story. Explore designs from seasons gone by—pieces that
-          were once made for sale and remain part of the KSD story.
+        <p className="mx-auto mt-8 max-w-2xl text-sm leading-7 text-black/60 md:text-base md:leading-8">
+          A collection of pieces from the Katherine Sterling Designs archive—
+          designs once made for sale and now preserved as part of the story.
         </p>
       </section>
 
-      {/* Category Filters */}
-      {categoryOptions.length > 0 && (
-        <section className="border-y border-black/10">
-          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-2 px-6 py-6 md:px-10">
-            <button
-              type="button"
-              onClick={() => setActiveCategory("all")}
-              className={`px-4 py-2 text-[10px] uppercase tracking-[0.25em] transition ${
-                activeCategory === "all"
-                  ? "bg-black text-white"
-                  : "text-black/55 hover:text-black"
-              }`}
-            >
-              All
-            </button>
+      {/* =========================================================
+          FILTERS
+      ========================================================= */}
 
-            {categoryOptions.map((category) => (
+      <section className="border-y border-black/10">
+        {/* Product Type */}
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-2 gap-y-2 px-6 py-6 md:px-10">
+          <button
+            type="button"
+            onClick={() => setActiveCategory("all")}
+            className={`px-4 py-2 text-[9px] uppercase tracking-[0.28em] transition ${
+              activeCategory === "all"
+                ? "bg-black text-white"
+                : "text-black/50 hover:text-black"
+            }`}
+          >
+            All Pieces
+          </button>
+
+          {categories.map((category) => {
+            const hasItems = allItems.some(
+              (item) => item.category === category
+            );
+
+            if (!hasItems) return null;
+
+            return (
               <button
                 key={category}
                 type="button"
                 onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 text-[10px] uppercase tracking-[0.25em] transition ${
+                className={`px-4 py-2 text-[9px] uppercase tracking-[0.28em] transition ${
                   activeCategory === category
                     ? "bg-black text-white"
-                    : "text-black/55 hover:text-black"
+                    : "text-black/50 hover:text-black"
                 }`}
               >
                 {categoryLabel(category)}
               </button>
-            ))}
-          </div>
+            );
+          })}
+        </div>
 
-          {/* Collection Filters */}
-          {collectionOptions.length > 0 && (
-            <div className="border-t border-black/10">
-              <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-2 px-6 py-5 md:px-10">
+        {/* Collections */}
+        {collectionOptions.length > 0 && (
+          <div className="border-t border-black/10">
+            <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-2 gap-y-2 px-6 py-5 md:px-10">
+              <button
+                type="button"
+                onClick={() => setActiveCollection("all")}
+                className={`px-4 py-2 text-[9px] uppercase tracking-[0.28em] transition ${
+                  activeCollection === "all"
+                    ? "bg-black text-white"
+                    : "text-black/50 hover:text-black"
+                }`}
+              >
+                All Collections
+              </button>
+
+              {collectionOptions.map((collection) => (
                 <button
+                  key={collection}
                   type="button"
-                  onClick={() => setActiveCollection("all")}
-                  className={`px-4 py-2 text-[10px] uppercase tracking-[0.25em] transition ${
-                    activeCollection === "all"
+                  onClick={() => setActiveCollection(collection)}
+                  className={`px-4 py-2 text-[9px] uppercase tracking-[0.28em] transition ${
+                    activeCollection === collection
                       ? "bg-black text-white"
-                      : "text-black/55 hover:text-black"
+                      : "text-black/50 hover:text-black"
                   }`}
                 >
-                  All Collections
+                  {collectionLabel(collection)}
                 </button>
-
-                {collectionOptions.map((collection) => (
-                  <button
-                    key={collection}
-                    type="button"
-                    onClick={() => setActiveCollection(collection)}
-                    className={`px-4 py-2 text-[10px] uppercase tracking-[0.25em] transition ${
-                      activeCollection === collection
-                        ? "bg-black text-white"
-                        : "text-black/55 hover:text-black"
-                    }`}
-                  >
-                    {collectionLabelFromKey(collection)}
-                  </button>
-                ))}
-              </div>
+              ))}
             </div>
-          )}
-        </section>
-      )}
+          </div>
+        )}
+      </section>
 
-      {/* Product Grid */}
+      {/* =========================================================
+          PIECES
+      ========================================================= */}
+
       <section className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
         {filteredItems.length > 0 ? (
           <div className="grid grid-cols-2 gap-x-5 gap-y-14 md:grid-cols-3 lg:grid-cols-4">
             {filteredItems.map((item) => (
               <article key={item.id} className="group">
+                {/* Image */}
                 <div className="aspect-[4/5] overflow-hidden bg-[#f7f7f5]">
                   <img
                     src={item.imageUrl}
-                    alt={`${item.name} — past Katherine Sterling Designs piece`}
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.02]"
+                    alt={`${item.name} — Katherine Sterling Designs`}
+                    className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-[1.025]"
                     loading="lazy"
                   />
                 </div>
 
-                <div className="pt-4">
-                  <p className="text-[9px] uppercase tracking-[0.28em] text-black/45">
-                    {item.collectionLabel || item.categoryLabel}
-                  </p>
+                {/* Information */}
+                <div className="pt-5">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="text-[8px] uppercase tracking-[0.3em] text-black/40">
+                      {categoryLabel(item.category)}
+                    </p>
+
+                    {item.collection && (
+                      <p className="text-right text-[8px] uppercase tracking-[0.25em] text-black/35">
+                        {collectionLabel(item.collection)}
+                      </p>
+                    )}
+                  </div>
 
                   <h2
-                    className="mt-2 text-2xl"
+                    className="mt-2 text-2xl leading-tight"
                     style={{ fontFamily: '"Perandory", serif' }}
                   >
                     {item.name}
                   </h2>
 
-                  {item.shortDescription && (
-                    <p className="mt-2 max-w-sm text-xs leading-5 text-black/55">
-                      {item.shortDescription}
-                    </p>
-                  )}
+                  <p className="mt-2 text-xs leading-5 text-black/55">
+                    {item.shortDescription}
+                  </p>
 
-                  <p className="mt-3 text-[9px] uppercase tracking-[0.25em] text-black/35">
+                  <p className="mt-3 text-[8px] uppercase tracking-[0.28em] text-black/30">
                     Vestige · No longer available
                   </p>
                 </div>
@@ -337,12 +342,12 @@ export default function Vestige() {
           </div>
         ) : (
           <div className="py-24 text-center">
-            <p className="text-[10px] uppercase tracking-[0.3em] text-black/45">
+            <p className="text-[9px] uppercase tracking-[0.35em] text-black/40">
               No pieces found
             </p>
           </div>
         )}
       </section>
-    </div>
+    </main>
   );
 }
