@@ -225,7 +225,7 @@ export default function TopBar() {
               </Link>
 
               {/* Desktop nav */}
-              <nav className="hidden md:flex items-center gap-8">
+              <nav className="hidden md:flex items-center gap-6">
                 <div
                   className="relative flex items-center"
                   onMouseEnter={scheduleOpen}
