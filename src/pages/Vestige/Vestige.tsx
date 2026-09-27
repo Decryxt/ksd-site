@@ -1,4 +1,146 @@
+import { useMemo, useState } from "react";
+
+import { productCopy } from "../../data/productCopy";
+
+const vestigeImages = import.meta.glob(
+  "../../assets/products/vestige/*.{png,jpg,jpeg,webp}",
+  { eager: true, import: "default" }
+) as Record<string, string>;
+
+type ProductType = "necklaces" | "bracelets" | "earrings" | "body-jewelry";
+
+function titleFromFilename(filePath: string) {
+  const file = filePath.split("/").pop() || "";
+  const base = file.replace(/\.(png|jpg|jpeg|webp)$/i, "");
+
+  return base
+    .replace(/[-_]+/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+function slugFromFilename(filePath: string) {
+  const file = filePath.split("/").pop() || "";
+  const base = file.replace(/\.(png|jpg|jpeg|webp)$/i, "");
+
+  return base
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function collectionLabelFromKey(key: string) {
+  switch (key) {
+    case "golden-hour-muse":
+      return "Golden Hour Muse";
+
+    case "one-of-one":
+      return "One Of One";
+
+    case "southern-solstice":
+      return "Southern Solstice";
+
+    default:
+      return key
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+  }
+}
+
+function productTypeLabel(type: ProductType) {
+  switch (type) {
+    case "necklaces":
+      return "Necklaces";
+
+    case "bracelets":
+      return "Bracelets";
+
+    case "earrings":
+      return "Earrings";
+
+    case "body-jewelry":
+      return "Body Jewelry";
+  }
+}
+
 export default function Vestige() {
+  const [activeType, setActiveType] = useState("all");
+  const [activeCollection, setActiveCollection] = useState("all");
+
+  const allItems = useMemo(() => {
+    return Object.entries(vestigeImages)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([path, url], idx) => {
+        const slug = slugFromFilename(path);
+
+        const productMeta =
+          productCopy.necklaces?.[slug] ??
+          productCopy.bracelets?.[slug] ??
+          productCopy.earrings?.[slug] ??
+          productCopy["body-jewelry"]?.[slug];
+
+        let type: ProductType | undefined;
+
+        if (productCopy.necklaces?.[slug]) {
+          type = "necklaces";
+        } else if (productCopy.bracelets?.[slug]) {
+          type = "bracelets";
+        } else if (productCopy.earrings?.[slug]) {
+          type = "earrings";
+        } else if (productCopy["body-jewelry"]?.[slug]) {
+          type = "body-jewelry";
+        }
+
+        return {
+          id: `vestige-${idx + 1}`,
+          slug,
+          name: titleFromFilename(path),
+          imageUrl: url,
+          type,
+          typeLabel: type ? productTypeLabel(type) : "Jewelry",
+          collection: productMeta?.collection,
+          collectionLabel: productMeta?.collection
+            ? collectionLabelFromKey(productMeta.collection)
+            : undefined,
+          shortDescription: productMeta?.shortDescription,
+          description: productMeta?.description,
+          details: productMeta?.details,
+        };
+      });
+  }, []);
+
+  const typeOptions = useMemo(() => {
+    return Array.from(
+      new Set(
+        allItems
+          .map((item) => item.type)
+          .filter(Boolean)
+      )
+    ) as ProductType[];
+  }, [allItems]);
+
+  const collectionOptions = useMemo(() => {
+    return Array.from(
+      new Set(
+        allItems
+          .map((item) => item.collection)
+          .filter(Boolean)
+      )
+    ) as string[];
+  }, [allItems]);
+
+  const filteredItems = useMemo(() => {
+    return allItems.filter((item) => {
+      const typeMatches =
+        activeType === "all" || item.type === activeType;
+
+      const collectionMatches =
+        activeCollection === "all" ||
+        item.collection === activeCollection;
+
+      return typeMatches && collectionMatches;
+    });
+  }, [activeType, activeCollection, allItems]);
+
   return (
     <div className="min-h-screen bg-white text-black">
       <section className="px-6 pb-16 pt-28 text-center md:px-10 md:pb-24 md:pt-40">
@@ -13,16 +155,115 @@ export default function Vestige() {
         <p className="mx-auto mt-8 max-w-2xl text-sm leading-7 text-black/65 md:text-base">
           A collection of past Katherine Sterling Designs pieces, preserved as
           part of the story. Explore designs from seasons gone by—pieces that
-          were once made for sale and remain part of the KSD archive.
+          were once made for sale and remain part of the KSD story.
         </p>
       </section>
 
-      <section className="border-t border-black/10 px-6 py-20 md:px-10">
-        <div className="mx-auto max-w-7xl">
-          <p className="text-center text-xs uppercase tracking-[0.3em] text-black/45">
-            Past Designs
-          </p>
+      <section className="border-y border-black/10">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-3 px-6 py-6 md:px-10">
+          <button
+            type="button"
+            onClick={() => setActiveType("all")}
+            className={`px-4 py-2 text-[10px] uppercase tracking-[0.25em] transition ${
+              activeType === "all"
+                ? "bg-black text-white"
+                : "text-black/55 hover:text-black"
+            }`}
+          >
+            All
+          </button>
+
+          {typeOptions.map((type) => (
+            <button
+              key={type}
+              type="button"
+              onClick={() => setActiveType(type)}
+              className={`px-4 py-2 text-[10px] uppercase tracking-[0.25em] transition ${
+                activeType === type
+                  ? "bg-black text-white"
+                  : "text-black/55 hover:text-black"
+              }`}
+            >
+              {productTypeLabel(type)}
+            </button>
+          ))}
         </div>
+
+        {collectionOptions.length > 0 && (
+          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-3 border-t border-black/10 px-6 py-5 md:px-10">
+            <button
+              type="button"
+              onClick={() => setActiveCollection("all")}
+              className={`px-4 py-2 text-[10px] uppercase tracking-[0.25em] transition ${
+                activeCollection === "all"
+                  ? "bg-black text-white"
+                  : "text-black/55 hover:text-black"
+              }`}
+            >
+              All Collections
+            </button>
+
+            {collectionOptions.map((collection) => (
+              <button
+                key={collection}
+                type="button"
+                onClick={() => setActiveCollection(collection)}
+                className={`px-4 py-2 text-[10px] uppercase tracking-[0.25em] transition ${
+                  activeCollection === collection
+                    ? "bg-black text-white"
+                    : "text-black/55 hover:text-black"
+                }`}
+              >
+                {collectionLabelFromKey(collection)}
+              </button>
+            ))}
+          </div>
+        )}
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
+        {filteredItems.length > 0 ? (
+          <div className="grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-3 lg:grid-cols-4">
+            {filteredItems.map((item) => (
+              <article key={item.id} className="group">
+                <div className="aspect-[4/5] overflow-hidden bg-[#f7f7f5]">
+                  <img
+                    src={item.imageUrl}
+                    alt={`${item.name} — past Katherine Sterling Designs piece`}
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.02]"
+                    loading="lazy"
+                  />
+                </div>
+
+                <div className="pt-4">
+                  <p className="text-[9px] uppercase tracking-[0.28em] text-black/45">
+                    {item.collectionLabel || item.typeLabel}
+                  </p>
+
+                  <h2 className="mt-2 font-[Perfandory] text-2xl">
+                    {item.name}
+                  </h2>
+
+                  {item.shortDescription && (
+                    <p className="mt-2 max-w-sm text-xs leading-5 text-black/55">
+                      {item.shortDescription}
+                    </p>
+                  )}
+
+                  <p className="mt-3 text-[9px] uppercase tracking-[0.25em] text-black/35">
+                    Vestige · No longer available
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="py-24 text-center">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-black/45">
+              No pieces found
+            </p>
+          </div>
+        )}
       </section>
     </div>
   );
