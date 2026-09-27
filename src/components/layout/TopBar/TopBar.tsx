@@ -383,7 +383,7 @@ export default function TopBar() {
 
                 <Link
                   to="/vestige"
-                  className="text-[11px] uppercase tracking-[0.32em] leading-none text-black/70 hover:text-black transition-colors"
+                  className="block border border-black/10 px-4 py-3 text-[11px] uppercase tracking-[0.32em] text-black/75 hover:border-black/20 hover:text-black transition-colors"
                 >
                   Vestige
                 </Link>
