@@ -7,14 +7,31 @@ const vestigeImages = import.meta.glob(
   { eager: true, import: "default" }
 ) as Record<string, string>;
 
-type VestigeCategory =
+type BaseCategory =
   | "necklaces"
   | "bracelets"
   | "earrings"
-  | "high-end-pearls"
-  | "belly-chains"
-  | "hand-chains"
-  | "anklets";
+  | "high-end-pearls";
+
+type BodyCategory = "belly-chains" | "hand-chains" | "anklets";
+
+type VestigeCategory = BaseCategory | BodyCategory;
+
+type VestigeProduct = {
+  collection?: string;
+  shortDescription?: string;
+  description?: string;
+  details?: string[];
+};
+
+const bodyJewelryProducts: Record<
+  BodyCategory,
+  Record<string, VestigeProduct>
+> = {
+  "belly-chains": productCopy["belly-chains"] ?? {},
+  "hand-chains": productCopy["hand-chains"] ?? {},
+  anklets: productCopy.anklets ?? {},
+};
 
 function titleFromFilename(filePath: string) {
   const file = filePath.split("/").pop() || "";
@@ -78,6 +95,48 @@ function collectionLabelFromKey(key: string) {
   }
 }
 
+function findProduct(slug: string) {
+  const baseCategories: BaseCategory[] = [
+    "necklaces",
+    "bracelets",
+    "earrings",
+    "high-end-pearls",
+  ];
+
+  for (const category of baseCategories) {
+    const categoryData = productCopy[category];
+
+    if (categoryData?.[slug]) {
+      return {
+        category,
+        product: categoryData[slug] as VestigeProduct,
+      };
+    }
+  }
+
+  const bodyCategories: BodyCategory[] = [
+    "belly-chains",
+    "hand-chains",
+    "anklets",
+  ];
+
+  for (const category of bodyCategories) {
+    const categoryData = bodyJewelryProducts[category];
+
+    if (categoryData?.[slug]) {
+      return {
+        category,
+        product: categoryData[slug],
+      };
+    }
+  }
+
+  return {
+    category: undefined,
+    product: undefined,
+  };
+}
+
 export default function Vestige() {
   const [activeCategory, setActiveCategory] = useState<
     VestigeCategory | "all"
@@ -86,55 +145,28 @@ export default function Vestige() {
   const [activeCollection, setActiveCollection] = useState("all");
 
   const allItems = useMemo(() => {
-    const categories: VestigeCategory[] = [
-      "necklaces",
-      "bracelets",
-      "earrings",
-      "high-end-pearls",
-      "belly-chains",
-      "hand-chains",
-      "anklets",
-    ];
-
     return Object.entries(vestigeImages)
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([path, url], idx) => {
         const slug = slugFromFilename(path);
-
-        let category: VestigeCategory | undefined;
-        let productMeta:
-          | (typeof productCopy.necklaces extends
-              Record<string, infer T>
-              ? T
-              : never)
-          | undefined;
-
-        for (const candidate of categories) {
-          const categoryData = productCopy[candidate];
-
-          if (categoryData?.[slug]) {
-            category = candidate;
-            productMeta = categoryData[slug];
-            break;
-          }
-        }
+        const match = findProduct(slug);
 
         return {
           id: `vestige-${idx + 1}`,
           slug,
           name: titleFromFilename(path),
           imageUrl: url,
-          category,
-          categoryLabel: category
-            ? categoryLabel(category)
+          category: match.category,
+          categoryLabel: match.category
+            ? categoryLabel(match.category)
             : "Jewelry",
-          collection: productMeta?.collection,
-          collectionLabel: productMeta?.collection
-            ? collectionLabelFromKey(productMeta.collection)
+          collection: match.product?.collection,
+          collectionLabel: match.product?.collection
+            ? collectionLabelFromKey(match.product.collection)
             : undefined,
-          shortDescription: productMeta?.shortDescription,
-          description: productMeta?.description,
-          details: productMeta?.details,
+          shortDescription: match.product?.shortDescription,
+          description: match.product?.description,
+          details: match.product?.details,
         };
       });
   }, []);
