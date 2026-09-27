@@ -763,6 +763,58 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "betty-bracelet": {
+      price: 50,
+
+      squareVariationId: "X3PETJQC625Y4HM5P3TMROEB",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A turquoise and gold-filled beaded bracelet accented with organic stone detailing—sun-warmed, feminine, and effortlessly Southwestern.",
+
+      description:
+        "The Betty Bracelet blends the natural beauty of turquoise with the warmth of polished gold-filled beads for a timeless Southwestern-inspired look. Rounded turquoise-toned stones are paired with delicate gold-filled beads and textured accents, creating a balanced design that feels both earthy and refined. Each stone brings its own subtle variation in color and pattern, giving the bracelet an organic, collected character. Easy to wear on its own or layered into a stack, Betty adds a touch of sunlit Western charm to any look.",
+
+      details: [
+        "Turquoise-toned natural stone beads",
+        "Gold-filled accent beads",
+        "Textured gold-filled bead detailing",
+        "Organic stone variations",
+        "Southwestern-inspired design",
+        "Comfortable stretch bracelet silhouette",
+        "Hand-assembled in small batches",
+      ],
+    },
+
+    "padme-bracelet": {
+      price: 55,
+
+      squareVariationId: "QOWGBGTZYN2U3BNW62JDPEPA",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A delicate gold-filled beaded bracelet featuring a refined mix of polished beads—warm, luminous, and effortlessly elegant.",
+
+      description:
+        "The Padme Bracelet is a refined take on the classic beaded bracelet, designed to let the warmth of gold take center stage. A delicate arrangement of polished gold-filled beads creates subtle variation and dimension, catching the light with every movement. Minimal yet distinctive, its understated silhouette makes it effortless to wear alone or layer into a curated bracelet stack. Timeless, feminine, and quietly radiant, Padme brings an elevated golden touch to everyday styling.",
+
+      details: [
+        "Gold-filled beaded bracelet",
+        "Mix of polished and textured beads",
+        "Delicate, minimalist silhouette",
+        "Warm luminous gold finish",
+        "Designed for everyday wear or layering",
+        "Comfortable stretch bracelet silhouette",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "queen-of-hearts-bracelet": {
       price: 30,
 
