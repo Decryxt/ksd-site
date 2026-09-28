@@ -1,5 +1,6 @@
 import React from "react";
 import TopBar from "./TopBar/TopBar";
+import StudioSignup from "./StudioSignup";
 import Footer from "./Footer";
 
 type Props = {
@@ -15,6 +16,9 @@ export default function SiteLayout({ children }: Props) {
       <main className="flex-1 pt-16">
         {children}
       </main>
+
+      {/* Studio Signup */}
+      <StudioSignup />
 
       {/* Footer */}
       <Footer />
