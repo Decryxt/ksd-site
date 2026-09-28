@@ -219,7 +219,7 @@ export default function StudioSignup() {
                     fontWeight: 400,
                   }}
                 >
-                  Almost there! Confirm in your email.
+                  Almost there !  Confirm in your email .
                 </p>
 
                 <p className="mt-1 text-[10px] uppercase tracking-[0.22em] text-black/40">
