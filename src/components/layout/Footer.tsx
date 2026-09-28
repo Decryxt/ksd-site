@@ -1,3 +1,5 @@
+
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
@@ -21,6 +23,19 @@ export default function Footer() {
     "Golden Hour Muse",
     "One of One",
   ];
+
+  useEffect(() => {
+    const existingScript = document.querySelector(
+      'script[src="https://f.convertkit.com/ckjs/ck.5.js"]',
+    );
+
+    if (!existingScript) {
+      const script = document.createElement("script");
+      script.src = "https://f.convertkit.com/ckjs/ck.5.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
 
   return (
     <footer className="relative overflow-hidden border-t border-black/10 bg-[#fbf7ef] text-black">
@@ -59,6 +74,119 @@ export default function Footer() {
           .ksd-footer-orb {
             animation: ksd-soft-float 7s ease-in-out infinite;
           }
+
+          .ksd-letter-form {
+            width: 100%;
+          }
+
+          .ksd-letter-fields {
+            display: flex;
+            width: 100%;
+            gap: 8px;
+          }
+
+          .ksd-letter-input {
+            min-width: 0;
+            flex: 1;
+            border: 1px solid rgba(0,0,0,0.12);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.72);
+            padding: 12px 16px;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #000;
+            outline: none;
+            transition:
+              border-color 200ms ease,
+              background-color 200ms ease,
+              box-shadow 200ms ease;
+          }
+
+          .ksd-letter-input::placeholder {
+            color: rgba(0,0,0,0.42);
+          }
+
+          .ksd-letter-input:focus {
+            border-color: rgba(151,97,61,0.55);
+            background: rgba(255,255,255,0.92);
+            box-shadow: 0 0 0 3px rgba(212,178,106,0.10);
+          }
+
+          .ksd-letter-submit {
+            flex-shrink: 0;
+            border: 1px solid rgba(0,0,0,0.12);
+            border-radius: 999px;
+            background: #1d1a17;
+            color: #fff;
+            cursor: pointer;
+            padding: 12px 18px;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            line-height: 1;
+            text-transform: uppercase;
+            transition:
+              transform 200ms ease,
+              background-color 200ms ease,
+              box-shadow 200ms ease;
+          }
+
+          .ksd-letter-submit:hover {
+            background: #000;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.10);
+          }
+
+          .ksd-letter-submit:focus-visible {
+            outline: 2px solid rgba(151,97,61,0.55);
+            outline-offset: 3px;
+          }
+
+          .ksd-letter-alert {
+            margin-top: 10px;
+            border-radius: 12px;
+            padding: 10px 12px;
+            font-size: 11px;
+            line-height: 1.5;
+          }
+
+          .ksd-letter-alert:empty {
+            display: none;
+          }
+
+          .ksd-letter-alert[data-group="alert"] {
+            background: rgba(255,255,255,0.60);
+            border: 1px solid rgba(0,0,0,0.08);
+          }
+
+          .ksd-letter-powered-by {
+            margin-top: 8px;
+            text-align: center;
+          }
+
+          .ksd-letter-powered-by a {
+            font-size: 9px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(0,0,0,0.28);
+            text-decoration: none;
+            transition: color 200ms ease;
+          }
+
+          .ksd-letter-powered-by a:hover {
+            color: rgba(0,0,0,0.55);
+          }
+
+          @media (max-width: 640px) {
+            .ksd-letter-fields {
+              flex-direction: column;
+            }
+
+            .ksd-letter-submit {
+              width: 100%;
+              padding: 13px 18px;
+            }
+          }
         `}
       </style>
 
@@ -79,9 +207,9 @@ export default function Footer() {
               </Link>
 
               <p className="mt-5 max-w-md text-sm leading-relaxed text-black/60">
-                One-of-one coastal jewelry with a bohemian soul — handcrafted in
-                small batches with luminous pearls, golden details, and pieces
-                made to feel collected, not copied.
+                One-of-one coastal jewelry with a bohemian soul — handcrafted
+                in small batches with luminous pearls, golden details, and
+                pieces made to feel collected, not copied.
               </p>
 
               <div className="mt-7 flex flex-wrap gap-2">
@@ -149,13 +277,66 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Connect */}
+            {/* From the Studio */}
             <div className="md:col-span-3">
               <div className="text-[11px] uppercase tracking-[0.28em] text-black/45">
-                Connect
+                From the Studio
               </div>
 
-              <div className="mt-5 space-y-3 text-sm text-black/75">
+              <p className="mt-5 text-sm leading-relaxed text-black/65">
+                Notes from Alyssa. New pieces, stories, inspiration, and
+                little moments from behind the scenes.
+              </p>
+
+              <form
+                action="https://app.kit.com/forms/9971129/subscriptions"
+                method="post"
+                data-sv-form="9971129"
+                data-uid="69c250a2a2"
+                data-format="inline"
+                data-version="5"
+                className="ksd-letter-form mt-5"
+              >
+                <div data-style="clean">
+                  <ul
+                    className="ksd-letter-alert"
+                    data-element="errors"
+                    data-group="alert"
+                  />
+
+                  <div
+                    data-element="fields"
+                    data-stacked="false"
+                    className="ksd-letter-fields"
+                  >
+                    <div className="min-w-0 flex-1">
+                      <input
+                        className="ksd-letter-input w-full"
+                        name="email_address"
+                        aria-label="Email Address"
+                        placeholder="Your email address"
+                        required
+                        type="email"
+                        autoComplete="email"
+                      />
+                    </div>
+
+                    <button
+                      data-element="submit"
+                      type="submit"
+                      className="ksd-letter-submit"
+                    >
+                      <span>Join</span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <p className="mt-2 text-[10px] leading-relaxed text-black/35">
+                Occasionally, and always with intention.
+              </p>
+
+              <div className="mt-7 space-y-3 text-sm text-black/75">
                 <a
                   href="mailto:alyssa@katherinesterlingdesigns.com"
                   className="block transition hover:translate-x-1 hover:text-black"
@@ -246,5 +427,3 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  );
-}
