@@ -1,5 +1,3 @@
-
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
@@ -23,19 +21,6 @@ export default function Footer() {
     "Golden Hour Muse",
     "One of One",
   ];
-
-  useEffect(() => {
-    const existingScript = document.querySelector(
-      'script[src="https://f.convertkit.com/ckjs/ck.5.js"]',
-    );
-
-    if (!existingScript) {
-      const script = document.createElement("script");
-      script.src = "https://f.convertkit.com/ckjs/ck.5.js";
-      script.async = true;
-      document.body.appendChild(script);
-    }
-  }, []);
 
   return (
     <footer className="relative overflow-hidden border-t border-black/10 bg-[#fbf7ef] text-black">
@@ -157,24 +142,6 @@ export default function Footer() {
           .ksd-letter-alert[data-group="alert"] {
             background: rgba(255,255,255,0.60);
             border: 1px solid rgba(0,0,0,0.08);
-          }
-
-          .ksd-letter-powered-by {
-            margin-top: 8px;
-            text-align: center;
-          }
-
-          .ksd-letter-powered-by a {
-            font-size: 9px;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: rgba(0,0,0,0.28);
-            text-decoration: none;
-            transition: color 200ms ease;
-          }
-
-          .ksd-letter-powered-by a:hover {
-            color: rgba(0,0,0,0.55);
           }
 
           @media (max-width: 640px) {
@@ -427,3 +394,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
