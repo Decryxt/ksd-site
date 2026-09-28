@@ -1,21 +1,23 @@
 import { useState, type FormEvent } from "react";
 
+type SignupStatus = "idle" | "submitting" | "success" | "error";
+
 export default function StudioSignup() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<
-    "idle" | "submitting" | "success" | "error"
-  >("idle");
+  const [status, setStatus] = useState<SignupStatus>("idle");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (!email.trim()) return;
+    const trimmedEmail = email.trim();
+
+    if (!trimmedEmail) return;
 
     setStatus("submitting");
 
     try {
       const formData = new FormData();
-      formData.append("email_address", email.trim());
+      formData.append("email_address", trimmedEmail);
 
       const response = await fetch(
         "https://app.kit.com/forms/9971129/subscriptions",
@@ -35,6 +37,30 @@ export default function StudioSignup() {
 
       if (!response.ok) {
         throw new Error(`Kit subscription failed: ${response.status}`);
+      }
+
+      let kitResponse: {
+        status?: string;
+        consent?: {
+          enabled?: boolean;
+        };
+        url?: string;
+      } = {};
+
+      try {
+        kitResponse = JSON.parse(responseText);
+      } catch {
+        // Kit may return a non-JSON response depending on the request.
+      }
+
+      if (kitResponse.status === "quarantined") {
+        console.warn(
+          "Kit accepted the request but quarantined the subscriber.",
+          kitResponse
+        );
+
+        setStatus("error");
+        return;
       }
 
       setEmail("");
@@ -81,7 +107,6 @@ export default function StudioSignup() {
         `}
       </style>
 
-      {/* Ambient light */}
       <div
         className="studio-glow pointer-events-none absolute -left-32 top-16 h-72 w-72 rounded-full bg-[#d4b26a]/20 blur-3xl"
         aria-hidden="true"
@@ -93,7 +118,6 @@ export default function StudioSignup() {
         aria-hidden="true"
       />
 
-      {/* Soft moving highlight */}
       <div
         className="studio-shimmer pointer-events-none absolute left-0 top-0 h-full w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent blur-2xl"
         aria-hidden="true"
@@ -101,7 +125,6 @@ export default function StudioSignup() {
 
       <div className="relative mx-auto max-w-6xl px-6 py-20 md:px-8 md:py-28">
         <div className="relative overflow-hidden border border-black/10 bg-white/55 px-6 py-14 shadow-[0_20px_80px_rgba(0,0,0,0.04)] backdrop-blur-sm md:px-14 md:py-20">
-          {/* Editorial top line */}
           <div className="mb-10 flex items-center gap-4">
             <div className="h-px flex-1 bg-black/10" />
 
@@ -112,7 +135,6 @@ export default function StudioSignup() {
             <div className="h-px flex-1 bg-black/10" />
           </div>
 
-          {/* Heading */}
           <div className="mx-auto max-w-4xl text-center">
             <p className="text-[10px] uppercase tracking-[0.38em] text-black/45">
               From the Studio
@@ -135,7 +157,6 @@ export default function StudioSignup() {
             </p>
           </div>
 
-          {/* Jewelry-inspired divider */}
           <div className="mx-auto my-12 flex max-w-md items-center justify-center gap-4">
             <div className="h-px flex-1 bg-black/10" />
 
@@ -147,7 +168,6 @@ export default function StudioSignup() {
             <div className="h-px flex-1 bg-black/10" />
           </div>
 
-          {/* Email signup */}
           <div className="mx-auto max-w-3xl">
             <form
               onSubmit={handleSubmit}
@@ -163,7 +183,7 @@ export default function StudioSignup() {
 
                 <input
                   id="studio-email"
-                  name="email"
+                  name="email_address"
                   type="email"
                   value={email}
                   onChange={(event) => {
@@ -190,7 +210,6 @@ export default function StudioSignup() {
               </button>
             </form>
 
-            {/* Success */}
             {status === "success" && (
               <div className="mt-5 text-center">
                 <p
@@ -209,10 +228,10 @@ export default function StudioSignup() {
               </div>
             )}
 
-            {/* Error */}
             {status === "error" && (
               <p className="mt-4 text-center text-xs text-black/55">
-                Something went wrong. Please try again.
+                We couldn't complete your subscription. Please try again or
+                check your email for a confirmation message.
               </p>
             )}
           </div>
@@ -221,7 +240,6 @@ export default function StudioSignup() {
             New collections · Studio notes · First looks
           </p>
 
-          {/* Bottom editorial detail */}
           <div className="mt-14 flex items-center justify-center gap-3">
             <span className="h-1 w-1 rounded-full bg-[#b99558]/70" />
 
