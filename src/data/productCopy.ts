@@ -738,6 +738,31 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "shelly-bracelet": {
+      price: 55,
+
+      squareVariationId: "IBSJN3YFY24E4ENCZOLR2ADF",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "A delicate gold-filled beaded bracelet featuring polished statement beads and fine detailing for an effortless golden glow.",
+
+      description:
+        "The Shelly Bracelet is a refined take on everyday gold. Crafted with gold-filled beads in a delicate alternating pattern, the design pairs polished statement beads with smaller textured detailing for a subtle play of scale and light. Its understated silhouette makes it effortless worn alone, while the dimensional beadwork adds just enough character to complement a layered stack. Warm, feminine, and effortlessly polished, Shelly brings a quiet golden glow to the Southern Solstice collection.",
+
+      details: [
+        "Gold-filled beaded bracelet",
+        "Polished gold-filled statement beads",
+        "Fine gold-filled accent bead detailing",
+        "Delicate graduated bead pattern",
+        "Minimal everyday silhouette",
+        "Hand-assembled in small batches",
+      ],
+    },
+
     "sedona-bracelet": {
       price: 50,
 
