@@ -28,13 +28,19 @@ export default function StudioSignup() {
         }
       );
 
+      const responseText = await response.text();
+
+      console.log("Kit status:", response.status);
+      console.log("Kit response:", responseText);
+
       if (!response.ok) {
-        throw new Error("Subscription failed");
+        throw new Error(`Kit subscription failed: ${response.status}`);
       }
 
       setEmail("");
       setStatus("success");
-    } catch {
+    } catch (error) {
+      console.error("Kit signup error:", error);
       setStatus("error");
     }
   }
