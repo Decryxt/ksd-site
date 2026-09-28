@@ -1,25 +1,43 @@
-import { useEffect, useRef } from "react";
+import { FormEvent, useState } from "react";
 
 export default function StudioSignup() {
-  const formRef = useRef<HTMLDivElement>(null);
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
 
-  useEffect(() => {
-    if (!formRef.current) return;
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
-    const script = document.createElement("script");
+    if (!email.trim()) return;
 
-    script.async = true;
-    script.src =
-      "https://katherine-sterling-designs.kit.com/69c250a2a2/index.js";
+    setStatus("submitting");
 
-    formRef.current.appendChild(script);
+    try {
+      const formData = new FormData();
+      formData.append("email_address", email.trim());
 
-    return () => {
-      if (formRef.current) {
-        formRef.current.innerHTML = "";
+      const response = await fetch(
+        "https://app.kit.com/forms/9971129/subscriptions",
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Subscription failed");
       }
-    };
-  }, []);
+
+      setEmail("");
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
+  }
 
   return (
     <section className="relative overflow-hidden bg-[#f7f2e9] text-black">
@@ -28,12 +46,12 @@ export default function StudioSignup() {
           @keyframes studio-glow {
             0%, 100% {
               transform: translate3d(0, 0, 0) scale(1);
-              opacity: 0.35;
+              opacity: 0.30;
             }
 
             50% {
               transform: translate3d(18px, -12px, 0) scale(1.08);
-              opacity: 0.55;
+              opacity: 0.50;
             }
           }
 
@@ -54,110 +72,10 @@ export default function StudioSignup() {
           .studio-shimmer {
             animation: studio-shimmer 8s ease-in-out infinite;
           }
-
-          .studio-signup-input input {
-            width: 100% !important;
-            min-height: 56px !important;
-            border: 0 !important;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.18) !important;
-            border-radius: 0 !important;
-            background: transparent !important;
-            padding: 14px 4px !important;
-            font-family: inherit !important;
-            font-size: 13px !important;
-            color: #171513 !important;
-            outline: none !important;
-            box-shadow: none !important;
-          }
-
-          .studio-signup-input input::placeholder {
-            color: rgba(0, 0, 0, 0.45) !important;
-          }
-
-          .studio-signup-input input:focus {
-            border-bottom-color: rgba(151, 97, 61, 0.65) !important;
-          }
-
-          .studio-signup-button button,
-          .studio-signup-button input[type="submit"] {
-            min-height: 56px !important;
-            border: 1px solid rgba(0, 0, 0, 0.10) !important;
-            border-radius: 0 !important;
-            background: #171513 !important;
-            color: white !important;
-            padding: 0 30px !important;
-            font-family: inherit !important;
-            font-size: 10px !important;
-            font-weight: 500 !important;
-            letter-spacing: 0.22em !important;
-            text-transform: uppercase !important;
-            cursor: pointer !important;
-            transition:
-              background-color 200ms ease,
-              transform 200ms ease,
-              box-shadow 200ms ease !important;
-          }
-
-          .studio-signup-button button:hover,
-          .studio-signup-button input[type="submit"]:hover {
-            background: #000 !important;
-            transform: translateY(-2px) !important;
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12) !important;
-          }
-
-          .studio-signup-button button:focus-visible,
-          .studio-signup-button input[type="submit"]:focus-visible {
-            outline: 2px solid rgba(151, 97, 61, 0.55) !important;
-            outline-offset: 3px !important;
-          }
-
-          .studio-signup-form form {
-            margin: 0 !important;
-          }
-
-          .studio-signup-form [data-element="fields"] {
-            display: flex !important;
-            align-items: flex-end !important;
-            gap: 14px !important;
-          }
-
-          .studio-signup-form [data-element="fields"] > div:first-child {
-            flex: 1 !important;
-            min-width: 0 !important;
-          }
-
-          .studio-signup-form [data-element="fields"] > div:last-child {
-            flex-shrink: 0 !important;
-          }
-
-          .studio-signup-form label {
-            display: none !important;
-          }
-
-          .studio-signup-form [data-element="submit"] {
-            width: auto !important;
-          }
-
-          .studio-signup-form [data-element="powered-by"] {
-            display: none !important;
-          }
-
-          @media (max-width: 640px) {
-            .studio-signup-form [data-element="fields"] {
-              flex-direction: column !important;
-              align-items: stretch !important;
-              gap: 12px !important;
-            }
-
-            .studio-signup-button button,
-            .studio-signup-button input[type="submit"] {
-              width: 100% !important;
-            }
-          }
         `}
       </style>
 
-      {/* Ambient jewelry-inspired light */}
+      {/* Ambient light */}
       <div
         className="studio-glow pointer-events-none absolute -left-32 top-16 h-72 w-72 rounded-full bg-[#d4b26a]/20 blur-3xl"
         aria-hidden="true"
@@ -169,7 +87,7 @@ export default function StudioSignup() {
         aria-hidden="true"
       />
 
-      {/* Subtle moving highlight */}
+      {/* Soft moving highlight */}
       <div
         className="studio-shimmer pointer-events-none absolute left-0 top-0 h-full w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent blur-2xl"
         aria-hidden="true"
@@ -181,13 +99,14 @@ export default function StudioSignup() {
           <div className="mb-10 flex items-center gap-4">
             <div className="h-px flex-1 bg-black/10" />
 
-            <span className="text-[10px] uppercase tracking-[0.32em] text-black/40">
+            <span className="text-center text-[10px] uppercase tracking-[0.32em] text-black/40">
               Katherine Sterling Designs
             </span>
 
             <div className="h-px flex-1 bg-black/10" />
           </div>
 
+          {/* Heading */}
           <div className="mx-auto max-w-4xl text-center">
             <p className="text-[10px] uppercase tracking-[0.38em] text-black/45">
               From the Studio
@@ -210,7 +129,7 @@ export default function StudioSignup() {
             </p>
           </div>
 
-          {/* Decorative jewelry-inspired divider */}
+          {/* Jewelry-inspired divider */}
           <div className="mx-auto my-12 flex max-w-md items-center justify-center gap-4">
             <div className="h-px flex-1 bg-black/10" />
 
@@ -222,15 +141,74 @@ export default function StudioSignup() {
             <div className="h-px flex-1 bg-black/10" />
           </div>
 
-          {/* Kit signup */}
+          {/* Email signup */}
           <div className="mx-auto max-w-3xl">
-            <div className="studio-signup-form">
-              <div
-                ref={formRef}
-                className="min-h-[70px]"
-                aria-label="Email signup"
-              />
-            </div>
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-3 sm:flex-row sm:items-end"
+            >
+              <div className="min-w-0 flex-1">
+                <label
+                  htmlFor="studio-email"
+                  className="mb-2 block text-[9px] uppercase tracking-[0.28em] text-black/40"
+                >
+                  Email Address
+                </label>
+
+                <input
+                  id="studio-email"
+                  name="email"
+                  type="email"
+                  value={email}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+
+                    if (status !== "idle") {
+                      setStatus("idle");
+                    }
+                  }}
+                  placeholder="Your email address"
+                  autoComplete="email"
+                  required
+                  disabled={status === "submitting"}
+                  className="h-14 w-full border-0 border-b border-black/20 bg-transparent px-1 text-sm text-black outline-none transition placeholder:text-black/35 focus:border-[#9b6b3d]/70 disabled:opacity-50"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={status === "submitting"}
+                className="h-14 shrink-0 border border-black/10 bg-[#171513] px-8 text-[10px] font-medium uppercase tracking-[0.24em] text-white transition hover:-translate-y-0.5 hover:bg-black hover:shadow-[0_12px_28px_rgba(0,0,0,0.12)] disabled:cursor-not-allowed disabled:opacity-60 sm:px-10"
+              >
+                {status === "submitting" ? "Joining..." : "Join"}
+              </button>
+            </form>
+
+            {/* Success */}
+            {status === "success" && (
+              <div className="mt-5 text-center">
+                <p
+                  className="text-2xl text-black"
+                  style={{
+                    fontFamily: '"Perandory", serif',
+                    fontWeight: 400,
+                  }}
+                >
+                  You're in.
+                </p>
+
+                <p className="mt-1 text-[10px] uppercase tracking-[0.22em] text-black/40">
+                  Welcome to the studio.
+                </p>
+              </div>
+            )}
+
+            {/* Error */}
+            {status === "error" && (
+              <p className="mt-4 text-center text-xs text-black/55">
+                Something went wrong. Please try again.
+              </p>
+            )}
           </div>
 
           <p className="mt-6 text-center text-[10px] uppercase tracking-[0.24em] text-black/35">
@@ -240,9 +218,11 @@ export default function StudioSignup() {
           {/* Bottom editorial detail */}
           <div className="mt-14 flex items-center justify-center gap-3">
             <span className="h-1 w-1 rounded-full bg-[#b99558]/70" />
-            <span className="text-[9px] uppercase tracking-[0.28em] text-black/30">
+
+            <span className="text-center text-[9px] uppercase tracking-[0.28em] text-black/30">
               Occasionally, and always with intention.
             </span>
+
             <span className="h-1 w-1 rounded-full bg-[#b99558]/70" />
           </div>
         </div>
