@@ -713,6 +713,31 @@ export const productCopy: Partial<Record<CategoryKey, Record<string, ProductCopy
       ],
     },
 
+    "north-star-bracelet": {
+      price: 50,
+
+      squareVariationId: "TKPVNB4LWNWTBVN56ZZA57VY",
+
+      status: "active",
+
+      collection: "southern-solstice",
+
+      shortDescription:
+        "Polished golden beads and a delicate medallion charm come together in this timeless bracelet—sunlit, elegant, and effortlessly refined.",
+
+      description:
+        "The North Star Bracelet is a radiant everyday piece inspired by the warmth of golden sunlight. A strand of polished, spherical gold beads creates a luminous finish, while a delicate circular star medallion charm adds a touch of intricate detail and timeless elegance. Its classic silhouette feels both understated and distinctive, making it effortless to wear alone or layer into a golden bracelet stack. Refined yet versatile, Solara brings a little golden glow to every moment, from slow coastal mornings to evenings worth remembering.",
+
+      details: [
+        "Polished spherical gold beads",
+        "Delicate circular star medallion charm with textured detailing",
+        "Luminous gold-tone finish",
+        "Timeless design for everyday wear",
+        "Beautiful worn alone or layered with other bracelets",
+        "Effortlessly transitions from casual styling to special occasions",
+      ],
+    },
+
     "golden-spur-bracelet": {
       price: 50,
 
